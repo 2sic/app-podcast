@@ -1,1 +1,29 @@
-<p>You successfully created your own template. Start editing it by hovering the "Manage" button and opening the "Edit Template" dialog.</p>
+<link rel="stylesheet" data-enableoptimizations="true" href="@App.Path/assets/style.css" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <img src="@Content.Image?w=200&h=200&mode=crop">
+                <div class="card-body">
+                    <p class="card-text">
+                        <p class="text-muted">[Episode Count]</p>
+                        <hr>
+                        @Html.Raw(Content.Description)
+                    </p>
+                </div>
+            </div>
+            <hr class="mobile-hr">
+        </div>
+        <div class="col-12 col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">@Content.Title</h3>
+                    <h6 class="card-subtitle mb-3">@Content.Owner[0].FullName</h6> <!-- TODO: Why is Owner a list? Where should I put his email? -->
+                    <p class="card-text">@Content.Language | @Content.Category | @Content.License</p> <!-- TODO: How to show the labels? -->
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
