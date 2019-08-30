@@ -1,3 +1,7 @@
+@using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
+@{
+    var episodes = Content.Parents("Episode") as Dynlist;
+}
 <link rel="stylesheet" data-enableoptimizations="true" href="@App.Path/assets/style.css" />
 
 <div class="container">
@@ -7,7 +11,7 @@
                 <img src="@Content.Image?w=200&h=200&mode=crop">
                 <div class="card-body">
                     <p class="card-text">
-                        <p class="text-muted">[Episode Count]</p>
+                        <p class="text-muted">@episodes.Count() Episoden (todo:translation)</p> 
                         <hr>
                         @Html.Raw(Content.Description)
                     </p>
@@ -19,8 +23,8 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">@Content.Title</h3>
-                    <h6 class="card-subtitle mb-3">@Content.Owner[0].FullName</h6> <!-- TODO: Why is Owner a list? Where should I put his email? -->
-                    <p class="card-text">@Content.Language | @Content.Category | @Content.License</p> <!-- TODO: How to show the labels? -->
+                    <h6 class="card-subtitle mb-3">@Content.Owner[0].FullName</h6>
+                    <p class="card-text">@Content.Category (todo:get the label)</p>
                 </div>
                 <hr>
             </div>
