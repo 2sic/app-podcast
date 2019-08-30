@@ -5,25 +5,31 @@
 <link rel="stylesheet" data-enableoptimizations="true" href="@App.Path/assets/style.css" />
 
 <div class="container">
+    @Edit.Toolbar(Content)
     <div class="row">
         <div class="col-12 col-md-4">
             <div class="card">
                 <img src="@Content.Image?w=200&h=200&mode=crop">
                 <div class="card-body">
                     <p class="card-text">
-                        <p class="text-muted">@episodes.Count() Episoden (todo:translation)</p> 
+                        <!-- TODO: add translation -->
+                        <p class="text-muted">@episodes.Count() Episoden</p> 
                         <hr>
-                        @Html.Raw(Content.Description)
+                        <div class="channel-description-desktop">
+                            @Html.Raw(Content.Description)
+                        </div>
                     </p>
                 </div>
             </div>
-            <hr class="mobile-hr">
         </div>
         <div class="col-12 col-md-8">
             <div class="card mb-4">
                 <div class="card-body">
                     <h3 class="card-title channel-title">@Content.Title</h3>
                     <h5 class="card-subtitle mb-3 owner-name">@Content.Owner[0].FullName</h6>
+                    <div class="channel-description-mobile">
+                        @Html.Raw(Content.Description)
+                    </div>
                     <!-- TODO: get the label -->
                     <p class="card-text text-muted">@Content.Category</p>
                 </div>
@@ -36,7 +42,8 @@
                         <!-- TODO: Add text-mute class -->
                         @Html.Raw(episode.Description)
                         <!-- TODO: Add play icon and add translation-->
-                        <button type="button" class="btn btn-primary mt-2">Abspielen</button>
+                        <!-- <button type="button" class="btn btn-primary mt-2">Abspielen</button> -->
+                        <audio controls class="mt-2" src="@episode.Audio"></audio>
                     </li>
                 }
             </ul>

@@ -40,13 +40,29 @@ img {
 
 /* Try to find better solution */
 @media (min-width: 576px) {
-    .mobile-hr {
+    audio {
+        width: 100%;
+    }
+
+    .channel-description-desktop {
+        display: none;
+    }
+
+    .channel-description-mobile {
         display: block;
     }
 }
 
 @media (min-width: 768px) {
-    .mobile-hr {
+    audio {
+        width: 50%;
+    }
+
+    .channel-description-desktop {
+        display: block;
+    }
+
+    .channel-description-mobile {
         display: none;
     }
 }
