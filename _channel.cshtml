@@ -20,14 +20,26 @@
             <hr class="mobile-hr">
         </div>
         <div class="col-12 col-md-8">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
-                    <h3 class="card-title">@Content.Title</h3>
-                    <h6 class="card-subtitle mb-3">@Content.Owner[0].FullName</h6>
-                    <p class="card-text">@Content.Category (todo:get the label)</p>
+                    <h3 class="card-title channel-title">@Content.Title</h3>
+                    <h5 class="card-subtitle mb-3 owner-name">@Content.Owner[0].FullName</h6>
+                    <!-- TODO: get the label -->
+                    <p class="card-text text-muted">@Content.Category</p>
                 </div>
-                <hr>
             </div>
+            <ul class="list-group">
+                @foreach(var episode in episodes.OrderByDescending(e => e.Date)) {
+                    <li class="list-group-item pb-3 pt-3 ">
+                        <p class="text-muted episode-date">@episode.Date.ToString("dd MMM yyyy")</p>
+                        <h5 class="episode-title">@episode.Title</h5>
+                        <!-- TODO: Add text-mute class -->
+                        @Html.Raw(episode.Description)
+                        <!-- TODO: Add play icon and add translation-->
+                        <button type="button" class="btn btn-primary mt-2">Abspielen</button>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 </div>

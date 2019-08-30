@@ -7,8 +7,34 @@ img {
     border: none;
 }
 
-.card-body {
+.card-body, .list-group-item {
     padding: 0;
+}
+
+.list-group-item {
+    border-right: 0;
+    border-left: 0;
+}
+
+.channel-title {
+    font-size: 1.5rem;
+}
+
+.owner-name {
+    font-weight: 500;
+}
+
+.episode-title {
+    margin: 0;
+}
+
+.episode-date {
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+
+.btn {
+    border-radius: 20px;
 }
 
 
