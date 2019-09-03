@@ -4,7 +4,7 @@
 }
 <link rel="stylesheet" data-enableoptimizations="true" href="@App.Path/assets/style.css" />
 
-<div class="container">
+<div class="container sc-element">
     @Edit.Toolbar(Content)
     <div class="row">
         <div class="col-12 col-md-4">
@@ -30,23 +30,67 @@
                     <div class="channel-description-mobile">
                         @Html.Raw(Content.Description)
                     </div>
-                    <!-- TODO: get the label -->
-                    <p class="card-text text-muted">@Content.Category</p>
+                    <div class="channel-category-rss">
+                        <!-- TODO: get the label -->
+                        <p class="card-text text- mb-0">@Content.Category</p>
+                        <a href="@Link.To(parameters: App.Settings.DetailsPage + "rss/true/" + Content.EntityId)" class="btn btn-secondary">RSS</a>
+                    </div>
                 </div>
             </div>
-            <ul class="list-group">
+            <div>
+            <ul class="list-group"  @Edit.TagToolbar(actions: "new", contentType: "Episode", prefill: new {
+                    Channels = new string[] { Content.EntityGuid.ToString() },
+                    Author = new string[] { (Content.Owner as Dynlist).First().EntityGuid.ToString() },
+                    Date = DateTime.Now.ToString("MM.dd.yyyy")
+                })>
                 @foreach(var episode in episodes.OrderByDescending(e => e.Date)) {
-                    <li class="list-group-item pb-3 pt-3 ">
+                    <li class="list-group-item pb-3 pt-3 " @Edit.TagToolbar(episode, actions: "edit")>
                         <p class="text-muted episode-date">@episode.Date.ToString("dd MMM yyyy")</p>
-                        <h5 class="episode-title">@episode.Title</h5>
-                        <!-- TODO: Add text-mute class -->
-                        @Html.Raw(episode.Description)
-                        <!-- TODO: Add play icon and add translation-->
-                        <!-- <button type="button" class="btn btn-primary mt-2">Abspielen</button> -->
-                        <audio controls class="mt-2" src="@episode.Audio"></audio>
+                        <h5 class="episode-title">@episode.Title <span class="audio-duration-ie">@episode.Duration</span></h5>
+                        <div class="episode-description">
+                            @Html.Raw(episode.Description)
+                        </div>
+                        <audio controls class="mt-2" preload="metadata" src="@episode.Audio"></audio>
                     </li>
                 }
             </ul>
+            </div>
         </div>
     </div>
 </div>
+<script>
+    window.onload = function () {
+        var audioDurationsList = document.getElementsByClassName('audio-duration-ie');
+        var hideDuration = IsIeOrEdge();
+        var formatedDuration = '';
+
+        for(var i = 0; i < audioDurationsList.length; i++) {
+            if (hideDuration) {
+                audioDurationsList[i].style.display = 'inline';
+                formatedDuration = formatTime(audioDurationsList[i].innerHTML);
+                audioDurationsList[i].innerHTML = '(' + formatedDuration + ')';
+            } else {
+                audioDurationsList[i].style.display = 'none';
+            }
+        }
+    }
+
+    function IsIeOrEdge() {
+        var userAgent = window.navigator.userAgent;
+        var ie = userAgent.indexOf('MSIE') > -1;
+        var ie11 = !!navigator.userAgent.match(/Trident\/7\./);
+        var edge = userAgent.indexOf('Edge') > -1;
+
+        return (ie && !ie11 && !edge) || (!ie && ie11 && !edge) || (!ie && !ie11 && edge) ? true : false;
+    }
+
+    function formatTime(time) {
+        var hr = ~~(time / 60);
+        var min = ~~(time % 60);
+        var hr_min = '';
+        hr_min += hr + ':' + (min < 10 ? '0' : '');
+        hr_min += min;
+
+        return hr_min;
+    }
+</script>

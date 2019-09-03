@@ -28,6 +28,21 @@ img {
     display: none;
 }
 
+.channel-category-rss {
+    display: flex;
+}
+
+.channel-category-rss > p {
+    flex: 4;
+    align-self: center;
+}
+
+.channel-category-rss > a {
+    color: white;
+    flex: 1;
+    max-width: 60px;
+}
+
 .owner-name {
     font-weight: 500;
 }
@@ -41,19 +56,24 @@ img {
     font-size: 0.7rem;
 }
 
+.episode-description {
+    color: #6c757d;
+}
+
 .btn {
     border-radius: 20px;
 }
 
 audio {
-    width: 50%;
+    width: 100%;
 }
 
-@media (max-width: 576px) {
-    audio {
-        width: 100%;
-    }
+.audio-duration-ie {
+    font-size: 13px;
+}
 
+
+@media (max-width: 576px) {
     .channel-description-desktop {
         display: none;
     }
