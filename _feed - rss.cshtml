@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+@{
+    // get all posts as delived from the standard query
+	var postsToShow = AsDynamic(Data["Default"]);
+	
+	// only apply this filter for non-editors
+	if (!Permissions.UserMayEditContent) {
+		postsToShow = postsToShow.Where(p => p.PublicationMoment <= DateTime.Now);
+	}
+	
+	/*  Just a note to anybody editing this file
+	    The @Html.Raw("<link>") is necessary, because otherwise the
+	    <link> tag gets parsed by Razor in an attempt to do something
+	*/
+}
+@if(Request.QueryString["standalone"] == "true")
+{
+<rss version="2.0">
+  <channel>
+    <title>@App.Settings.Title</title>
+    @Html.Raw("<link>")
+        @App.Settings.BlogHomePage 
+    @Html.Raw("</link>")
+    <description>@App.Settings.RssDescription</description>
+    @foreach(var post in postsToShow)
+    {
+        <item>
+          <title>@post.EntityTitle</title>
+          @Html.Raw("<link>") 
+              @(App.Settings.DetailsPage + "/post/" + post.UrlKey)
+          @Html.Raw("</link>")
+        <description>@post.Teaser</description>
+        <guid isPermaLink="true">@(App.Settings.DetailsPage + "/post/" + post.UrlKey)</guid>
+        <pubDate>@post.PublicationMoment.ToString("R")</pubDate>
+      </item>
+    }
+    
+  </channel>
+</rss>
+}
+else 
+{
+    <span>you are seeing this because you are currently viewing a normal page. to use this feed correctly, you must add ?standalone=true to the url, so it doesn't show dnn stuff or html. note that you can put the feed on an own page and then link to it <a href="@Link.To(parameters: "standalone=true")" target="_blank">(with ?standalone=true)</a> or you can also auto-use it by using the normal blog-page and where you would usually see things like /tag/something replace with /feed/all?standalone=true
+    @Content.Toolbar
+    </span>
+}

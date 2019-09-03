@@ -40,7 +40,13 @@ img {
 .channel-category-rss > a {
     color: white;
     flex: 1;
-    max-width: 40px;
+    max-width: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.rss-icon {
+    align-self: center;
 }
 
 .owner-name {
