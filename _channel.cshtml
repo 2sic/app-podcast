@@ -32,7 +32,10 @@
                     </div>
                     <div class="channel-category-rss">
                         <p class="card-text text-muted mb-0">@Content.Category[0].Name</p>
-                        <a href="@Link.To(parameters: App.Settings.DetailsPage + "rss/true/" + Content.EntityId)" class="badge badge-pill badge-secondary">RSS</a>
+                        <a href="@Link.To(parameters: App.Settings.DetailsPage + "rss/true/" + Content.EntityId)" 
+                           class="badge badge-pill badge-secondary">
+                           RSS
+                        </a>
                     </div>
                 </div>
             </div>
