@@ -1,12 +1,8 @@
+@using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 <?xml version="1.0" encoding="utf-8" ?>
 @{
     // get all posts as delived from the standard query
-	var postsToShow = AsDynamic(Data["Default"]);
-	
-	// only apply this filter for non-editors
-	if (!Permissions.UserMayEditContent) {
-		postsToShow = postsToShow.Where(p => p.PublicationMoment <= DateTime.Now);
-	}
+    var episodes = Content.Parents("Episode") as Dynlist;
 	
 	/*  Just a note to anybody editing this file
 	    The @Html.Raw("<link>") is necessary, because otherwise the
@@ -17,21 +13,33 @@
 {
 <rss version="2.0">
   <channel>
-    <title>@App.Settings.Title</title>
+    <title>@Content.Title</title>
+    <description>@Content.Description</description>
+    <image>
+      <url>@Content.Image</url>
+    </image>
+    <itunes:author>@Content.Owner[0].FullName</itunes:author>
+    <creativeCommons:license>@Content.License[0].Link</creativeCommons:license>
     @Html.Raw("<link>")
-        @App.Settings.BlogHomePage 
+        @* ??? *@
     @Html.Raw("</link>")
-    <description>@App.Settings.RssDescription</description>
-    @foreach(var post in postsToShow)
+    <guid>@Content.EntityGuid.ToString()</guid>
+    <generator>2sxc PodCast App</generator>
+    @foreach(var episode in episodes)
     {
-        <item>
-          <title>@post.EntityTitle</title>
-          @Html.Raw("<link>") 
-              @(App.Settings.DetailsPage + "/post/" + post.UrlKey)
-          @Html.Raw("</link>")
-        <description>@post.Teaser</description>
-        <guid isPermaLink="true">@(App.Settings.DetailsPage + "/post/" + post.UrlKey)</guid>
-        <pubDate>@post.PublicationMoment.ToString("R")</pubDate>
+      <item>
+        <title>@episode.Title</title>
+        <description>@episode.Description</description>
+        <category>@Content.Category[0].Name</category>
+        <pubDate>@episode.Date.ToString("R")</pubDate>
+        <itunes:author>@episode.Author[0].FullName</itunes:author>
+        <itunes:duration>@episode.Duration</itunes:duration>
+        <itunes:explicit>@(episode.Explicit ? "yes" : "no")</itunes:explicit>
+        @Html.Raw("<link>")
+          @* ??? *@
+        @Html.Raw("</link>")
+        <guid>@episode.EntityGuid.ToString()</guid>
+        <enclosure url="@episode.Audio" type="audio/mpeg"></enclosure>
       </item>
     }
     
