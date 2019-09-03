@@ -34,13 +34,13 @@ img {
 
 .channel-category-rss > p {
     flex: 4;
-    align-self: center;
+    align-self: flex-end;
 }
 
 .channel-category-rss > a {
     color: white;
     flex: 1;
-    max-width: 60px;
+    max-width: 40px;
 }
 
 .owner-name {
