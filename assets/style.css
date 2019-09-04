@@ -66,14 +66,9 @@ img {
     color: #6c757d;
 }
 
-audio {
-    width: 100%;
+.pause-button {
+    display: none;
 }
-
-.audio-duration-ie {
-    font-size: 13px;
-}
-
 
 @media (max-width: 576px) {
     .channel-description-desktop {

@@ -1,4 +1,5 @@
 @using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
+@using System;
 <?xml version="1.0" encoding="utf-8" ?>
 @{
     // get all posts as delived from the standard query
@@ -20,26 +21,24 @@
     </image>
     <itunes:author>@Content.Owner[0].FullName</itunes:author>
     <creativeCommons:license>@Content.License[0].Link</creativeCommons:license>
-    @Html.Raw("<link>")
-        @* ??? *@
-    @Html.Raw("</link>")
+    <language>@Content.Language</language>
+    @Html.Raw("<link>" + Link.To() + "</link>")
     <guid>@Content.EntityGuid.ToString()</guid>
     <generator>2sxc PodCast App</generator>
     @foreach(var episode in episodes)
     {
+      var duration = TimeSpan.FromMinutes(decimal.ToDouble(episode.Duration ?? 0));
       <item>
         <title>@episode.Title</title>
         <description>@episode.Description</description>
         <category>@Content.Category[0].Name</category>
         <pubDate>@episode.Date.ToString("R")</pubDate>
         <itunes:author>@episode.Author[0].FullName</itunes:author>
-        <itunes:duration>@episode.Duration</itunes:duration>
+        <itunes:duration>@duration.ToString("hh\\:mm"):00</itunes:duration>
         <itunes:explicit>@(episode.Explicit ? "yes" : "no")</itunes:explicit>
-        @Html.Raw("<link>")
-          @* ??? *@
-        @Html.Raw("</link>")
+        @Html.Raw("<link>" + Link.To() + "</link>")
         <guid>@episode.EntityGuid.ToString()</guid>
-        <enclosure url="@episode.Audio" type="audio/mpeg"></enclosure>
+        <enclosure url="@episode.Audio" type="audio/mpeg" length="1024"></enclosure>
       </item>
     }
     

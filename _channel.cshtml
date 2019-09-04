@@ -1,6 +1,8 @@
+<script type="text/javascript" src="@App.Path/assets/jquery.jplayer.min.js"></script>
 @using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @{
     var episodes = Content.Parents("Episode") as Dynlist;
+    var episodeNumber = 0;
 }
 <link rel="stylesheet" data-enableoptimizations="true" href="@App.Path/assets/style.css" />
 
@@ -33,7 +35,9 @@
                     <div class="channel-category-rss">
                         <p class="card-text text-muted mb-0">@Content.Category[0].Name</p>
                         <a href="@Link.To(parameters: "rss/true/?standalone=true")" 
-                           class="badge badge-pill badge-secondary">
+                           class="badge badge-pill badge-secondary"
+                           target="_blank"
+                           >
                            <i class="rss-icon fas fa-rss" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -46,13 +50,18 @@
                     Date = DateTime.Now.ToString("MM.dd.yyyy")
                 })>
                 @foreach(var episode in episodes.OrderByDescending(e => e.Date)) {
-                    <li class="list-group-item pb-3 pt-3 " @Edit.TagToolbar(episode, actions: "edit")>
+                    episodeNumber++;
+
+                    <li class="list-group-item pb-3 pt-3" @Edit.TagToolbar(episode, actions: "edit")>
                         <p class="text-muted episode-date">@episode.Date.ToString("dd MMM yyyy")</p>
-                        <h5 class="episode-title">@episode.Title <span class="audio-duration-ie">@episode.Duration</span></h5>
+                        <h5 class="episode-title">@episode.Title</h5>
                         <div class="episode-description">
                             @Html.Raw(episode.Description)
                         </div>
-                        <audio controls class="mt-2" preload="metadata" src="@episode.Audio"></audio>
+                        <div class="jp-jplayer @("episode-audio-"+@episodeNumber)" data-target="@episode.Audio"></div>
+                        <button class="play-button play-button-@episodeNumber btn btn-primary" type="button" data-target="@episodeNumber"><i class="fas fa-play"></i> Play</button>
+                        <button class="pause-button pause-button-@episodeNumber btn btn-primary" type="button" data-target="@episodeNumber"><i class="fas fa-pause"></i> Pause</button>
+                        <span class="episode-duration text-muted">@episode.Duration</span>
                     </li>
                 }
             </ul>
@@ -61,37 +70,52 @@
     </div>
 </div>
 <script>
+    $(document).ready(function(){
+        $(".play-button").click( function() {
+            $(".episode-audio-" + $(this).data('target')).jPlayer("play");
+            $(this).css("display", "none");
+            $(".pause-button-" + $(this).data('target')).css("display", "inline-block")
+        });
+
+        $(".pause-button").click( function() {
+            $(".episode-audio-" + $(this).data('target')).jPlayer("pause");
+            $(this).css("display", "none");
+            $(".play-button-" + $(this).data('target')).css("display", "inline-block")
+        });
+
+        $(".jp-jplayer").each(function() {
+            $(this).jPlayer({
+                ready: function () {
+                    $(this).jPlayer("setMedia", {
+                        mp3: $(this).data('target'),
+                    })
+                },
+                ended: function (event) {
+                    $(this).jPlayer("play");
+                },
+                swfPath: "/assets",
+                supplied: "mp3"
+            })
+            .bind($.jPlayer.event.play, function() { // pause other instances of player when current one play
+                    $(this).jPlayer("pauseOthers");
+            });
+        });
+    });
+
     window.onload = function () {
-        var audioDurationsList = document.getElementsByClassName('audio-duration-ie');
-        var hideDuration = IsIeOrEdge();
+        var episodeDurationsList = document.getElementsByClassName('episode-duration');
         var formatedDuration = '';
 
-        for(var i = 0; i < audioDurationsList.length; i++) {
-            if (hideDuration) {
-                audioDurationsList[i].style.display = 'inline';
-                formatedDuration = formatTime(audioDurationsList[i].innerHTML);
-                audioDurationsList[i].innerHTML = '(' + formatedDuration + ')';
-            } else {
-                audioDurationsList[i].style.display = 'none';
-            }
+        for(var i = 0; i < episodeDurationsList.length; i++) {
+            formatedDuration = formatTime(episodeDurationsList[i].innerHTML);
+            episodeDurationsList[i].innerHTML = formatedDuration;
         }
-    }
-
-    function IsIeOrEdge() {
-        var userAgent = window.navigator.userAgent;
-        var ie = userAgent.indexOf('MSIE') > -1;
-        var ie11 = !!navigator.userAgent.match(/Trident\/7\./);
-        var edge = userAgent.indexOf('Edge') > -1;
-
-        return (ie && !ie11 && !edge) || (!ie && ie11 && !edge) || (!ie && !ie11 && edge) ? true : false;
     }
 
     function formatTime(time) {
         var hr = ~~(time / 60);
         var min = ~~(time % 60);
-        var hr_min = '';
-        hr_min += hr + ':' + (min < 10 ? '0' : '');
-        hr_min += min;
+        var hr_min = hr + ' hr ' + min + ' min';
 
         return hr_min;
     }
