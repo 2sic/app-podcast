@@ -3,19 +3,6 @@ img {
     border-radius: 4%;
 }
 
-.card {
-    border: none;
-}
-
-.card-body, .list-group-item {
-    padding: 0;
-}
-
-.list-group-item {
-    border-right: 0;
-    border-left: 0;
-}
-
 .channel-title {
     font-size: 1.5rem;
 }
@@ -45,16 +32,8 @@ img {
     justify-content: center;
 }
 
-.rss-icon {
-    align-self: center;
-}
-
 .owner-name {
     font-weight: 500;
-}
-
-.episode-title {
-    margin: 0;
 }
 
 .episode-date {
@@ -68,6 +47,10 @@ img {
 
 .pause-button {
     display: none;
+}
+
+.btn {
+    border-radius: 18px;
 }
 
 @media (max-width: 576px) {

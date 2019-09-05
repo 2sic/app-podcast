@@ -2,6 +2,7 @@
 @using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @{
     var episodes = Content.Parents("Episode") as Dynlist;
+    /* Counter which is brought for the identification of the individual episodes  */
     var episodeNumber = 0;
 }
 <link rel="stylesheet" data-enableoptimizations="true" href="@App.Path/assets/style.css" />
@@ -9,13 +10,16 @@
 <div class="container sc-element">
     @Edit.Toolbar(Content)
     <div class="row">
+        <!-- Left column with image, episode counter and channel description -->
         <div class="col-12 col-md-4">
-            <div class="card">
+            <div class="card border-0">
                 <img src="@Content.Image?w=200&h=200&mode=crop">
-                <div class="card-body">
+                <div class="card-body p-0">
                     <p class="card-text">
                         <!-- TODO: add translation -->
-                        <p class="text-muted">@episodes.Count() Episoden</p> 
+                        <p class="text-muted">
+                            @episodes.Count() Episoden
+                        </p> 
                         <hr>
                         <div class="channel-description-desktop">
                             @Html.Raw(Content.Description)
@@ -24,26 +28,33 @@
                 </div>
             </div>
         </div>
+        <!-- Right column with the rest of the channel information and the episode listing -->
         <div class="col-12 col-md-8"> 
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h3 class="card-title channel-title">@Content.Title</h3>
-                    <h5 class="card-subtitle mb-3 owner-name">@Content.Owner[0].FullName</h6>
+            <div class="card border-0 mb-4">
+                <!-- Channel Information -->
+                <div class="card-body p-0">
+                    <h3 class="card-title channel-title">
+                        @Content.Title
+                    </h3>
+                    <h5 class="card-subtitle mb-3 owner-name">
+                        @Content.Owner[0].FullName
+                    </h5>
                     <div class="channel-description-mobile">
                         @Html.Raw(Content.Description)
                     </div>
                     <div class="channel-category-rss">
-                        <p class="card-text text-muted mb-0">@Content.Category[0].Name</p>
+                        <p class="card-text text-muted mb-0">
+                            @Content.Category[0].Name
+                        </p>
                         <a href="@Link.To(parameters: "rss/true/?standalone=true")" 
                            class="badge badge-pill badge-secondary"
-                           target="_blank"
-                           >
-                           <i class="rss-icon fas fa-rss" aria-hidden="true"></i>
+                           target="_blank">
+                           <i class="fas fa-rss align-self-center" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            <div>
+            <!-- Listing of episodes -->
             <ul class="list-group"  @Edit.TagToolbar(actions: "new", contentType: "Episode", prefill: new {
                     Channels = new string[] { Content.EntityGuid.ToString() },
                     Author = new string[] { (Content.Owner as Dynlist).First().EntityGuid.ToString() },
@@ -51,72 +62,93 @@
                 })>
                 @foreach(var episode in episodes.OrderByDescending(e => e.Date)) {
                     episodeNumber++;
-
-                    <li class="list-group-item pb-3 pt-3" @Edit.TagToolbar(episode, actions: "edit")>
-                        <p class="text-muted episode-date">@episode.Date.ToString("dd MMM yyyy")</p>
-                        <h5 class="episode-title">@episode.Title</h5>
+                    <!-- Episode information -->
+                    <li class="list-group-item border-right-0 border-left-0 p-0 pb-3 pt-3" @Edit.TagToolbar(episode, actions: "edit")>
+                        <p class="text-muted episode-date">
+                            @episode.Date.ToString("dd MMM yyyy")
+                        </p>
+                        <h5 class="m-0">
+                            @episode.Title
+                        </h5>
                         <div class="episode-description">
                             @Html.Raw(episode.Description)
                         </div>
-                        <div class="jp-jplayer @("episode-audio-"+@episodeNumber)" data-target="@episode.Audio"></div>
-                        <button class="play-button play-button-@episodeNumber btn btn-primary" type="button" data-target="@episodeNumber"><i class="fas fa-play"></i> Play</button>
-                        <button class="pause-button pause-button-@episodeNumber btn btn-primary" type="button" data-target="@episodeNumber"><i class="fas fa-pause"></i> Pause</button>
-                        <span class="episode-duration text-muted">@episode.Duration</span>
+
+                        <!-- Audio Player -->
+                        <div class="jp-jplayer episode-audio-@episodeNumber" data-episode-audio="@episode.Audio"></div>
+                        <button class="play-button play-button-@episodeNumber btn btn-primary" 
+                                type="button" 
+                                data-episode-number="@episodeNumber">
+                            <!-- TODO: add translation -->
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                        <button class="pause-button pause-button-@episodeNumber btn btn-primary" 
+                                type="button" 
+                                data-episode-number="@episodeNumber">
+                            <!-- TODO: add translation -->
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <span class="episode-duration text-muted">
+                            @episode.Duration
+                        </span>
                     </li>
                 }
             </ul>
-            </div>
         </div>
     </div>
 </div>
 <script>
     $(document).ready(function(){
-        $(".play-button").click( function() {
-            $(".episode-audio-" + $(this).data('target')).jPlayer("play");
-            $(this).css("display", "none");
-            $(".pause-button-" + $(this).data('target')).css("display", "inline-block")
-        });
-
-        $(".pause-button").click( function() {
-            $(".episode-audio-" + $(this).data('target')).jPlayer("pause");
-            $(this).css("display", "none");
-            $(".play-button-" + $(this).data('target')).css("display", "inline-block")
-        });
-
-        $(".jp-jplayer").each(function() {
+        /* Configure the players */
+        $('.jp-jplayer').each(function() {
             $(this).jPlayer({
                 ready: function () {
-                    $(this).jPlayer("setMedia", {
-                        mp3: $(this).data('target'),
+                    $(this).jPlayer('setMedia', {
+                        mp3: $(this).data('episode-audio'),
                     })
                 },
-                ended: function (event) {
-                    $(this).jPlayer("play");
+                ended: function () {
+                    $(this).jPlayer('play');
                 },
-                swfPath: "/assets",
-                supplied: "mp3"
-            })
-            .bind($.jPlayer.event.play, function() { // pause other instances of player when current one play
-                    $(this).jPlayer("pauseOthers");
+                swfPath: '/assets',
+                supplied: 'mp3'
+            }) // pause other instances of player when current one play
+            .bind($.jPlayer.event.play, function() {
+                    $(this).jPlayer('pauseOthers');
             });
         });
+
+        /* Start playing an audio  */
+        $('.play-button').click( function() {
+            // Make sure all play buttons are shown
+            $('.play-button').each(function() {
+                $(this).css('display', 'inline-block');
+            });
+            // Make sure all pause buttons are hidden
+            $('.pause-button').each(function() {
+                $(this).css('display', 'none');
+            });
+
+            // Hide the clicked play button and show the corresponding pause button
+            $('.episode-audio-' + $(this).data('episode-number')).jPlayer('play');
+            $(this).css('display', 'none');
+            $('.pause-button-' + $(this).data('episode-number')).css('display', 'inline-block');
+        });
+
+        /* Pause an audio */
+        $('.pause-button').click( function() {
+            $('.episode-audio-' + $(this).data('episode-number')).jPlayer('pause');
+            $(this).css('display', 'none');
+            $('.play-button-' + $(this).data('episode-number')).css('display', 'inline-block');
+        });
+
+        /* Format the episode duration */
+        $('.episode-duration').each(function() {
+            var hr = ~~($(this).context.innerHTML / 60);
+            var min = ~~($(this).context.innerHTML % 60);
+            var formatedDuration = hr + ' hr ' + min + ' min';
+
+            $(this).context.innerHTML = formatedDuration;
+        });
     });
-
-    window.onload = function () {
-        var episodeDurationsList = document.getElementsByClassName('episode-duration');
-        var formatedDuration = '';
-
-        for(var i = 0; i < episodeDurationsList.length; i++) {
-            formatedDuration = formatTime(episodeDurationsList[i].innerHTML);
-            episodeDurationsList[i].innerHTML = formatedDuration;
-        }
-    }
-
-    function formatTime(time) {
-        var hr = ~~(time / 60);
-        var min = ~~(time % 60);
-        var hr_min = hr + ' hr ' + min + ' min';
-
-        return hr_min;
-    }
 </script>
