@@ -75,7 +75,10 @@
                         </div>
 
                         <!-- Audio Player -->
-                        <div class="jp-jplayer episode-audio-@episodeNumber" data-episode-audio="@episode.Audio"></div>
+                        <div class="jp-jplayer episode-audio-@episodeNumber"
+                             data-episode-audio="@episode.Audio"
+                             data-episode-number="@episodeNumber">
+                        </div>
                         <button class="play-button play-button-@episodeNumber btn btn-primary" 
                                 type="button" 
                                 data-episode-number="@episodeNumber">
@@ -108,7 +111,8 @@
                     })
                 },
                 ended: function () {
-                    $(this).jPlayer('play');
+                    $('.pause-button-' + $(this).data('episode-number')).css('display', 'none');
+                    $('.play-button-' + $(this).data('episode-number')).css('display', 'inline-block');
                 },
                 swfPath: '/assets',
                 supplied: 'mp3'
