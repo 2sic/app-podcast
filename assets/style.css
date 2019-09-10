@@ -3,28 +3,28 @@ img {
     border-radius: 4%;
 }
 
-.channel-title {
+.pc-channel-title {
     font-size: 1.5rem;
 }
 
-.channel-description-desktop {
+.pc-channel-description-desktop {
     display: block;
 }
 
-.channel-description-mobile {
+.pc-channel-description-mobile {
     display: none;
 }
 
-.channel-category-rss {
+.pc-channel-category-rss {
     display: flex;
 }
 
-.channel-category-rss > p {
+.pc-channel-category-rss > p {
     flex: 4;
     align-self: flex-end;
 }
 
-.channel-category-rss > a {
+.pc-channel-category-rss > a {
     color: white;
     flex: 1;
     max-width: 30px;
@@ -32,33 +32,134 @@ img {
     justify-content: center;
 }
 
-.owner-name {
+.pc-owner-name {
     font-weight: 500;
 }
 
-.episode-date {
+.pc-episode-date {
     font-weight: bold;
     font-size: 0.7rem;
 }
 
-.episode-description {
+.pc-episode-description {
     color: #6c757d;
 }
 
-.pause-button {
+/* .pc-pause-button {
     display: none;
-}
+} */
 
-.btn {
+/* .btn {
     border-radius: 18px;
-}
+} */
 
 @media (max-width: 576px) {
-    .channel-description-desktop {
+    .pc-channel-description-desktop {
         display: none;
     }
 
-    .channel-description-mobile {
+    .pc-channel-description-mobile {
         display: block;
     }
 }
+
+
+/* jPlayer classes */
+.jp-audio {
+    display: inline-block;
+    width: 6%;
+}
+
+.jp-interface {
+    position: relative;
+    border-radius: 25px;
+    padding: 10px 6px 10px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.jp-controls-holder {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.jp-controls {
+    flex-basis: calc(100% / 9);
+    flex-grow: 1;
+}
+
+.jp-play {
+    background: transparent;
+    color: #fff;
+    border: none;
+}
+
+.jp-play:focus {
+    outline: none;
+}
+
+.jp-progress {
+    display: none;
+    position: relative;
+    flex-grow: 9;
+    background-color: #ddd;
+    height: 15px;
+}
+
+.jp-seek-bar {
+    position: absolute;
+    background-color: #fff;
+    height: 15px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.jp-play-bar {
+    background: #43845c;
+    height: 100%;
+ }
+
+.pc-drag-handler {
+    position: absolute;
+    width: 7.5px;
+    height: 15px;
+    background-color: #845c43;
+    padding: 0px;
+    transition: transform 0.15s ease-in-out;
+}
+
+.jp-time-control {
+    display: none;
+    padding: 0 10px;
+}
+
+.pc-gap {
+    flex-basis: calc(100% / 9);
+    flex-grow: 1;
+    cursor: default;
+}
+
+.jp-time-labels {
+    flex-grow: 9;
+    display: flex;
+    align-items: flex-start;
+}
+
+.jp-current-time {
+    padding-left: 8px;
+}
+
+.jp-duration {
+    margin-left: auto;
+    padding-right: 2px;
+}
+
+.jp-current-time,
+.jp-duration {
+    font-size:.64em;
+    font-style:oblique;
+    color: #fff;
+}
+ 
