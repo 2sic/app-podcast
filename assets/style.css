@@ -45,29 +45,16 @@ img {
     color: #6c757d;
 }
 
-/* .pc-pause-button {
-    display: none;
-} */
-
-/* .btn {
-    border-radius: 18px;
-} */
-
-@media (max-width: 576px) {
-    .pc-channel-description-desktop {
-        display: none;
-    }
-
-    .pc-channel-description-mobile {
-        display: block;
-    }
+.pc-play-button-duration {
+    display: flex;
+    align-items: center;
 }
-
 
 /* jPlayer classes */
 .jp-audio {
     display: inline-block;
-    width: 6%;
+    width: 46px;
+    margin-right: 10px;
 }
 
 .jp-interface {
@@ -162,4 +149,28 @@ img {
     font-style:oblique;
     color: #fff;
 }
- 
+
+@media (max-width: 576px) {
+    .pc-channel-description-desktop {
+        display: none;
+    }
+
+    .pc-channel-description-mobile {
+        display: block;
+    }
+
+    /* jPlayer classes */
+    .jp-interface {
+        width: 100% !important;
+    }
+
+    .pc-gap, .jp-controls {
+        flex-basis: calc(100% / 20);
+        flex-grow: 1;
+    }
+
+    .jp-time-labels, .jp-progress {
+        flex-grow: 20;
+    }
+
+}

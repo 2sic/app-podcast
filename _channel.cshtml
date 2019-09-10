@@ -78,34 +78,36 @@
                              data-episode-audio="@episode.Audio"
                              data-episode-number="@episodeNumber">
                         </div>
-                        <div id="jp_container_@episodeNumber" class="jp-audio jp-audio-@episodeNumber">
-                            <div class="jp-interface jp-interface-@episodeNumber bg-primary">
-                                <div class="jp-controls-holder">
-                                    <div class="jp-controls">
-                                        <button class="jp-play jp-play-@episodeNumber" type="button">
-                                            <i class="fas fa-play"></i>
-                                        </button>
-                                    </div>
-                                    <div class="jp-progress jp-progress-@episodeNumber">
-                                        <div class="jp-seek-bar">
-                                            <div class="jp-play-bar jp-play-bar-@episodeNumber" data-episode-number="@episodeNumber">
-                                                <div class="pc-drag-handler pc-drag-handler-@episodeNumber"></div>
+                        <div class="pc-play-button-duration">
+                            <div id="jp_container_@episodeNumber" class="jp-audio jp-audio-@episodeNumber">
+                                <div class="jp-interface jp-interface-@episodeNumber bg-primary">
+                                    <div class="jp-controls-holder">
+                                        <div class="jp-controls">
+                                            <button class="jp-play jp-play-@episodeNumber" type="button">
+                                                <i class="fas fa-play"></i>
+                                            </button>
+                                        </div>
+                                        <div class="jp-progress jp-progress-@episodeNumber">
+                                            <div class="jp-seek-bar">
+                                                <div class="jp-play-bar jp-play-bar-@episodeNumber" data-episode-number="@episodeNumber">
+                                                    <div class="pc-drag-handler pc-drag-handler-@episodeNumber"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="jp-time-control jp-time-control-@episodeNumber">
-                                    <div class="pc-gap">&nbsp;</div>
-                                    <div class="jp-time-labels">
-                                        <div class="jp-current-time">&nbsp;</div>
-                                        <div class="jp-duration">&nbsp;</div>
+                                    <div class="jp-time-control jp-time-control-@episodeNumber">
+                                        <div class="pc-gap">&nbsp;</div>
+                                        <div class="jp-time-labels">
+                                            <div class="jp-current-time">&nbsp;</div>
+                                            <div class="jp-duration">&nbsp;</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <span class="pc-episode-duration pc-episode-duration-@episodeNumber text-muted">
+                                @episode.Duration
+                            </span>
                         </div>
-                        <span class="episode-duration episode-duration-@episodeNumber text-muted">
-                            @episode.Duration
-                        </span>
                     </li>
                 }
             </ul>
@@ -158,7 +160,7 @@
         });
 
         /* Format the episode duration */
-        $('.episode-duration').each(function() {
+        $('.pc-episode-duration').each(function() {
             var hr = ~~($(this).context.innerHTML / 60);
             var min = ~~($(this).context.innerHTML % 60);
             var formatedDuration = hr + ' hr ' + min + ' min';
@@ -173,17 +175,17 @@
             $('.jp-interface-' + episodeNumber).css('padding', '10px 6px 0 0');
             $('.jp-progress-' + episodeNumber).css('display', 'block');
             $('.jp-time-control-' + episodeNumber).css('display', 'flex');
-            $('.episode-duration-' + episodeNumber).css('display', 'none');
+            $('.pc-episode-duration-' + episodeNumber).css('display', 'none');
         }
 
         /* Hide audio player elements */
         var hideAudioPlayerElements = function(episodeNumber) {
-            $('.jp-audio-' + episodeNumber).css('width', '6%');
+            $('.jp-audio-' + episodeNumber).css('width', '46px');
             $('.jp-interface-' + episodeNumber).css('width', '100%');
             $('.jp-interface-' + episodeNumber).css('padding', '10px 6px 10px 0');
             $('.jp-progress-' + episodeNumber).css('display', 'none');
             $('.jp-time-control-' + episodeNumber).css('display', 'none');
-            $('.episode-duration-' + episodeNumber).css('display', 'inline');
+            $('.pc-episode-duration-' + episodeNumber).css('display', 'inline');
         }
 
 
