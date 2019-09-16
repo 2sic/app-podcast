@@ -84,11 +84,11 @@
               height: 100%; }
           .list-group .jp-audio .jp-interface .jp-controls-holder .jp-progress .pc-drag-handler {
             position: absolute;
-            top: -3px;
-            margin-left: -5px;
-            width: 10px;
-            height: 10px;
-            border-radius: 5px;
+            top: -4px;
+            margin-left: -4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
             background-color: #43845c;
             padding: 0;
             transition: transform 0.15s ease-in-out;
@@ -109,6 +109,8 @@
   .list-group {
     /* jPlayer classes */ }
     .list-group .jp-audio .jp-interface {
-      width: 100% !important; } }
+      width: 100% !important; }
+    .list-group .jp-audio .pc-drag-handler.dragging {
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.2); } }
 
 /*# sourceMappingURL=styles.css.map */

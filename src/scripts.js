@@ -80,6 +80,7 @@ $(document).ready(function(){
             episodeNumber = $(this).data('episode-number');
             $('#jquery_jplayer_' + episodeNumber).jPlayer('pause');
             timeDrag = true;
+            $('.pc-drag-handler-' + episodeNumber).addClass('dragging');
             updateBar(e.pageX);
         },
         drag: function (e) {
@@ -90,6 +91,7 @@ $(document).ready(function(){
         stop: function (e) {
             if (timeDrag) {
                 timeDrag = false;
+                $('.pc-drag-handler-' + episodeNumber).removeClass('dragging');
                 updateBar(e.pageX);
                 $('#jquery_jplayer_' + episodeNumber).jPlayer('play');
             }
