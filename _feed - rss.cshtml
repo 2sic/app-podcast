@@ -12,6 +12,8 @@
 }
 @if(Request.QueryString["standalone"] == "true")
 {
+  var licenseItems = Content.License as Dynlist;
+  var licenseLink = licenseItems.Any() ? licenseItems.First().Link : "";
 <rss version="2.0">
   <channel>
     <title>@Content.Title</title>
@@ -19,8 +21,8 @@
     <image>
       <url>@Content.Image</url>
     </image>
-    <itunes:author>@Content.Owner[0].FullName</itunes:author>
-    <creativeCommons:license>@Content.License[0].Link</creativeCommons:license>
+    <itunes:author>@Content.Owner[0].FullName</itunes:author> 
+    <creativeCommons:license>@licenseLink</creativeCommons:license>
     <language>@Content.Language</language>
     @Html.Raw("<link>" + Link.To() + "</link>")
     <guid>@Content.EntityGuid.ToString()</guid>
@@ -32,7 +34,7 @@
         <title>@episode.Title</title>
         <description>@episode.Description</description>
         <category>@Content.Category[0].Name</category>
-        <pubDate>@episode.Date.ToString("R")</pubDate>
+        <pubDate>@((episode.Date ?? new DateTime()).ToString("R"))</pubDate>
         <itunes:author>@episode.Author[0].FullName</itunes:author>
         <itunes:duration>@duration.ToString("hh\\:mm"):00</itunes:duration>
         <itunes:explicit>@(episode.Explicit ? "yes" : "no")</itunes:explicit>

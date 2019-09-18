@@ -3,20 +3,20 @@
     var episodes = Content.Parents("Episode") as Dynlist;
     /* Counter which is brought for the identification of the individual episodes  */
     var episodeNumber = 0;
+    var demoChannelGuid = new Guid("f9000077-f51d-4309-baf1-24debd7503a9");
+    var isShowingDemo = Content.EntityGuid == demoChannelGuid;
 }
 
-<div class="container sc-element">
-    @Edit.Toolbar(Content)
+<div class="container">
     <div class="row">
         <!-- Left column with image, episode counter and channel description -->
         <div class="col-12 col-md-4">
             <div class="card border-0">
-                <img src="@Content.Image?w=200&h=200&mode=crop">
+                <img src="@Content.Image?w=1000&h=1000&mode=crop&quality=75">
                 <div class="card-body p-0">
                     <p class="card-text">
-                        <!-- TODO: add translation -->
                         <p class="pc-text-muted">
-                            @episodes.Count() Episoden
+                            @episodes.Count() @App.Resources.Episodes
                         </p> 
                         <hr>
                         <div class="pc-channel-description-desktop">
@@ -30,7 +30,12 @@
         <div class="col-12 col-md-8"> 
             <div class="card border-0 mb-4">
                 <!-- Channel Information -->
-                <div class="card-body p-0">
+                <div class="card-body p-0" @Edit.TagToolbar(Content)>
+                    @if(isShowingDemo){
+                        <div class="alert alert-warning">
+                            @Html.Raw(App.Resources.WarningIsShowingDemo)
+                        </div>
+                    }
                     <h3 class="card-title pc-channel-title">
                         @Content.Title
                     </h3>
@@ -44,7 +49,7 @@
                         <p class="card-text pc-text-muted mb-0">
                             @Content.Category[0].Name
                         </p>
-                        <a href="@Link.To(parameters: "rss/true/?standalone=true")" 
+                        <a href="@Link.To(parameters: "rss/true/standalone/true")" 
                            class="badge badge-pill"
                            target="_blank">
                            <i class="fas fa-rss align-self-center" aria-hidden="true"></i>
@@ -52,12 +57,17 @@
                     </div>
                 </div>
             </div>
+
+
             <!-- Listing of episodes -->
-            <ul class="list-group"  @Edit.TagToolbar(actions: "new", contentType: "Episode", prefill: new {
-                    Channels = new string[] { Content.EntityGuid.ToString() },
-                    Author = new string[] { (Content.Owner as Dynlist).First().EntityGuid.ToString() },
-                    Date = DateTime.Now.ToString("MM.dd.yyyy")
-                })>
+            @if(!isShowingDemo) {
+                @Edit.Toolbar(actions: "new", contentType: "Episode", prefill: new {
+                        Channels = new string[] { Content.EntityGuid.ToString() },
+                        Author = new string[] { (Content.Owner as Dynlist).First().EntityGuid.ToString() },
+                        Date = DateTime.Now.ToString("MM.dd.yyyy")
+                    })
+            }
+            <ul class="list-group">
                 @foreach(var episode in episodes.OrderByDescending(e => e.Date)) {
                     episodeNumber++;
                     <!-- Episode information -->
