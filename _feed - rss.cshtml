@@ -1,55 +1,117 @@
 @using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @using System;
-<?xml version="1.0" encoding="utf-8" ?>
+@using Connect.Razor.Blade;
+<?xml version="1.0" encoding="utf-8"?>
 @{
     // get all posts as delived from the standard query
-    var episodes = Content.Parents("Episode") as Dynlist;
+    var episodes = (Content.Parents("Episode") as Dynlist).OrderByDescending(e => e.Date);
 	
 	/*  Just a note to anybody editing this file
 	    The @Html.Raw("<link>") is necessary, because otherwise the
 	    <link> tag gets parsed by Razor in an attempt to do something
 	*/
+
+    // get protocol and host to complete the urls of the episodes and the one of the image
+    var urlHostPath = Link.To().Substring(Link.To().IndexOf("//") + 2);
+    var urlHost = urlHostPath.Substring(0, urlHostPath.IndexOf("/"));
+    var urlProtocol = Link.To().Substring(0, Link.To().IndexOf("//") + 2);
+    var urlProtocolHost = urlProtocol + urlHost;
 }
+
 @if(Request.QueryString["standalone"] == "true")
 {
+  var imageUrl = urlProtocolHost + Content.Image + "?w=3000&h=3000"; // 3000 x 3000 is a apple requirement
   var licenseItems = Content.License as Dynlist;
   var licenseLink = licenseItems.Any() ? licenseItems.First().Link : "";
-<rss version="2.0">
-  <channel>
-    <title>@Content.Title</title>
-    <description>@Content.Description</description>
-    <image>
-      <url>@Content.Image</url>
-    </image>
-    <itunes:author>@Content.Owner[0].FullName</itunes:author> 
-    <creativeCommons:license>@licenseLink</creativeCommons:license>
-    <language>@Content.Language</language>
-    @Html.Raw("<link>" + Link.To() + "</link>")
-    <guid>@Content.EntityGuid.ToString()</guid>
-    <generator>2sxc PodCast App</generator>
-    @foreach(var episode in episodes)
-    {
-      var duration = TimeSpan.FromMinutes(decimal.ToDouble(episode.Duration ?? 0));
-      <item>
-        <title>@episode.Title</title>
-        <description>@episode.Description</description>
-        <category>@Content.Category[0].Name</category>
-        <pubDate>@((episode.Date ?? new DateTime()).ToString("R"))</pubDate>
-        <itunes:author>@episode.Author[0].FullName</itunes:author>
-        <itunes:duration>@duration.ToString("hh\\:mm"):00</itunes:duration>
-        <itunes:explicit>@(episode.Explicit ? "yes" : "no")</itunes:explicit>
-        @Html.Raw("<link>" + Link.To() + "</link>")
-        <guid>@episode.EntityGuid.ToString()</guid>
-        <enclosure url="@episode.Audio" type="audio/mpeg" length="1024"></enclosure>
-      </item>
+  var ownerItems = Content.Owner as Dynlist;
+  var ownerFullName = ownerItems.Any() ? ownerItems.First().FullName : "";
+  var ownerEmail = ownerItems.Any() ? ownerItems.First().Email : "";
+  var managingEditor = ownerItems.Any() ? ownerItems.First().Email + " (" + ownerFullName + ")" : "";
+  var copyrightYear = episodes.Last().Date.Year == episodes.First().Date.Year ? episodes.First().Date.Year : episodes.Last().Date.Year + "-" + episodes.First().Date.Year; // results in e.g. 2019 or 2017-2019
+  var copyrightNotice = "Copyright © " + copyrightYear + " " + ownerFullName;
+  var categoryItems = Content.Category as Dynlist;
+  var categoryName = categoryItems.Any() ? categoryItems.First().Name : "";
+  var mainCategoryName = "";
+  if(Text.Has(categoryName)) {
+    var mainCategoryItems = categoryItems.First().MainCategory as Dynlist;
+    mainCategoryName = mainCategoryItems.Any() ? mainCategoryItems.First().Name : "";
+  }
+  // check whether any episode is explicit because iTunes needs this information on channel level
+  var isChannelExplicit = false;
+  foreach(var e in episodes) {
+    if(e.Explicit){
+      isChannelExplicit = true;
+      break;
     }
-    
-  </channel>
-</rss>
+  }
+  var atomLink = Link.To(parameters: "rss/true/channelid/" + Content.EntityId + "/standalone/true");
+  @:<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule">
+    @:<channel>
+      @:<title>@Content.Title</title>
+      @Html.Raw("<link>" + Link.To() + "</link>")
+      @:<image>
+        @:<title>@Content.Title</title>
+        @:<url>@imageUrl</url>
+        @Html.Raw("<link>" + Link.To() + "</link>")
+      @:</image>
+      @:<itunes:image href="@imageUrl"/>
+      @:<description>@Tags.Strip(Content.Description)</description>
+      @:<itunes:summary>@Tags.Strip(Content.Description)</itunes:summary>
+      @:<language>@Content.Language</language>
+      if(licenseLink == "copyright/")
+      {
+      @:<copyright>@copyrightNotice</copyright>
+      } else {
+      @:<creativeCommons:license>@licenseLink</creativeCommons:license>
+      }
+      @:<managingEditor>@(ownerEmail + " (" + ownerFullName + ")")</managingEditor>
+      @:<itunes:owner>
+        @:<itunes:name>@ownerFullName</itunes:name>
+        @:<itunes:email>@ownerEmail</itunes:email>
+      @:</itunes:owner>
+      @:<itunes:author>@ownerFullName</itunes:author>
+
+      if(Text.Has(mainCategoryName))
+      {
+      @:<itunes:category text="@mainCategoryName">
+        @:<itunes:category text="@categoryName"/>
+      @:</itunes:category>
+      } else {
+      @:<itunes:category text="@categoryName"/>
+      }
+      @:<itunes:explicit>@isChannelExplicit</itunes:explicit>
+      @:<atom:link href="@atomLink" rel="self" type="application/rss+xml" />
+      @:<generator>2sxc PodCast App</generator>
+      foreach(var episode in episodes)
+      {
+        var publicationDate = (episode.Date ?? DateTime.Now).ToString("R");
+        var episodeUrl = urlProtocolHost + episode.Audio;
+        var authorItems = episode.Author as Dynlist;
+        var authorFullName = authorItems.Any() ? authorItems.First().FullName : "";
+        var authorEmail = authorItems.Any() ? authorItems.First().Email : "";
+        var duration = TimeSpan.FromMinutes(decimal.ToDouble(episode.Duration ?? 0)).ToString("hh\\:mm") + ":00";
+        @:<item>
+          @:<title>@episode.Title</title>
+          @:<itunes:subtitle>@Tags.Strip(episode.Description)</itunes:subtitle>
+          @:<description>@Tags.Strip(episode.Description)</description>
+          @:<itunes:summary>@Tags.Strip(episode.Description)</itunes:summary>
+          @:<pubDate>@publicationDate</pubDate>
+          @:<enclosure url="@episodeUrl" type="audio/mpeg" length="1024"></enclosure>
+          @:<guid isPermaLink="false">@episode.EntityGuid.ToString()</guid>
+          @:<category>@categoryName</category>
+          @:<author>@(authorEmail + " (" + authorFullName + ")")</author>
+          @:<itunes:author>@authorFullName</itunes:author>
+          @:<itunes:duration>@duration</itunes:duration>
+          @:<itunes:explicit>@episode.Explicit</itunes:explicit>
+          @Html.Raw("<link>" + Link.To() + "</link>")
+        @:</item>
+      } 
+    @:</channel>
+  @:</rss>
 }
 else 
 {
-    <span>you are seeing this because you are currently viewing a normal page. to use this feed correctly, you must add ?standalone=true to the url, so it doesn't show dnn stuff or html. note that you can put the feed on an own page and then link to it <a href="@Link.To(parameters: "standalone=true")" target="_blank">(with ?standalone=true)</a> or you can also auto-use it by using the normal blog-page and where you would usually see things like /tag/something replace with /feed/all?standalone=true
-    @Content.Toolbar
-    </span>
+  @:<span>you are seeing this because you are currently viewing a normal page. to use this feed correctly, you must add ?standalone=true to the url, so it doesn't show dnn stuff or html. note that you can put the feed on an own page and then link to it <a href="@Link.To(parameters: "standalone=true")" target="_blank">(with ?standalone=true)</a> or you can also auto-use it by using the normal blog-page and where you would usually see things like /tag/something replace with /feed/all?standalone=true
+  @Content.Toolbar
+  @:</span>
 }
