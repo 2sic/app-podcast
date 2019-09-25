@@ -47,13 +47,13 @@
     .list-group .jp-audio .jp-interface {
       position: relative;
       border-radius: 25px;
-      padding: 10px 6px 10px 0;
+      padding: 10px 0;
       width: 100%;
       background-color: #5c4384; }
       .list-group .jp-audio .jp-interface .jp-controls-holder {
         display: flex;
         align-items: center;
-        padding: 0 10px; }
+        text-align: center; }
         .list-group .jp-audio .jp-interface .jp-controls-holder .jp-controls,
         .list-group .jp-audio .jp-interface .jp-controls-holder .jp-current-time,
         .list-group .jp-audio .jp-interface .jp-controls-holder .jp-duration {
@@ -72,7 +72,7 @@
           flex-grow: 10;
           background-color: #fff;
           height: 4px;
-          margin: 0 6px; }
+          margin: 0 10px; }
           .list-group .jp-audio .jp-interface .jp-controls-holder .jp-progress .jp-seek-bar {
             position: absolute;
             background-color: #fff;
@@ -84,11 +84,11 @@
               height: 100%; }
           .list-group .jp-audio .jp-interface .jp-controls-holder .jp-progress .pc-drag-handler {
             position: absolute;
-            top: -4px;
-            margin-left: -4px;
-            width: 12px;
-            height: 12px;
-            border-radius: 6px;
+            top: -6px;
+            margin-left: -8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 8px;
             background-color: #43845c;
             padding: 0;
             transition: transform 0.15s ease-in-out;
@@ -111,6 +111,6 @@
     .list-group .jp-audio .jp-interface {
       width: 100% !important; }
     .list-group .jp-audio .pc-drag-handler.dragging {
-      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.2); } }
+      box-shadow: 0 0 0 12px rgba(0, 0, 0, 0.2); } }
 
 /*# sourceMappingURL=styles.css.map */

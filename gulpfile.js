@@ -3,15 +3,15 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('watch-sass', function () {
-	gulp.watch(['./src/*.scss'], ['sass']);
+	gulp.watch(['./src/scss/*.scss'], ['sass']);
 });
 
 gulp.task('watch-javascript', function () {
-	gulp.watch(['./src/*.js'], ['javascript']);
+	gulp.watch(['./src/js/*.js'], ['javascript']);
 });
 
 gulp.task('sass', function () {
-  return gulp.src('./src/*.scss')
+  return gulp.src('./src/scss/*.scss')
 	.pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
 	.pipe(sourcemaps.write('.', { sourceRoot: '../src/' }))
@@ -19,7 +19,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('javascript', function() {
-	return gulp.src('./src/*.js')
+	return gulp.src('./src/js/*.js')
 		.pipe(gulp.dest('./dist/'));
 });
 

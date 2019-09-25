@@ -47,7 +47,7 @@ $(document).ready(function(){
     $('.pc-episode-duration').each(function() {
         var hr = ~~($(this).context.innerHTML / 60);
         var min = ~~($(this).context.innerHTML % 60);
-        var formatedDuration = hr + ' hr ' + min + ' min';
+        var formatedDuration = (hr < 10 ? '0' + hr : hr) + ':' + (min < 10 ? '0' + min : min) + ':00';
 
         $(this).context.innerHTML = formatedDuration;
     });
@@ -56,6 +56,7 @@ $(document).ready(function(){
     var showAudioPlayerElements = function(episodeNumber) {
         $('.jp-audio-' + episodeNumber).css('width', '100%');
         $('.jp-interface-' + episodeNumber).css('width', '30%');
+        $('.jp-controls-holder-' + episodeNumber).css('padding', '0 10px');
         $('.jp-progress-' + episodeNumber).css('display', 'block');
         $('.jp-current-time-' + episodeNumber + ', .jp-duration-' + episodeNumber).css('display', 'inline');
         $('.pc-episode-duration-' + episodeNumber).css('display', 'none');
@@ -65,6 +66,7 @@ $(document).ready(function(){
     var hideAudioPlayerElements = function(episodeNumber) {
         $('.jp-audio-' + episodeNumber).css('width', '46px');
         $('.jp-interface-' + episodeNumber).css('width', '100%');
+        $('.jp-controls-holder-' + episodeNumber).css('padding', '0');
         $('.jp-progress-' + episodeNumber).css('display', 'none');
         $('.jp-current-time-' + episodeNumber + ', .jp-duration-' + episodeNumber).css('display', 'none');
         $('.pc-episode-duration-' + episodeNumber).css('display', 'inline');
