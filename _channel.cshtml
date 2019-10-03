@@ -5,6 +5,15 @@
     var episodeNumber = 0;
     var demoChannelGuid = new Guid("f9000077-f51d-4309-baf1-24debd7503a9");
     var isShowingDemo = Content.EntityGuid == demoChannelGuid;
+    /* get category of the channel */
+    var category = "";
+    if (Content.Category[0].Name.IndexOf("-") > 0) {
+        var mainCategoryLength = Content.Category[0].Name.IndexOf("-") + 2;
+        var categoryLength = Content.Category[0].Name.Length - mainCategoryLength;
+        category = Content.Category[0].Name.Substring(mainCategoryLength, categoryLength);
+    } else {
+        category = Content.Category[0].Name;
+    }
 }
 
 <div class="container mb-4">
@@ -17,7 +26,7 @@
                     <p class="card-text">
                         <p class="text-muted">
                             @episodes.Count() @App.Resources.Episodes
-                        </p> 
+                        </p>
                         <hr>
                         <div class="pc-channel-description-desktop d-none d-md-block ">
                             @Html.Raw(Content.Description)
@@ -27,7 +36,7 @@
             </div>
         </div>
         <!-- Right column with the rest of the channel information and the episode listing -->
-        <div class="col-12 col-md-8"> 
+        <div class="col-12 col-md-8">
             <div class="card border-0 mb-4">
                 <!-- Channel Information -->
                 <div class="card-body p-0" @Edit.TagToolbar(Content)>
@@ -47,9 +56,9 @@
                     </div>
                     <div class="pc-channel-category-rss d-flex">
                         <p class="card-text text-muted mb-0 align-self-end">
-                            @Content.Category[0].Name
+                            @category
                         </p>
-                        <a href='@Link.To(parameters: "rss/true/channelid/" + @Content.EntityId + "/standalone/true")' 
+                        <a href='@Link.To(parameters: "rss/true/channelid/" + @Content.EntityId + "/standalone/true")'
                            class="badge badge-pill d-flex justify-content-center bg-secondary flex-grow-1"
                            target="_blank">
                            <i class="fas fa-rss align-self-center" aria-hidden="true"></i>
@@ -82,7 +91,7 @@
                             @Html.Raw(episode.Description)
                         </div>
                         <!-- jPlayer audio player -->
-                        <div id="jquery_jplayer_@episodeNumber" class="jp-jplayer episode-audio-@episodeNumber" 
+                        <div id="jquery_jplayer_@episodeNumber" class="jp-jplayer episode-audio-@episodeNumber"
                              data-episode-audio="@episode.Audio"
                              data-episode-number="@episodeNumber">
                         </div>

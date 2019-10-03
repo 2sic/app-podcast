@@ -5,7 +5,7 @@
 @{
     // get all posts as delived from the standard query
     var episodes = (Content.Parents("Episode") as Dynlist).OrderByDescending(e => e.Date);
-	
+
 	/*  Just a note to anybody editing this file
 	    The @Html.Raw("<link>") is necessary, because otherwise the
 	    <link> tag gets parsed by Razor in an attempt to do something
@@ -30,12 +30,10 @@
   var copyrightYear = episodes.Last().Date.Year == episodes.First().Date.Year ? episodes.First().Date.Year : episodes.Last().Date.Year + "-" + episodes.First().Date.Year; // results in e.g. 2019 or 2017-2019
   var copyrightNotice = "Copyright © " + copyrightYear + " " + ownerFullName;
   var categoryItems = Content.Category as Dynlist;
-  var categoryName = categoryItems.Any() ? categoryItems.First().Name : "";
-  var mainCategoryName = "";
-  if(Text.Has(categoryName)) {
-    var mainCategoryItems = categoryItems.First().MainCategory as Dynlist;
-    mainCategoryName = mainCategoryItems.Any() ? mainCategoryItems.First().Name : "";
-  }
+  var fullCategory = categoryItems.Any() ? categoryItems.First().Name : "";
+  var mainCategoryName = fullCategory.IndexOf("-") > 0 ? fullCategory.Substring(0, fullCategory.IndexOf("-") - 1) : "";
+  var mainCategoryLength = mainCategoryName.Length + 3;
+  var categoryName = Text.Has(mainCategoryName) ? fullCategory.Substring(mainCategoryLength, (fullCategory.Length - mainCategoryLength)) : fullCategory;
   // check whether any episode is explicit because iTunes needs this information on channel level
   var isChannelExplicit = false;
   foreach(var e in episodes) {
@@ -105,11 +103,11 @@
           @:<itunes:explicit>@episode.Explicit</itunes:explicit>
           @Html.Raw("<link>" + Link.To() + "</link>")
         @:</item>
-      } 
+      }
     @:</channel>
   @:</rss>
 }
-else 
+else
 {
   @:<span>you are seeing this because you are currently viewing a normal page. to use this feed correctly, you must add ?standalone=true to the url, so it doesn't show dnn stuff or html. note that you can put the feed on an own page and then link to it <a href="@Link.To(parameters: "standalone=true")" target="_blank">(with ?standalone=true)</a> or you can also auto-use it by using the normal blog-page and where you would usually see things like /tag/something replace with /feed/all?standalone=true
   @Content.Toolbar
