@@ -1,6 +1,49 @@
-$(document).ready(function(){
+$(document).ready(function () {
+    /* Show audio player elements */
+    var showAudioPlayerElements = function (episodeNumber) {
+        $('.jp-audio-' + episodeNumber).css('width', '100%');
+        $('.jp-interface-' + episodeNumber).css('width', '30%');
+        $('.jp-controls-holder-' + episodeNumber).css('padding', '0 10px');
+        $('.jp-progress-' + episodeNumber).css('display', 'block');
+        $('.jp-current-time-' + episodeNumber + ', .jp-duration-' + episodeNumber).css('display', 'inline');
+        $('.pc-episode-duration-' + episodeNumber).css('display', 'none');
+    }
+
+    /* Hide audio player elements */
+    var hideAudioPlayerElements = function (episodeNumber) {
+        $('.jp-audio-' + episodeNumber).css('width', '46px');
+        $('.jp-interface-' + episodeNumber).css('width', '100%');
+        $('.jp-controls-holder-' + episodeNumber).css('padding', '0');
+        $('.jp-progress-' + episodeNumber).css('display', 'none');
+        $('.jp-current-time-' + episodeNumber + ', .jp-duration-' + episodeNumber).css('display', 'none');
+        $('.pc-episode-duration-' + episodeNumber).css('display', 'inline');
+    }
+
+    /* Update Progress Bar control */
+    var updateBar = function (x) {
+        var progress = $('.jp-progress-' + episodeNumber);
+        var maxduration = $('#jquery_jplayer_' + episodeNumber).data('jPlayer').status.duration; // audio duration
+        var position = x - progress.offset().left; //Click pos
+        var percentage = 100 * position / progress.width();
+
+        // Check within range
+        if (percentage > 100) {
+            percentage = 100;
+        }
+        if (percentage < 0) {
+            percentage = 0;
+        }
+
+        $('#jquery_jplayer_' + episodeNumber).jPlayer('playHead', percentage);
+
+        // Update progress bar and audio currenttime
+        $('.pc-drag-handler-' + episodeNumber).css('left', percentage + '%');
+        $('.jp-play-bar-' + episodeNumber).css('width', percentage + '%');
+        $('#jquery_jplayer_' + episodeNumber).jPlayer.currentTime = maxduration * percentage / 100;
+    };
+
     /* Configure the jPlayers */
-    $('.jp-jplayer').each(function() {
+    $('.jp-jplayer').each(function () {
         var episodeNumber = $(this).data('episode-number');
 
         $(this).jPlayer({
@@ -19,7 +62,7 @@ $(document).ready(function(){
                 // pause other instances of player when current one plays
                 $(this).jPlayer('pauseOthers');
             },
-            timeupdate: function(event) {
+            timeupdate: function (event) {
                 $('.pc-drag-handler-' + episodeNumber).css('left', event.jPlayer.status.currentPercentAbsolute + '%');
             },
             pause: function () {
@@ -39,38 +82,18 @@ $(document).ready(function(){
             useStateClassSkin: true,
             remainingDuration: true,
             toggleDuration: true,
-            preload:  'none',
+            preload: 'none',
         })
     });
 
     /* Format the episode duration */
-    $('.pc-episode-duration').each(function() {
-        var hr = ~~($(this).context.innerHTML / 60);
-        var min = ~~($(this).context.innerHTML % 60);
+    $('.pc-episode-duration').each(function () {
+        var hr = ~~($(this).text() / 60);
+        var min = ~~($(this).text() % 60);
         var formatedDuration = (hr < 10 ? '0' + hr : hr) + ':' + (min < 10 ? '0' + min : min) + ':00';
 
-        $(this).context.innerHTML = formatedDuration;
+        $(this).text(formatedDuration);
     });
-
-    /* Show audio player elements */
-    var showAudioPlayerElements = function(episodeNumber) {
-        $('.jp-audio-' + episodeNumber).css('width', '100%');
-        $('.jp-interface-' + episodeNumber).css('width', '30%');
-        $('.jp-controls-holder-' + episodeNumber).css('padding', '0 10px');
-        $('.jp-progress-' + episodeNumber).css('display', 'block');
-        $('.jp-current-time-' + episodeNumber + ', .jp-duration-' + episodeNumber).css('display', 'inline');
-        $('.pc-episode-duration-' + episodeNumber).css('display', 'none');
-    }
-
-    /* Hide audio player elements */
-    var hideAudioPlayerElements = function(episodeNumber) {
-        $('.jp-audio-' + episodeNumber).css('width', '46px');
-        $('.jp-interface-' + episodeNumber).css('width', '100%');
-        $('.jp-controls-holder-' + episodeNumber).css('padding', '0');
-        $('.jp-progress-' + episodeNumber).css('display', 'none');
-        $('.jp-current-time-' + episodeNumber + ', .jp-duration-' + episodeNumber).css('display', 'none');
-        $('.pc-episode-duration-' + episodeNumber).css('display', 'inline');
-    }
 
     /* Drag handler */
     var timeDrag = false; // Drag status
@@ -99,27 +122,4 @@ $(document).ready(function(){
             }
         }
     });
-
-    /* Update Progress Bar control */
-    var updateBar = function (x) {
-        var progress = $('.jp-progress-' + episodeNumber);
-        var maxduration = $('#jquery_jplayer_' + episodeNumber).data('jPlayer').status.duration; // audio duration
-        var position = x - progress.offset().left; //Click pos
-        var percentage = 100 * position / progress.width();
-
-        // Check within range
-        if (percentage > 100) {
-            percentage = 100;
-        }
-        if (percentage < 0) {
-            percentage = 0;
-        }
-
-        $('#jquery_jplayer_' + episodeNumber).jPlayer('playHead', percentage);
-
-        // Update progress bar and audio currenttime
-        $('.pc-drag-handler-' + episodeNumber).css('left', percentage + '%');
-        $('.jp-play-bar-' + episodeNumber).css('width', percentage + '%');
-        $('#jquery_jplayer_' + episodeNumber).jPlayer.currentTime = maxduration * percentage / 100;
-    };
 });
