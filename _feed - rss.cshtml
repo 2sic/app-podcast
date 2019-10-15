@@ -30,7 +30,7 @@
   var copyrightYear = episodes.Last().Date.Year == episodes.First().Date.Year ? episodes.First().Date.Year : episodes.Last().Date.Year + "-" + episodes.First().Date.Year; // results in e.g. 2019 or 2017-2019
   var copyrightNotice = "Copyright © " + copyrightYear + " " + ownerFullName;
   var categoryItems = Content.Category as Dynlist;
-  var fullCategory = categoryItems.Any() ? categoryItems.First().Name : "";
+  var fullCategory = categoryItems.Any() ? categoryItems.First().Value : "";
   var mainCategoryName = fullCategory.IndexOf("-") > 0 ? fullCategory.Substring(0, fullCategory.IndexOf("-") - 1) : "";
   var mainCategoryLength = mainCategoryName.Length + 3;
   var categoryName = Text.Has(mainCategoryName) ? fullCategory.Substring(mainCategoryLength, (fullCategory.Length - mainCategoryLength)) : fullCategory;
