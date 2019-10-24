@@ -4,7 +4,6 @@
     /* Counter which is brought for the identification of the individual episodes  */
     var episodeNumber = 0;
     var demoChannelGuid = new Guid("f9000077-f51d-4309-baf1-24debd7503a9");
-    var isShowingDemo = Content.EntityGuid == demoChannelGuid;
     /* get category of the channel */
     var category = "";
     if (Content.Category[0].Name.IndexOf("-") > 0) {
@@ -40,7 +39,7 @@
             <div class="card border-0 mb-4">
                 <!-- Channel Information -->
                 <div class="card-body p-0" @Edit.TagToolbar(Content)>
-                    @if(isShowingDemo){
+                    @if(Content.IsDemoItem){
                         <div class="alert alert-warning">
                             @Html.Raw(App.Resources.WarningIsShowingDemo)
                         </div>
@@ -69,7 +68,7 @@
 
 
             <!-- Listing of episodes -->
-            @if(!isShowingDemo) {
+            @if(!Content.IsDemoItem) {
                 @Edit.Toolbar(actions: "new", contentType: "Episode", prefill: new {
                         Channels = new string[] { Content.EntityGuid.ToString() },
                         Author = new string[] { (Content.Owner as Dynlist).First().EntityGuid.ToString() },
