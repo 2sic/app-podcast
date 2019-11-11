@@ -1,6 +1,6 @@
 @using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @using System;
-@using Connect.Razor.Blade;
+@using ToSic.Razor.Blade;
 <?xml version="1.0" encoding="utf-8"?>
 @{
     // get all posts as delived from the standard query
@@ -28,7 +28,7 @@
   var ownerEmail = ownerItems.Any() ? ownerItems.First().Email : "";
   var managingEditor = ownerItems.Any() ? ownerItems.First().Email + " (" + ownerFullName + ")" : "";
   var copyrightYear = episodes.Last().Date.Year == episodes.First().Date.Year ? episodes.First().Date.Year : episodes.Last().Date.Year + "-" + episodes.First().Date.Year; // results in e.g. 2019 or 2017-2019
-  var copyrightNotice = "Copyright © " + copyrightYear + " " + ownerFullName;
+  var copyrightNotice = licenseLink != "copyright/" ? "Copyright © " + copyrightYear + " " + ownerFullName + " (" + licenseLink + ")" : "Copyright © " + copyrightYear + " " + ownerFullName;
   var categoryItems = Content.Category as Dynlist;
   var fullCategory = categoryItems.Any() ? categoryItems.First().Value : "";
   var mainCategoryName = fullCategory.IndexOf("-") > 0 ? fullCategory.Substring(0, fullCategory.IndexOf("-") - 1) : "";
@@ -45,29 +45,28 @@
   var atomLink = Link.To(parameters: "rss/true/channelid/" + Content.EntityId + "/standalone/true");
   @:<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule">
     @:<channel>
-      @:<title>@Content.Title</title>
+      @Tag.Custom("title", Content.Title)
       @Html.Raw("<link>" + Link.To() + "</link>")
-      @:<image>
-        @:<title>@Content.Title</title>
-        @:<url>@imageUrl</url>
-        @Html.Raw("<link>" + Link.To() + "</link>")
-      @:</image>
+      @Tag.Custom("image",
+        Tag.Custom("title", Content.Title),
+        Tag.Custom("url", imageUrl),
+        Tag.Custom("link", Link.To())
+      )
       @:<itunes:image href="@imageUrl"/>
       @:<description>@Tags.Strip(Content.Description)</description>
       @:<itunes:summary>@Tags.Strip(Content.Description)</itunes:summary>
-      @:<language>@Content.Language</language>
-      if(licenseLink == "copyright/")
+      @Tag.Custom("language", Content.Language)
+      @Tag.Custom("copyright", copyrightNotice)
+      if(licenseLink != "copyright/")
       {
-      @:<copyright>@copyrightNotice</copyright>
-      } else {
-      @:<creativeCommons:license>@licenseLink</creativeCommons:license>
+        @:<creativeCommons:license>@licenseLink</creativeCommons:license>
       }
-      @:<managingEditor>@(ownerEmail + " (" + ownerFullName + ")")</managingEditor>
-      @:<itunes:owner>
-        @:<itunes:name>@ownerFullName</itunes:name>
-        @:<itunes:email>@ownerEmail</itunes:email>
-      @:</itunes:owner>
-      @:<itunes:author>@ownerFullName</itunes:author>
+      @Tag.Custom("managingEditor", ownerEmail + " (" + ownerFullName + ")")
+      @Tag.Custom("itunes:owner",
+        Tag.Custom("itunes:name", ownerFullName),
+        Tag.Custom("itunes:email", ownerEmail)
+      )
+      @Tag.Custom("itunes:author", ownerFullName)
 
       if(Text.Has(mainCategoryName))
       {
@@ -79,7 +78,7 @@
       }
       @:<itunes:explicit>@isChannelExplicit</itunes:explicit>
       @:<atom:link href="@atomLink" rel="self" type="application/rss+xml" />
-      @:<generator>2sxc PodCast App</generator>
+      @Tag.Custom("generator", "2sxc PodCast App")
       foreach(var episode in episodes)
       {
         var publicationDate = (episode.Date ?? DateTime.Now).ToString("R");
@@ -97,11 +96,11 @@
           @:<enclosure url="@episodeUrl" type="audio/mpeg" length="1024"></enclosure>
           @:<guid isPermaLink="false">@episode.EntityGuid.ToString()</guid>
           @:<category>@categoryName</category>
-          @:<author>@(authorEmail + " (" + authorFullName + ")")</author>
+          @Tag.Custom("author", authorEmail + " (" + authorFullName + ")")
           @:<itunes:author>@authorFullName</itunes:author>
           @:<itunes:duration>@duration</itunes:duration>
           @:<itunes:explicit>@episode.Explicit</itunes:explicit>
-          @Html.Raw("<link>" + Link.To() + "</link>")
+          @Tag.Custom("link", Link.To())
         @:</item>
       }
     @:</channel>

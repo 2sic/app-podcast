@@ -57,7 +57,7 @@
                         <p class="card-text text-muted mb-0 align-self-end">
                             @category
                         </p>
-                        <a href='@Link.To(parameters: "rss/true/channelid/" + @Content.EntityId + "/standalone/true")'
+                        <a href='@Link.To(parameters: "mid/" + @Dnn.Module.ModuleID + "/rss/true/channelid/" + @Content.EntityId + "/standalone/true")'
                            class="badge badge-pill d-flex justify-content-center bg-secondary flex-grow-1"
                            target="_blank">
                            <i class="fas fa-rss align-self-center" aria-hidden="true"></i>
