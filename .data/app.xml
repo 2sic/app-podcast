@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="11.00.00" ExportDate="2020-05-07T08:00:24.5651774+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="11.00.01" ExportDate="2020-05-08T14:03:09.816695+02:00">
   <Header>
     <App Guid="d2758f88-228e-45bd-b6ba-52c9ebc0fe47" />
     <Language Default="en-US" />
@@ -1251,10 +1251,10 @@
       <Value Key="Episodes" Value="Episoden" Type="String">
         <Dimension DimensionID="147" ReadOnly="false" />
       </Value>
-      <Value Key="WarningIsShowingDemo" Value="&lt;h2&gt;Warning&lt;/h2&gt;&#xA;&lt;p&gt;You just added this to a page and it's still showing demo data. Before you add episodes, you must first edit the channel information. This warning will then dissapear.&lt;/p&gt;&#xA;&lt;p&gt;Take a look at &lt;a href=&quot;https://azing.org/2sxc/l/ylkMM9c5/app-podcast&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;these azing checklists&lt;/a&gt;, if you need help.&lt;/p&gt;" Type="String">
+      <Value Key="WarningIsShowingDemo" Value="&lt;h2&gt;Getting Started&lt;/h2&gt;&#xA;&lt;p&gt;You just added this to a page and it's still showing demo data. Before you add episodes, you must first edit the channel information. This warning will then dissapear.&lt;/p&gt;&#xA;&lt;p&gt;Take a look at &lt;a href=&quot;https://azing.org/2sxc/l/ylkMM9c5/app-podcast&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;these azing checklists&lt;/a&gt;, if you need help.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="WarningIsShowingDemo" Value="&lt;h2&gt;Warnung&lt;/h2&gt;&#xA;&lt;p&gt;Sie haben dies gerade einer Seite hinzugef&amp;uuml;gt und es zeigt immer noch Demo-Daten an. Bevor Sie Episoden hinzuf&amp;uuml;gen, m&amp;uuml;ssen Sie zuerst die Kanalinformationen bearbeiten. Diese Warnung wird dann verschwinden.&lt;/p&gt;&#xA;&lt;p&gt;Schauen Sie sich &lt;a href=&quot;https://azing.org/2sxc/l/ylkMM9c5/app-podcast&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;diese azing checklists&lt;/a&gt; an, wenn Sie hilfe ben&amp;ouml;tigen.&lt;/p&gt;" Type="String">
+      <Value Key="WarningIsShowingDemo" Value="&lt;h2&gt;Erste Schritte&lt;/h2&gt;&#xA;&lt;p&gt;Sie haben dies gerade einer Seite hinzugef&amp;uuml;gt und es zeigt immer noch Demo-Daten an. Bevor Sie Episoden hinzuf&amp;uuml;gen, m&amp;uuml;ssen Sie zuerst die Kanalinformationen bearbeiten. Diese Warnung wird dann verschwinden.&lt;/p&gt;&#xA;&lt;p&gt;Schauen Sie sich &lt;a href=&quot;https://azing.org/2sxc/l/ylkMM9c5/app-podcast&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;diese azing checklists&lt;/a&gt; an, wenn Sie hilfe ben&amp;ouml;tigen.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="147" ReadOnly="false" />
       </Value>
     </Entity>
@@ -1313,7 +1313,7 @@
       <Value Key="Description" Value="&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Image" Value="file:4451" Type="Hyperlink">
+      <Value Key="Image" Value="file:4453" Type="Hyperlink">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="Language" Value="de-de" Type="String">
@@ -1370,7 +1370,7 @@
       </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="d9fbf8a7-c656-426e-b820-e74943699af1" AttributeSetName="Episode" EntityGUID="3febf037-bc62-4378-91bf-931dc55d18ac">
-      <Value Key="Audio" Value="file:4193" Type="Hyperlink">
+      <Value Key="Audio" Value="file:4190" Type="Hyperlink">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="Author" Value="2827581c-b4ed-48ad-9930-f3703c6c8d3b" Type="Entity" />
@@ -1388,28 +1388,6 @@
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="Title" Value="Test Episode 3" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="d9fbf8a7-c656-426e-b820-e74943699af1" AttributeSetName="Episode" EntityGUID="80892046-bf73-4d12-a416-0479f6f033cd">
-      <Value Key="Audio" Value="file:4194" Type="Hyperlink">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Author" Value="2827581c-b4ed-48ad-9930-f3703c6c8d3b" Type="Entity" />
-      <Value Key="Channels" Value="f9000077-f51d-4309-baf1-24debd7503a9" Type="Entity" />
-      <Value Key="Date" Value="2019-09-13T00:00:00" Type="DateTime">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Description" Value="&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Duration" Value="3" Type="Number">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Explicit" Value="True" Type="Boolean">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Test Episode 4" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
     </Entity>
@@ -2706,16 +2684,15 @@
     </Entity>
   </Entities>
   <PortalFiles>
-    <File Id="4451" RelativePath="adam\PodCast\dwAA-R31CUO68STevXUDqQ\Image\placeholder.jpg" />
+    <File Id="4453" RelativePath="adam\PodCast\dwAA-R31CUO68STevXUDqQ\Image\podcast logo.png" />
     <File Id="4190" RelativePath="adam\PodCast\GTzLbJdOTUqkX81-6Zp_PA\Audio\lyricchords.mp3" />
     <File Id="4191" RelativePath="adam\PodCast\7tjelP10MUC5Co3h_m1bPg\Audio\lyricslap.mp3" />
-    <File Id="4193" RelativePath="adam\PodCast\N_DrP2K8eEORv5MdxV0YrA\Audio\monsterslap.mp3" />
-    <File Id="4194" RelativePath="adam\PodCast\RiCJgHO_Ek2kFgR59vAzzQ\Audio\lyricchords.mp3" />
     <File Id="4388" RelativePath="adam\PodCast\6EkYIiSbU02i3b2AL7TJNQ\Image\placeholder.jpg" />
     <File Id="4188" RelativePath="adam\PodCast\a4QynAVWUEaCRU7f3rfzmQ\Image\placeholder.png" />
     <File Id="4195" RelativePath="adam\PodCast\A4Zh7Sh9FU6U0SvoLmdUFg\Audio\file_example_MP3_5MG.mp3" />
     <File Id="4192" RelativePath="adam\PodCast\A4Zh7Sh9FU6U0SvoLmdUFg\Audio\monsterchords.mp3" />
-    <File Id="4189" RelativePath="adam\PodCast\dwAA-R31CUO68STevXUDqQ\Image\nigel-tadyanehondo-wny6Y4MbyhA-unsplash.jpg" />
+    <File Id="4193" RelativePath="adam\PodCast\N_DrP2K8eEORv5MdxV0YrA\Audio\monsterslap.mp3" />
+    <File Id="4194" RelativePath="adam\PodCast\RiCJgHO_Ek2kFgR59vAzzQ\Audio\lyricchords.mp3" />
     <File Id="4452" RelativePath="adam\PodCast\seNq0bKU0kes9rI6exdEUQ\Image\2020-05-06_12-10-35.jpg" />
     <File Id="4449" RelativePath="adam\PodCast\u8xD39KpYkiInFd2dWZFOg\Image\placeholder.jpg" />
     <File Id="4196" RelativePath="adam\PodCast\uCI31fHOpEWhv7bYOEtUGQ\Audio\file_example_MP3_1MG.mp3" />
@@ -2724,11 +2701,11 @@
     <Folder Id="7011" RelativePath="adam/PodCast/dwAA-R31CUO68STevXUDqQ/Image/" />
     <Folder Id="7013" RelativePath="adam/PodCast/GTzLbJdOTUqkX81-6Zp_PA/Audio/" />
     <Folder Id="7015" RelativePath="adam/PodCast/7tjelP10MUC5Co3h_m1bPg/Audio/" />
-    <Folder Id="7019" RelativePath="adam/PodCast/N_DrP2K8eEORv5MdxV0YrA/Audio/" />
-    <Folder Id="7021" RelativePath="adam/PodCast/RiCJgHO_Ek2kFgR59vAzzQ/Audio/" />
     <Folder Id="7711" RelativePath="adam/PodCast/6EkYIiSbU02i3b2AL7TJNQ/Image/" />
     <Folder Id="7008" RelativePath="adam/PodCast/a4QynAVWUEaCRU7f3rfzmQ/Image/" />
     <Folder Id="7017" RelativePath="adam/PodCast/A4Zh7Sh9FU6U0SvoLmdUFg/Audio/" />
+    <Folder Id="7019" RelativePath="adam/PodCast/N_DrP2K8eEORv5MdxV0YrA/Audio/" />
+    <Folder Id="7021" RelativePath="adam/PodCast/RiCJgHO_Ek2kFgR59vAzzQ/Audio/" />
     <Folder Id="9762" RelativePath="adam/PodCast/seNq0bKU0kes9rI6exdEUQ/Image/" />
     <Folder Id="9760" RelativePath="adam/PodCast/u8xD39KpYkiInFd2dWZFOg/Image/" />
     <Folder Id="7032" RelativePath="adam/PodCast/uCI31fHOpEWhv7bYOEtUGQ/Audio/" />
