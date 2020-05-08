@@ -7,7 +7,7 @@
   var episodeNumber = 0;
 }
 
-<div class="container mb-4">
+<div class="container mb-4"  @Edit.TagToolbar(Content, toolbar: new [] { "settings&hover=left&autoAddMore=start" })>
   <div class="row">
     @* Left column with image, episode counter and channel description *@
     <div class="col-12 col-md-4">
@@ -26,7 +26,7 @@
     <div class="col-12 col-md-8">
       <div class="card border-0 mb-4">
         @* Channel Information *@
-        <div class="card-body p-0" @Edit.TagToolbar(Content)>
+        <div class="card-body p-0">
           @if(Content.IsDemoItem){
             <div class="alert alert-warning">
               @Html.Raw(App.Resources.WarningIsShowingDemo)
@@ -61,7 +61,10 @@
         @foreach(var episode in episodes.OrderByDescending(e => e.Date)) {
           episodeNumber++;
           @* Episode information *@
-          <li class="list-group-item border-right-0 border-left-0 p-0 pb-3 pt-3" @Edit.TagToolbar(episode, toolbar: "%delete&show=true")>
+          <li class="list-group-item border-right-0 border-left-0 p-0 pb-3 pt-3" @(Content.IsDemoItem ? "" : Edit.TagToolbar(episode, toolbar: new [] {
+            "-layout",
+            "%delete&show=true"
+          }))>
             <p class="text-muted pc-episode-date font-weight-bold">@episode.Date.ToString("dd MMM yyyy")</p>
             <h5 class="m-0">@episode.Title</h5>
             <div class="text-muted">@Html.Raw(episode.Description)</div>
