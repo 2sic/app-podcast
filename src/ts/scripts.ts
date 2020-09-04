@@ -45,11 +45,12 @@ $(document).ready(function(){
 
   /* Format the episode duration */
   $('.pc-episode-duration').each(function() {
-    var hr = ~~(($(this) as any).context.innerHTML / 60);
-    var min = ~~(($(this) as any).context.innerHTML % 60);
+    const duration: number = parseInt($(this).html());
+    var hr = ~~(duration / 60);
+    var min = ~~(duration % 60);
     var formatedDuration = (hr < 10 ? '0' + hr : hr) + ':' + (min < 10 ? '0' + min : min) + ':00';
 
-    ($(this) as any).context.innerHTML = formatedDuration;
+    $(this).html(formatedDuration);
   });
 
   /* Show audio player elements */
