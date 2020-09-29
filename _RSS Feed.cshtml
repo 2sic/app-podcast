@@ -35,7 +35,7 @@
         @Tag.Custom("url", imageUrl)
         @Tag.Custom("link", Link.To())
       @Tag.Custom("image").TagEnd
-      @Tag.Custom("itunes:image").Attr("href", imageUrl + "?w=3000&h=3000") <!-- 3000 x 3000 is a apple requirement -->
+      @Tag.Custom("itunes:image").Attr("href", imageUrl + "?w=3000&amp;h=3000") <!-- 3000 x 3000 is a apple requirement -->
       @Tag.Custom("description", Tags.Strip(Content.Description))
       @Tag.Custom("itunes:summary", Tags.Strip(Content.Description))
       @Tag.Custom("language", Content.Language)
