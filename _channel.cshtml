@@ -44,6 +44,12 @@
               target="_blank">
               <i class="fas fa-rss align-self-center"></i>
             </a>
+            @* new 2dm *@
+            <a class="badge badge-pill d-flex justify-content-center bg-secondary flex-grow-1"
+              href='@Link.To(api: "api/PodCast/Rss", parameters: "pageid=" + CmsContext.Page.Id + "&moduleId=" + CmsContext.Module.Id + "&channelid=" + Content.EntityId)'
+              target="_blank">
+              <i class="fas fa-rss align-self-center"></i>
+            </a>
           </div>
         </div>
       </div>

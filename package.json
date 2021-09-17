@@ -1,6 +1,6 @@
 {
-  "name": "podcast",
-  "version": "01.00.01",
+  "name": "app-podcast",
+  "version": "02.00.00",
   "description": "A podcast app for 2sxc",
   "main": "(none)",
   "scripts": {
