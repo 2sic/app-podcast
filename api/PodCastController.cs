@@ -118,7 +118,7 @@ public class PodCastController : Custom.Hybrid.Api12
     AddNamespaceTag(channel, ItunesNsCode, "explicit", ItunesNamespace, episodes.Any(e => e.Explicit == true) ? "yes" : "no");
     var itunesImage = AddNamespaceTag(channel, ItunesNsCode, "image", ItunesNamespace);
     // Image size of 3000 x 3000 is required by itunes
-    AddAttribute(itunesImage, "href", imageUrl + "?w=3000&amp;h=3000");
+    AddAttribute(itunesImage, "href", Link.Image(url: imageUrl, width: 3000, height: 3000));
 
     var itunesOwner = AddNamespaceTag(channel, ItunesNsCode, "owner", ItunesNamespace);
     AddNamespaceTag(itunesOwner, ItunesNsCode, "name", ItunesNamespace, Content.Owner.FullName);
