@@ -1,0 +1,8 @@
+@inherits Custom.Hybrid.Razor12
+@using ToSic.Razor.Blade;
+@{
+  var page = GetService<ToSic.Sxc.Web.IPageService>();
+  page.Activate("turnOn"); // see https://r.2sxc.org/turnon
+}
+<link rel="stylesheet" href="@App.Path/dist/styles.min.css" data-enableoptimizations="true">
+<script src="@App.Path/dist/scripts.min.js" data-enableoptimizations="false"></script>

@@ -1,3 +1,14 @@
+// function initEpisode({ moduleId, episodeNumber } : { moduleId: string, episodeNumber: string }) {
+//   console.log(moduleId)
+//   console.log(episodeNumber)
+// }
+
+// // so it can be called from the HTML when content re-initializes dynamically
+// const winAny = (window as any);
+// winAny.appPodcast2 ??= {};
+// winAny.appPodcast2.initEpisode ??= initEpisode;
+
+
 $(document).ready(function(){
   /* Configure the jPlayers */
   $('.jp-jplayer').each(function() {

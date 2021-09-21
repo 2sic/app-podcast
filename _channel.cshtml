@@ -7,7 +7,7 @@
   var episodeNumber = 0;
 }
 
-<div class="container mb-4"  @Edit.TagToolbar(Content, toolbar: new [] { "settings&hover=left&autoAddMore=start" })>
+<div class="app-podcast2 container mb-4"  @Edit.TagToolbar(Content, toolbar: new [] { "settings&hover=left&autoAddMore=start" })>
   <div class="row">
     @* Left column with image, episode counter and channel description *@
     <div class="col-12 col-md-4">
@@ -68,8 +68,19 @@
             <p class="text-muted pc-episode-date font-weight-bold">@episode.Date.ToString("dd MMM yyyy")</p>
             <h5 class="m-0">@episode.Title</h5>
             <div class="text-muted">@Html.Raw(episode.Description)</div>
+            <audio
+                id="podcast2-@CmsContext.Module.Id-episode-@episodeNumber"
+                preload="metadata"
+                controls
+                src="@episode.Audio">
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+            <turnOn turn-on='{"await": ["window.appPodcast2"], "run": "window.appPodcast2.initEpisode()", "data": { "episode": @episodeNumber, "moduleId": @CmsContext.Module.Id} }'></turnOn>
+
+            @episode.Duration
             @* jPlayer audio player *@
-            <div id="jquery_jplayer_@episodeNumber" class="jp-jplayer episode-audio-@episodeNumber"
+            @*<div id="jquery_jplayer_@episodeNumber" class="jp-jplayer episode-audio-@episodeNumber"
                 data-episode-audio="@episode.Audio"
                 data-episode-number="@episodeNumber">
             </div>
@@ -94,7 +105,7 @@
                 </div>
               </div>
               <span class="pc-episode-duration pc-episode-duration-@episodeNumber text-muted">@episode.Duration</span>
-            </div>
+            </div>*@
           </li>
         }
       </ul>
@@ -106,3 +117,5 @@
 <script type="text/javascript" src="@App.Path/dist/lib/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="@App.Path/dist/scripts.min.js"></script>
+
+@Html.Partial("./_Channel.PartAssets.cshtml")
