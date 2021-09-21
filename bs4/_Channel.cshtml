@@ -1,22 +1,24 @@
 @inherits Custom.Hybrid.Razor12
 @using ToSic.Razor.Blade;
 @{
+  var channel = Content; // give it a nicer name so the code is easier to read
+  // List of episodes
   var episodes = AsList(Content.Parents("Episode") as object);
   /* Counter which is brought for the identification of the individual episodes  */
   var episodeNumber = 0;
 }
 
-<div class="app-podcast2 container mb-4"  @Edit.TagToolbar(Content, toolbar: new [] { "settings&hover=left&autoAddMore=start" })>
+<div class="app-podcast2 container mb-4"  @Edit.TagToolbar(channel, toolbar: new [] { "settings&hover=left&autoAddMore=start" })>
   <div class="row">
     @* Left column with image, episode counter and channel description *@
     <div class="col-12 col-md-4">
       <div class="card border-0">
-        <img class="w-100 rounded-sm" loading="lazy" src='@Link.Image(url: Content.Image, width: 1000, height: 1000, resizeMode: "crop", quality: 75)' />
+        <img class="w-100 rounded-sm" loading="lazy" src='@Link.Image(url: channel.Image, width: 1000, height: 1000, resizeMode: "crop", quality: 75)' />
         <div class="card-body p-0">
           <p class="card-text">
             <p class="text-muted">@episodes.Count() @Resources.Episodes</p>
             <hr>
-            <div class="pc-channel-description-desktop d-none d-md-block">@Html.Raw(Content.Description)</div>
+            <div class="pc-channel-description-desktop d-none d-md-block">@Html.Raw(channel.Description)</div>
           </p>
         </div>
       </div>
@@ -26,20 +28,20 @@
       <div class="card border-0 mb-4">
         @* Channel Information *@
         <div class="card-body p-0">
-          @if(Content.IsDemoItem){
+          @if(channel.IsDemoItem){
             <div class="alert alert-warning">
               @Html.Raw(Resources.WarningIsShowingDemo)
             </div>
           }
-          <h3 class="card-title pc-channel-title">@Content.Title</h3>
-          <h5 class="card-subtitle mb-3 pc-owner-name">@Content.Owner.FullName</h5>
-          <div class="pc-channel-description-mobile d-block d-md-none">@Html.Raw(Content.Description)</div>
+          <h3 class="card-title pc-channel-title">@channel.Title</h3>
+          <h5 class="card-subtitle mb-3 pc-owner-name">@channel.Owner.FullName</h5>
+          <div class="pc-channel-description-mobile d-block d-md-none">@Html.Raw(channel.Description)</div>
           <div class="pc-channel-category-rss d-flex">
             <p class="card-text text-muted mb-0 align-self-end">
-              @(Text.Has(Content.Category.SubCategory) ? Content.Category.SubCategory : Content.Category.MainCategory)
+              @(Text.Has(channel.Category.SubCategory) ? channel.Category.SubCategory : channel.Category.MainCategory)
             </p>
             <a class="badge badge-pill d-flex justify-content-center bg-secondary"
-              href='@Link.To(api: "api/PodCast/Rss", parameters: "pageid=" + CmsContext.Page.Id + "&moduleId=" + CmsContext.Module.Id + "&channelid=" + Content.EntityId)'
+              href='@Link.To(api: "api/PodCast/Rss", parameters: "pageid=" + CmsContext.Page.Id + "&moduleId=" + CmsContext.Module.Id + "&channelid=" + channel.EntityId)'
               target="_blank">
               <i class="fas fa-rss align-self-center"></i>
             </a>
@@ -48,12 +50,12 @@
       </div>
 
       @* Listing of episodes *@
-      @if(!Content.IsDemoItem) {
+      @if(!channel.IsDemoItem) {
         @Edit.Toolbar(toolbar: new [] {
           "toolbar=empty",
           "new?contentType=Episode&prefill:Date=" + @DateTime.Now.ToString("yyyy-MM-dd")
-            + "&prefill:Channels=" + Content.EntityGuid.ToString()
-            + "&prefill:Author=" + Content.Owner.EntityGuid.ToString()
+            + "&prefill:Channels=" + channel.EntityGuid.ToString()
+            + "&prefill:Author=" + channel.Owner.EntityGuid.ToString()
         })
       }
       <ul class="list-group">

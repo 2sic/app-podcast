@@ -7,7 +7,7 @@ const WebpackBar = require('webpackbar');
 
 module.exports = {
   entry: {
-    bs4: './src/styles/bs4.scss',
+    bs4: './src/scss/bs4.scss',
     scripts: './src/ts/scripts.ts',
   },
   output: {
@@ -67,9 +67,11 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
-              plugins: [
-                require('autoprefixer')
-              ]
+              postcssOptions: { 
+                plugins: [
+                  require('autoprefixer')
+                ] 
+              }
             }
           }, {
             loader: 'sass-loader',
