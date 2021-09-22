@@ -30,6 +30,10 @@ The podcast app does not have any app settings and only a few resources(labels) 
 
 If you want to customize the CSS, you will usually follow the ["Create Custom Styles in a Standard 2sxc App" checklist](https://azing.org/2sxc/r/gg_aB9FD)
 
-## Screenshots
+## History
 
-Read more about it in the [App Catalog](https://2sxc.org/en/apps/app/podcast-v1-for-2sxc)
+* v2 2021-09
+    * Updated to best-practices of 2sxc 12.05
+    * RSS feed now in a web controller
+    * Hybrid, so it works with Oqtane
+    * Tested to look ok on Bootstrap5
