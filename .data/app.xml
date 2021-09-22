@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="12.05.00" ExportDate="2021-09-21T08:03:22.7287046+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="12.05.00" ExportDate="2021-09-22T09:23:17.1471474+02:00">
   <Header>
     <App Guid="8258619d-a5d7-4f9a-9ef5-af9caac8dbaa" />
     <Language Default="en-us" />
@@ -1254,6 +1254,12 @@
       <Value Key="ContentTypeStaticName" Value="c9af98e2-ca7d-478e-972e-bf221bd0af8c" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
+      <Value Key="Icon" Value="" Type="Hyperlink">
+        <Dimension DimensionID="146" ReadOnly="false" />
+      </Value>
+      <Value Key="Identifier" Value="" Type="String">
+        <Dimension DimensionID="146" ReadOnly="false" />
+      </Value>
       <Value Key="IsHidden" Value="False" Type="Boolean">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
@@ -1263,19 +1269,25 @@
       <Value Key="ListPresentationTypeStaticName" Value="" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Location" Value="Portal File System" Type="String">
+      <Value Key="Location" Value="Site" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="Name" Value="Channel" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Path" Value="_Channel.cshtml" Type="String">
+      <Value Key="Path" Value="bs4/_Channel.cshtml" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="PresentationTypeStaticName" Value="" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="PublishData" Value="False" Type="Boolean">
+        <Dimension DimensionID="146" ReadOnly="false" />
+      </Value>
+      <Value Key="SearchIndexingDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="146" ReadOnly="false" />
+      </Value>
+      <Value Key="SearchIndexingStreams" Value="" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="StreamsToPublish" Value="" Type="String">
@@ -1285,6 +1297,9 @@
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="UseForList" Value="False" Type="Boolean">
+        <Dimension DimensionID="146" ReadOnly="false" />
+      </Value>
+      <Value Key="ViewController" Value="" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="ViewNameInUrl" Value="" Type="String">
@@ -1487,50 +1502,6 @@
       <Value Key="Content" Value="f9000077-f51d-4309-baf1-24debd7503a9,null" Type="Entity" />
       <Value Key="Presentation" Value="null,null" Type="Entity" />
       <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="1edc671b-7680-4e47-b684-a61d7a4ea31b" Json="True">
-      <Value Key="ContentTypeStaticName" Value="" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="IsHidden" Value="True" Type="Boolean">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="ListContentTypeStaticName" Value="" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="ListPresentationTypeStaticName" Value="" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Location" Value="Portal File System" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Name" Value="RSS Feed" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Path" Value="_RSS Feed.cshtml" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Pipeline" Value="ec3c41dc-2f64-4b28-8000-6f79fcdd4d36" Type="Entity">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="PresentationTypeStaticName" Value="" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="PublishData" Value="False" Type="Boolean">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="StreamsToPublish" Value="" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Type" Value="C# Razor" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="UseForList" Value="False" Type="Boolean">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="ViewNameInUrl" Value="rss/.*" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="abe30171-48b6-448b-8b7c-c6d0d5c1fcb0" AttributeSetName="Category" EntityGUID="8dd26f54-a1fa-4a11-b788-fa6dc06841a4">
       <Value Key="MainCategory" Value="Arts" Type="String">
@@ -2699,11 +2670,14 @@
     <File Id="4453" RelativePath="adam\PodCast\dwAA-R31CUO68STevXUDqQ\Image\podcast logo.png" />
     <File Id="4190" RelativePath="adam\PodCast\GTzLbJdOTUqkX81-6Zp_PA\Audio\lyricchords.mp3" />
     <File Id="4191" RelativePath="adam\PodCast\7tjelP10MUC5Co3h_m1bPg\Audio\lyricslap.mp3" />
+    <File Id="6029" RelativePath="adam\PodCast2\340HITtockSiX9FO_tUu1Q\Image\tall img.png" />
   </PortalFiles>
   <PortalFolders>
     <Folder Id="7011" RelativePath="adam/PodCast/dwAA-R31CUO68STevXUDqQ/Image/" />
     <Folder Id="7013" RelativePath="adam/PodCast/GTzLbJdOTUqkX81-6Zp_PA/Audio/" />
     <Folder Id="7015" RelativePath="adam/PodCast/7tjelP10MUC5Co3h_m1bPg/Audio/" />
+    <Folder Id="13427" RelativePath="adam/PodCast2/340HITtockSiX9FO_tUu1Q/Image/" />
     <Folder Id="13414" RelativePath="adam/PodCast2/" />
+    <Folder Id="13426" RelativePath="adam/PodCast2/340HITtockSiX9FO_tUu1Q/" />
   </PortalFolders>
 </SexyContent>
