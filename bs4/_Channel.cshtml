@@ -38,6 +38,7 @@
             <p class="card-text text-muted mb-0 align-self-end">
               @(Text.Has(channel.Category.SubCategory) ? channel.Category.SubCategory : channel.Category.MainCategory)
             </p>
+            @* TODO: @2MH - bitte RSS icon als SVG einbinden, am besten Roman fragen, damit es weiss ist *@
             <a class="badge badge-pill d-flex justify-content-center bg-secondary"
               href='@Link.To(api: "api/PodCast/Rss", parameters: "pageid=" + CmsContext.Page.Id + "&moduleId=" + CmsContext.Module.Id + "&channelid=" + channel.EntityId)'
               target="_blank">
