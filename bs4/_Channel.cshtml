@@ -2,10 +2,8 @@
 @using ToSic.Razor.Blade;
 @{
   var channel = Content; // give it a nicer name so the code is easier to read
-  // List of episodes
+  // Get all the Episode items which point to this channel
   var episodes = AsList(Content.Parents("Episode") as object);
-  /* Counter which is brought for the identification of the individual episodes  */
-  var episodeNumber = 0;
 }
 
 <div class="app-podcast2 container mb-4"  @Edit.TagToolbar(channel, toolbar: new [] { "settings&hover=left&autoAddMore=start" })>
@@ -60,7 +58,6 @@
       }
       <ul class="list-group">
         @foreach(var episode in episodes.OrderByDescending(e => e.Date)) {
-          episodeNumber++;
           @Html.Partial("./_Channel.PartEpisode.cshtml", new { Episode = episode })
         }
       </ul>
