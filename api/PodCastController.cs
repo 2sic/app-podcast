@@ -79,7 +79,7 @@ public class PodCastController : Custom.Hybrid.Api12
     var channel = AddTag(root, "channel");
     AddTag(channel, "generator", "2sxc PodCast App");
     AddTag(channel, "title", Content.Title);
-    AddTag(channel, "link", Link.To(pageId: detailsPageId) ?? linkErrMessage); // todo fix linkErrMessage ?? Link.To(pageId: detailsPageId)
+    AddTag(channel, "link", Link.To(pageId: detailsPageId) ?? linkErrMessage);
     AddTag(channel, "description", Tags.Strip(Content.Description));
     AddTag(channel, "language", Tags.Strip(Content.Language));
     AddTag(channel, "copyright", copyrightNotice);
@@ -137,8 +137,7 @@ public class PodCastController : Custom.Hybrid.Api12
   // Adds <atom> tag to channel
   private void AddChannelAtom(XmlElement channel) {
     var atomLink = AddNamespaceTag(channel, AtomNsCode, "link", AtomNamespace);
-    // TODO: @2dm must use correct current url
-    AddAttribute(atomLink, "href", Link.To(api: "api/PodCast/Rss"));
+    AddAttribute(atomLink, "href", Link.To(api: "api/PodCast/Rss", parameters: CmsContext.Page.Parameters));
     AddAttribute(atomLink, "rel", "self");
     AddAttribute(atomLink, "type", "application/rss+xml");
   }

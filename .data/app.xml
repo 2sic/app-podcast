@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="12.05.00" ExportDate="2021-09-22T09:23:17.1471474+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="12.05.00" ExportDate="2021-09-23T22:13:33.2680104+02:00">
   <Header>
     <App Guid="8258619d-a5d7-4f9a-9ef5-af9caac8dbaa" />
     <Language Default="en-us" />
@@ -919,6 +919,9 @@
             <Value Key="Disabled" Value="False" Type="Boolean">
               <Dimension DimensionID="146" ReadOnly="false" />
             </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="146" ReadOnly="false" />
+            </Value>
             <Value Key="InputType" Value="boolean-default" Type="String">
               <Dimension DimensionID="146" ReadOnly="false" />
             </Value>
@@ -931,6 +934,9 @@
             <Value Key="Notes" Value="" Type="String">
               <Dimension DimensionID="146" ReadOnly="false" />
             </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="146" ReadOnly="false" />
+            </Value>
             <Value Key="Required" Value="True" Type="Boolean">
               <Dimension DimensionID="146" ReadOnly="false" />
             </Value>
@@ -941,7 +947,23 @@
               <Dimension DimensionID="146" ReadOnly="false" />
             </Value>
           </Entity>
-          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@Boolean" AttributeSetName="@Boolean" EntityGUID="895f80cb-7179-4fe6-9744-186ab438aba7" Json="True" KeyNumber="3169" />
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@Boolean" AttributeSetName="@Boolean" EntityGUID="895f80cb-7179-4fe6-9744-186ab438aba7" Json="True" KeyNumber="3169">
+            <Value Key="TitleFalse" Value="No explicit content" Type="String">
+              <Dimension DimensionID="146" ReadOnly="false" />
+            </Value>
+            <Value Key="TitleFalse" Value="Enthält keine expliziten Inhalte" Type="String">
+              <Dimension DimensionID="147" ReadOnly="false" />
+            </Value>
+            <Value Key="TitleIndeterminate" Value="" Type="String">
+              <Dimension DimensionID="146" ReadOnly="false" />
+            </Value>
+            <Value Key="TitleTrue" Value="Has explicit content (not for minors/children)" Type="String">
+              <Dimension DimensionID="146" ReadOnly="false" />
+            </Value>
+            <Value Key="TitleTrue" Value="Enthält explizite Inhalte (nicht für Kinder)" Type="String">
+              <Dimension DimensionID="147" ReadOnly="false" />
+            </Value>
+          </Entity>
         </Attribute>
         <Attribute StaticName="Channels" Type="Entity" IsTitle="false">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="502ec355-5ea6-4e36-8e04-6a56f4c9dccc" Json="True" KeyNumber="3170">
