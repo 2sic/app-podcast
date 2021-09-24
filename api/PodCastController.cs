@@ -15,12 +15,19 @@ using ToSic.Razor.Blade;
 [AllowAnonymous]			// define that all commands can be accessed without a login
 public class PodCastController : Custom.Hybrid.Api12
 {
+  // Atom XML Namespace for RSS
   public const string AtomNsCode = "atom";
   public const string AtomNamespace = "http://www.w3.org/2005/Atom";
+  
+  // ITunes XML Namespace for integration into Apple ecosystem
   public const string ItunesNsCode = "itunes";
   public const string ItunesNamespace = "http://www.itunes.com/dtds/podcast-1.0.dtd";
+
+  // CreativeCommons XML Namespace for copyright information
   public const string CreativeCommonsNsCode = "creativeCommons";
   public const string CreativeCommonsNamespace = "http://backend.userland.com/creativeCommonsRssModule";
+
+  // Basic XML Document to start with
   public const string EmptyRssDocument = "<?xml version='1.0' encoding='utf-8'?>"
       + "<rss version='2.0' xmlns:" + AtomNsCode + "='" + AtomNamespace + "' "
       +  "xmlns:" + ItunesNsCode + "='" + ItunesNamespace + "' "
@@ -104,6 +111,19 @@ public class PodCastController : Custom.Hybrid.Api12
 
     return File(download: false, fileDownloadName: "rss.xml", contents: rssDoc);
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   #region functions that add xml sections 
 
