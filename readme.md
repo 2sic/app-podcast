@@ -32,7 +32,7 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
 
 ## History
 
-* v2 2021-09
+* v02.00 2021-10
     * Updated to best-practices of 2sxc 12.05
     * RSS feed now in a web controller
     * Hybrid, so it works with Oqtane
