@@ -8,11 +8,11 @@ const WebpackBar = require('webpackbar');
 module.exports = {
   entry: {
     bs4: './src/scss/bs4.scss',
-    scripts: './src/ts/scripts.ts',
+    // scripts: './src/ts/scripts.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].min.js',
+    // filename: '[name].min.js',
   },
   mode: 'production',
   devtool: 'source-map',

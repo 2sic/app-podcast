@@ -24,7 +24,7 @@ A standard podcast app to use with 2sxc - it's tested to work with normal PodCas
 
 
 
-## Customize the app
+## Customize the App
 
 The podcast app does not have any app settings and only a few resources(labels) you can customize.
 
