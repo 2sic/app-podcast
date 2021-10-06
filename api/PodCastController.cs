@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Autho
 using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
 using System.Web.Http;		// this enables [HttpGet] and [AllowAnonymous]
+// 2sxclint:disable:no-dnn-namespaces
 using DotNetNuke.Web.Api;	// this is to verify the AntiForgeryToken
 #endif
 using System.Linq;
@@ -41,21 +42,13 @@ public class PodCastController : Custom.Hybrid.Api12
     // get all posts as delived from the standard query
     var episodes = AsList(Content.Parents("Episode") as object).OrderByDescending(e => e.Date);
 
-    // get protocol and host to complete the urls of the episodes and the one of the image
-    var urlHostPath = Link.To().Substring(Link.To().IndexOf("//") + 2);
-    var urlHost = urlHostPath.Substring(0, urlHostPath.IndexOf("/"));
-    var urlProtocol = Link.To().Substring(0, Link.To().IndexOf("//") + 2);
-    var websiteRoot = urlProtocol + urlHost;
-    var imageUrl = Link.Image(websiteRoot + Content.Image);
-
     // results in "2019" or "2017-2019"
     var copyrightYear = episodes.Last().Date.Year == episodes.First().Date.Year
       ? episodes.First().Date.Year
       : episodes.Last().Date.Year + "-" + episodes.First().Date.Year;
 
-    var copyrightNotice = "Copyright © " + copyrightYear + " " + Content.Owner.FullName + (Content.License.Link != "copyright/"
-      ?  " (" + Content.License.Link + ")"
-      : "");
+    var copyrightNotice = "Copyright © " + copyrightYear + " " + Content.Owner.FullName 
+      + (Content.License.Link != "copyright/" ?  " (" + Content.License.Link + ")" : "");
 
     // 1. Prepare
     // 1.1 Figure out what page will show post details based on settings
@@ -86,27 +79,30 @@ public class PodCastController : Custom.Hybrid.Api12
     var channel = AddTag(root, "channel");
     AddTag(channel, "generator", "2sxc PodCast App");
     AddTag(channel, "title", Content.Title);
-    AddTag(channel, "link", Link.To(pageId: detailsPageId) ?? linkErrMessage);
+    AddTag(channel, "link", Link.To(pageId: detailsPageId, type: "full") ?? linkErrMessage);
     AddTag(channel, "description", Tags.Strip(Content.Description));
     AddTag(channel, "language", Tags.Strip(Content.Language));
     AddTag(channel, "copyright", copyrightNotice);
     AddTag(channel, "managingEditor", Content.Owner.Email + " (" + Content.Owner.FullName + ")");
     var image = AddTag(channel, "image");
     AddTag(image, "title", Content.Title);
-    AddTag(image, "url", imageUrl);
-    AddTag(image, "link", Link.To());
+    AddTag(image, "url", Link.Image(Content.Image, type: "full"));
+    AddTag(image, "link", Link.To(type: "full"));
 
     // 3.2 Create <creativeCommons:license> tag and add Creative Commons license if isn't copyright
     if(Content.License.Link != "copyright/") 
       AddNamespaceTag(channel, CreativeCommonsNsCode, "license", CreativeCommonsNamespace, Content.License.Link);
     
     // 3.3 Add required Itunes values to channel
-    AddChannelItunes(websiteRoot, channel);
+    AddChannelItunes(channel);
 
     // 3.4 Add Atom tag to channel
     AddChannelAtom(channel);
     
     // 3.5 Add all the episodes from the query to this channel
+    // get protocol and host to complete the urls of the episodes and the one of the image
+    var fullLink = Link.To(type: "full");
+    var websiteRoot = fullLink.Substring(0, fullLink.IndexOf("/", fullLink.IndexOf("//") + 2));
     foreach(var episode in episodes) AddEpisode(websiteRoot, channel, episode);
 
     return File(download: false, fileDownloadName: "rss.xml", contents: rssDoc);
@@ -128,10 +124,10 @@ public class PodCastController : Custom.Hybrid.Api12
   #region functions that add xml sections 
 
   // Adds required <itunes:xy> tags to channel
-  private void AddChannelItunes(string websiteRoot, XmlElement channel) {
+  private void AddChannelItunes(XmlElement channel) {
     // Get all posts as delived from the standard query
     var episodes = AsList(Content.Parents("Episode") as object).OrderByDescending(e => e.Date);
-    var imageUrl = Link.Image(websiteRoot + Content.Image);
+    var imageUrl = Link.Image(Content.Image, type: "full");
 
     AddNamespaceTag(channel, ItunesNsCode, "summary", ItunesNamespace, Tags.Strip(Content.Description));
     AddNamespaceTag(channel, ItunesNsCode, "author", ItunesNamespace, Content.Owner.FullName);
@@ -157,7 +153,7 @@ public class PodCastController : Custom.Hybrid.Api12
   // Adds <atom> tag to channel
   private void AddChannelAtom(XmlElement channel) {
     var atomLink = AddNamespaceTag(channel, AtomNsCode, "link", AtomNamespace);
-    AddAttribute(atomLink, "href", Link.To(api: "api/PodCast/Rss", parameters: CmsContext.Page.Parameters));
+    AddAttribute(atomLink, "href", Link.To(api: "api/PodCast/Rss", parameters: CmsContext.Page.Parameters, type: "full"));
     AddAttribute(atomLink, "rel", "self");
     AddAttribute(atomLink, "type", "application/rss+xml");
   }
@@ -191,7 +187,7 @@ public class PodCastController : Custom.Hybrid.Api12
 
   // Adds required <itunes:xy> tags to itemNode
   private void AddItemItunes(XmlElement itemNode, dynamic episode, string authorFullName) {
-    var duration = TimeSpan.FromMinutes(decimal.ToDouble(episode.Duration ?? 0)).ToString("hh\\:mm") + ":00";
+    var duration = TimeSpan.FromMinutes(Convert.ToFloat(episode.Duration ?? 0)).ToString("hh\\:mm") + ":00";
     AddNamespaceTag(itemNode, ItunesNsCode, "subtitle", ItunesNamespace, Text.Crop(Tags.Strip(episode.Description), 255));
     AddNamespaceTag(itemNode, ItunesNsCode, "summary", ItunesNamespace, Tags.Strip(episode.Description));
     AddNamespaceTag(itemNode, ItunesNsCode, "author", ItunesNamespace, authorFullName);
