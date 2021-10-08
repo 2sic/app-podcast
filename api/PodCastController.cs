@@ -3,8 +3,8 @@
 using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Authorize]
 using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
+// 2sxclint:disable:no-dnn-namespaces - 2sxclint:disable:no-web-namespace
 using System.Web.Http;		// this enables [HttpGet] and [AllowAnonymous]
-// 2sxclint:disable:no-dnn-namespaces
 using DotNetNuke.Web.Api;	// this is to verify the AntiForgeryToken
 #endif
 using System.Linq;
