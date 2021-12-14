@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="12.05.00" ExportDate="2021-10-12T08:41:26.6423837+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="13.00.00" ExportDate="2021-12-14T17:28:15.3682253+01:00">
   <Header>
     <App Guid="8258619d-a5d7-4f9a-9ef5-af9caac8dbaa" />
     <Language Default="en-us" />
@@ -9,7 +9,7 @@
     </Dimensions>
   </Header>
   <AttributeSets>
-    <AttributeSet StaticName="App-Resources" Name="App-Resources" Description="Stores resources like translations for an app" Scope="2SexyContent-App" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="App-Resources" Name="App-Resources" Description="Stores resources like translations for an app" Scope="System.App" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Episodes" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="93640a00-7712-4956-a91f-671c6b4fa737" Json="True" KeyNumber="3198">
@@ -97,10 +97,10 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="App-Settings" Name="App-Settings" Description="Stores settings for an app" Scope="2SexyContent-App" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="App-Settings" Name="App-Settings" Description="Stores settings for an app" Scope="System.App" AlwaysShareConfiguration="false">
       <Attributes />
     </AttributeSet>
-    <AttributeSet StaticName="abe30171-48b6-448b-8b7c-c6d0d5c1fcb0" Name="Category" Description="" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="abe30171-48b6-448b-8b7c-c6d0d5c1fcb0" Name="Category" Description="" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Name" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="f62f441c-dc28-4c0a-85bc-cf0769672fc3" Json="True" KeyNumber="3195">
@@ -218,7 +218,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="c9af98e2-ca7d-478e-972e-bf221bd0af8c" Name="Channel" Description="" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="c9af98e2-ca7d-478e-972e-bf221bd0af8c" Name="Channel" Description="" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Title" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="199210f6-bd35-43c8-a49d-7af861c4e794" Json="True" KeyNumber="3158">
@@ -608,7 +608,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="d9fbf8a7-c656-426e-b820-e74943699af1" Name="Episode" Description="" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="d9fbf8a7-c656-426e-b820-e74943699af1" Name="Episode" Description="" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Title" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="ab085b2c-eb6c-4bcb-96ae-ecbb8ba4df19" Json="True" KeyNumber="3164">
@@ -1025,7 +1025,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="8fc0f3df-07b4-4007-94a4-ca7f0fa6ffc9" Name="License" Description="" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="8fc0f3df-07b4-4007-94a4-ca7f0fa6ffc9" Name="License" Description="" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Name" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="229cb1bb-86f9-4781-bbfc-7f0aa0ea1b90" Json="True" KeyNumber="3190">
@@ -1129,7 +1129,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="daff7e11-292e-4096-81eb-a379c960ae7a" Name="Owner" Description="" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="daff7e11-292e-4096-81eb-a379c960ae7a" Name="Owner" Description="" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="FullName" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="77aa99a2-25dc-4ea4-9f7f-abd1b9699d1f" Json="True" KeyNumber="3171">
@@ -1252,7 +1252,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="02.00.00" Type="String">
+      <Value Key="Version" Value="02.01.00" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
     </Entity>
@@ -2671,7 +2671,7 @@
       </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="3937fa17-ef2d-40a7-b089-64164eb10bab" AttributeSetName="2sxcPolymorphismConfiguration" EntityGUID="8e74460a-0ce8-45de-95aa-d834c1bc7af1" Json="True">
-      <Value Key="Mode" Value="" Type="String">
+      <Value Key="Mode" Value="Koi?cssFramework" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
     </Entity>

@@ -20,7 +20,7 @@ A standard podcast app to use with 2sxc - it's tested to work with normal PodCas
 | Best Practices      | ✅    | Uses v12.05 conventions
 | Bootstrap 3         | ✔️    |
 | Bootstrap 4         | ✅    |
-| Bootstrap 5         | ✔️    | Works, but not optimized
+| Bootstrap 5         | ✅    | 
 
 
 
