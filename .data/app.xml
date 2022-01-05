@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="13.00.00" ExportDate="2021-12-14T17:28:15.3682253+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="13.00.01" ExportDate="2022-01-05T09:25:37.843402+01:00">
   <Header>
     <App Guid="8258619d-a5d7-4f9a-9ef5-af9caac8dbaa" />
     <Language Default="en-us" />
@@ -1252,7 +1252,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="02.01.00" Type="String">
+      <Value Key="Version" Value="02.01.01" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
     </Entity>
@@ -2687,6 +2687,7 @@
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="068c9631-1abb-4dc9-8d30-ac8bf61352ec" Json="True">
       <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
     </Entity>
+    <Entity AssignmentObjectType="Entity" AttributeSetStaticName="529ba3a2-d7d4-4f40-a81b-ff819de03a9e" AttributeSetName="IsDefaultDecorator" EntityGUID="82a67c53-e4b8-4697-bd14-968ab19ba099" Json="True" KeyGuid="bedafc8c-c1ec-445a-994d-fcce2b09e074" />
   </Entities>
   <PortalFiles>
     <File Id="4453" RelativePath="adam\PodCast\dwAA-R31CUO68STevXUDqQ\Image\podcast logo.png" />
