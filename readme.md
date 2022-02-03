@@ -37,3 +37,5 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
     * RSS feed now in a web controller
     * Hybrid, so it works with Oqtane
     * Tested to look ok on Bootstrap5
+* v02.01 2022-02
+    * Enabled data-optimizations
