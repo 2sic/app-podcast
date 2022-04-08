@@ -39,3 +39,6 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
     * Tested to look ok on Bootstrap5
 * v02.01.02 2022-02
     * Enabled data-optimizations
+* v02.02.00 2022-04
+    * Change Services to come from "ToSic.Sxc.Services"
+    * Use IScrub to replace Tag.Strip with IScrub.All
