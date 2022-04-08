@@ -1,9 +1,11 @@
 @inherits Custom.Hybrid.Razor12
 @using ToSic.Razor.Blade;
+@using ToSic.Sxc.Services;
 @{
   var channel = Content; // give it a nicer name so the code is easier to read
   // Get all the Episode items which point to this channel
   var episodes = AsList(Content.Parents("Episode") as object);
+  var imgSvc = GetService<IImageService>();
 }
 
 <div class="app-podcast2 container mb-4"  @Edit.TagToolbar(channel, toolbar: new [] { "settings&hover=left&autoAddMore=start" })>
@@ -11,7 +13,7 @@
     @* Left column with image, episode counter and channel description *@
     <div class="col-12 col-md-4">
       <div class="card border-0">
-        <img class="w-100 rounded-sm" loading="lazy" src='@Link.Image(url: channel.Image, width: 1000, height: 1000, resizeMode: "crop", quality: 75)' />
+        @imgSvc.Picture(channel.Image, settings: Content, width: "1000", imgClass:"w-100 rounded-sm")
         <div class="card-body p-0">
           <p class="card-text">
             <p class="text-muted">@episodes.Count() @Resources.Episodes</p>
