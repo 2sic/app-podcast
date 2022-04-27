@@ -13,7 +13,7 @@
     @* Left column with image, episode counter and channel description *@
     <div class="col-12 col-md-4">
       <div class="card border-0">
-        @imgSvc.Picture(channel.Image, settings: Content, width: "1000", imgClass:"w-100 rounded-sm")
+        @imgSvc.Picture(channel.Image, settings: imgSvc.Settings("Podcast"), width: "1000", imgClass:"w-100 rounded-sm")
         <div class="card-body p-0">
           <p class="card-text">
             <p class="text-muted">@episodes.Count() @Resources.Episodes</p>

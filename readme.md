@@ -42,4 +42,5 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
 * v02.02.00 2022-04
     * Change Services to come from "ToSic.Sxc.Services"
     * Use IScrub to replace Tag.Strip with IScrub.All
-    * Change images to use IImageService
+    * Changed images to use IImageService
+    * Activated image configuration
