@@ -5,6 +5,7 @@
   var channel = Content; // give it a nicer name so the code is easier to read
   // Get all the Episode items which point to this channel
   var episodes = AsList(Content.Parents("Episode") as object);
+  // Image Service used to generate optimal images
   var imgSvc = GetService<IImageService>();
 
   var imgSettings = AsDynamic(Settings.Images.Podcast, Settings.Images.Content);
@@ -15,7 +16,7 @@
     @* Left column with image, episode counter and channel description *@
     <div class="col-12 col-md-4">
       <div class="card border-0">
-        @imgSvc.Picture(channel.Image, settings: imgSettings, width: "1000", imgClass:"w-100 rounded-sm")
+        @imgSvc.Picture(channel.Field("Image"), settings: imgSettings, width: "1000", imgClass:"w-100 rounded-sm")
         <div class="card-body p-0">
           <p class="card-text">
             <p class="text-muted">@episodes.Count() @Resources.Episodes</p>
