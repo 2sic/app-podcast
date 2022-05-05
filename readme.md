@@ -44,3 +44,4 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
     * Use IScrub to replace Tag.Strip with IScrub.All
     * Changed images to use IImageService
     * Activated image configuration
+    * Replaced data-enableoptimizations with pageSvc.AssetAttributes()
