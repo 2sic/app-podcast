@@ -8,7 +8,7 @@
   // Image Service used to generate optimal images
   var imgSvc = GetService<IImageService>();
 
-  var imgSettings = AsDynamic(Settings.Images.Podcast, Settings.Images.Content);
+  var imgSettings = AsDynamic(Settings.Images.Podcast, "Content");
 }
 
 <div class="app-podcast2 container mb-4"  @Edit.TagToolbar(channel, toolbar: new [] { "settings&hover=left&autoAddMore=start" })>
