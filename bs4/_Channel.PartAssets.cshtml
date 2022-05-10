@@ -3,11 +3,11 @@
 @{
     // 1. Get Services for Css and Page
     var pageCss = GetService<Connect.Koi.ICss>();         // Service to get CSS information about the current Theme
-    var page = GetService<IPageService>();  // Service to set titles etc. on the page
+    var pageSvc = GetService<IPageService>();  // Service to set titles etc. on the pageSvc
 
     // 2. Include Bootstrap4 if the framework isn't known
     if (pageCss.IsUnknown) {
-      page.Activate("Bootstrap4");
+      pageSvc.Activate("Bootstrap4");
     }
 }
-<link rel="stylesheet" href="@App.Path/bs4/dist/styles.min.css" @(page.AssetAttributes())>
+<link rel="stylesheet" href="@App.Path/bs4/dist/styles.min.css" @pageSvc.AssetAttributes()>
