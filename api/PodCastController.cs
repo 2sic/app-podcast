@@ -12,12 +12,10 @@ using System.Xml;
 using System.IO;
 using System;
 using ToSic.Razor.Blade;
-using ToSic.Sxc.Services;
 
-var scrubSvc = GetService<IScrub>();
 
 [AllowAnonymous]			// define that all commands can be accessed without a login
-public class PodCastController : Custom.Hybrid.Api12
+public class PodCastController : Custom.Hybrid.Api14
 {
   // Atom XML Namespace for RSS
   public const string AtomNsCode = "atom";
@@ -83,8 +81,8 @@ public class PodCastController : Custom.Hybrid.Api12
     AddTag(channel, "generator", "2sxc PodCast App");
     AddTag(channel, "title", Content.Title);
     AddTag(channel, "link", Link.To(pageId: detailsPageId, type: "full") ?? linkErrMessage);
-    AddTag(channel, "description", scrubSvc.All(Content.Description));
-    AddTag(channel, "language", scrubSvc.All(Content.Language));
+    AddTag(channel, "description", Kit.Scrub.All(Content.Description));
+    AddTag(channel, "language", Kit.Scrub.All(Content.Language));
     AddTag(channel, "copyright", copyrightNotice);
     AddTag(channel, "managingEditor", Content.Owner.Email + " (" + Content.Owner.FullName + ")");
     var image = AddTag(channel, "image");
@@ -132,7 +130,7 @@ public class PodCastController : Custom.Hybrid.Api12
     var episodes = AsList(Content.Parents("Episode") as object).OrderByDescending(e => e.Date);
     var imageUrl = Link.Image(Content.Image, type: "full");
 
-    AddNamespaceTag(channel, ItunesNsCode, "summary", ItunesNamespace, scrubSvc.All(Content.Description));
+    AddNamespaceTag(channel, ItunesNsCode, "summary", ItunesNamespace, Kit.Scrub.All(Content.Description));
     AddNamespaceTag(channel, ItunesNsCode, "author", ItunesNamespace, Content.Owner.FullName);
     AddNamespaceTag(channel, ItunesNsCode, "explicit", ItunesNamespace, episodes.Any(e => e.Explicit == true) ? "yes" : "no");
     var itunesImage = AddNamespaceTag(channel, ItunesNsCode, "image", ItunesNamespace);
@@ -170,7 +168,7 @@ public class PodCastController : Custom.Hybrid.Api12
     
     var itemNode = AddTag(channel, "item");
     AddTag(itemNode, "title", episode.Title);
-    AddTag(itemNode, "description", scrubSvc.All(episode.Description));
+    AddTag(itemNode, "description", Kit.Scrub.All(episode.Description));
 
     var itemGuid = AddTag(itemNode, "guid", episode.EntityGuid.ToString());
     AddAttribute(itemGuid, "isPermaLink", "false");
@@ -190,9 +188,9 @@ public class PodCastController : Custom.Hybrid.Api12
 
   // Adds required <itunes:xy> tags to itemNode
   private void AddItemItunes(XmlElement itemNode, dynamic episode, string authorFullName) {
-    var duration = TimeSpan.FromMinutes(Convert.ToFloat(episode.Duration ?? 0)).ToString("hh\\:mm") + ":00";
-    AddNamespaceTag(itemNode, ItunesNsCode, "subtitle", ItunesNamespace, Text.Crop(scrubSvc.All(episode.Description), 255));
-    AddNamespaceTag(itemNode, ItunesNsCode, "summary", ItunesNamespace, scrubSvc.All(episode.Description));
+    var duration = TimeSpan.FromMinutes(Kit.Convert.ToFloat(episode.Duration ?? 0)).ToString("hh\\:mm") + ":00";
+    AddNamespaceTag(itemNode, ItunesNsCode, "subtitle", ItunesNamespace, Text.Crop(Kit.Scrub.All(episode.Description), 255));
+    AddNamespaceTag(itemNode, ItunesNsCode, "summary", ItunesNamespace, Kit.Scrub.All(episode.Description));
     AddNamespaceTag(itemNode, ItunesNsCode, "author", ItunesNamespace, authorFullName);
     AddNamespaceTag(itemNode, ItunesNsCode, "duration", ItunesNamespace, duration);
     AddNamespaceTag(itemNode, ItunesNsCode, "explicit", ItunesNamespace, episode.Explicit ? "yes" : "no");

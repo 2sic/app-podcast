@@ -1,8 +1,9 @@
-@inherits Custom.Hybrid.Razor12
+@inherits Custom.Hybrid.Razor14
 @using ToSic.Razor.Blade;
 @{
     var episode = DynamicModel.Episode;
-    var toolbar =  Content.IsDemoItem ? "" : Edit.TagToolbar(episode, toolbar: new [] { "-layout", "%delete&show=true"});
+    var episodeToolbar = Kit.Toolbar.Default().Layout("-").Delete();
+    var toolbar =  Content.IsDemoItem ? "" : episodeToolbar.For(episode);
 }
 @* Episode information *@
 <li class="app-podcast2 list-group-item border-end-0 border-start-0 p-0 pb-3 pt-3" @toolbar>

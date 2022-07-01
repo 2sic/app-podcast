@@ -45,3 +45,8 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
     * Changed images to use IImageService
     * Activated image configuration
     * Replaced data-enableoptimizations with pageSvc.AssetAttributes()
+* v02.03.00 2022-06 
+    * Replaced all base classes with their 2sxc 14 equivalents
+    * Replaced all GetService<> with the new ServiceKit14
+    * Updated webpack 
+    * Changed all the toolbar configurations to use the IToolbarService
