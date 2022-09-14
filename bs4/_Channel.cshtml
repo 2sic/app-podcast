@@ -25,7 +25,7 @@
       <div class="card border-0">
         @Kit.Image.Picture(channel.Field("Image"), settings: imgSettings, width: "1000", imgClass:"w-100 rounded-sm")
         <div class="card-body p-0">
-          <p class="card-text">
+          <div class="card-text mt-2">
             <p class="text-muted">@episodes.Count() @Resources.Episodes</p>
             <hr>
             <div class="pc-channel-description-desktop d-none d-md-block">@Html.Raw(channel.Description)</div>
@@ -47,9 +47,9 @@
           <h5 class="card-subtitle mb-3 pc-owner-name">@channel.Owner.FullName</h5>
           <div class="pc-channel-description-mobile d-block d-md-none">@Html.Raw(channel.Description)</div>
           <div class="pc-channel-category-rss d-flex">
-            <p class="card-text text-muted mb-0 align-self-end">
+            <div class="card-text text-muted mb-0 mt-2 align-self-end">
               @(Text.Has(channel.Category.SubCategory) ? channel.Category.SubCategory : channel.Category.MainCategory)
-            </p>
+            </div>
             <a class="badge badge-pill d-flex justify-content-center bg-secondary"
               href='@Link.To(api: "api/PodCast/Rss", parameters: "pageid=" + CmsContext.Page.Id + "&moduleId=" + CmsContext.Module.Id + "&channelid=" + channel.EntityId)'
               target="_blank">
