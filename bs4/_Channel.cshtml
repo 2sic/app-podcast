@@ -18,7 +18,7 @@
   var channelIsDemoItem = channel.IsDemoItem;
 }
 
-<div class="app-podcast2 container mb-4" @channelToolbar.For(channel)>
+<div class="app-podcast2 mb-4" @channelToolbar.For(channel)>
   <div class="row">
     @* Left column with image, episode counter and channel description *@
     <div class="col-12 col-md-4">
@@ -29,7 +29,7 @@
             <p class="text-muted">@episodes.Count() @Resources.Episodes</p>
             <hr>
             <div class="pc-channel-description-desktop d-none d-md-block">@Html.Raw(channel.Description)</div>
-          </p>
+          </div>
         </div>
       </div>
     </div>
@@ -46,8 +46,8 @@
           <h3 class="card-title pc-channel-title">@channel.Title</h3>
           <h5 class="card-subtitle mb-3 pc-owner-name">@channel.Owner.FullName</h5>
           <div class="pc-channel-description-mobile d-block d-md-none">@Html.Raw(channel.Description)</div>
-          <div class="pc-channel-category-rss d-flex">
-            <div class="card-text text-muted mb-0 mt-2 align-self-end">
+          <div class="pc-channel-category-rss d-flex justify-content-between">
+            <div class="card-text text-muted">
               @(Text.Has(channel.Category.SubCategory) ? channel.Category.SubCategory : channel.Category.MainCategory)
             </div>
             <a class="badge badge-pill d-flex justify-content-center bg-secondary"
@@ -63,7 +63,9 @@
       </div>
 
       @* Listing of episodes *@
-      <div @(channelIsDemoItem ? "" : episodeToolbar)></div>
+      <div class="position-relative">
+        @(channelIsDemoItem || episodes.Count() > 0 ? "" : episodeToolbar.AsTag())
+
         <ul class="list-group">
           @foreach(var episode in episodes.OrderByDescending(e => e.Date)) {
             @Html.Partial("./_Channel.PartEpisode.cshtml", new { Episode = episode })

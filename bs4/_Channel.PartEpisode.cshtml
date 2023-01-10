@@ -7,9 +7,9 @@
 }
 @* Episode information *@
 <li class="app-podcast2 list-group-item border-right-0 border-left-0 p-0 pb-3 pt-3" @toolbar>
-    <p class="text-muted pc-episode-date font-weight-bold">@episode.Date.ToString("dd MMM yyyy")</p>
+    <p class="text-muted pc-episode-date font-weight-bold mb-2">@episode.Date.ToString("dd MMM yyyy")</p>
     <h5 class="m-0">@episode.Title</h5>
-    <div class="text-muted">@Html.Raw(episode.Description)</div>
+    <div class="text-muted mb-4">@Html.Raw(episode.Description)</div>
     <audio
         preload="metadata"
         controls
