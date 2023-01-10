@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="14.09.00" ExportDate="2022-09-21T08:44:21.4670054+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="14.12.03" ExportDate="2023-01-10T10:16:40.958942+01:00">
   <Header>
     <App Guid="8258619d-a5d7-4f9a-9ef5-af9caac8dbaa" />
     <Language Default="en-us" />
@@ -912,7 +912,7 @@
             </Value>
           </Entity>
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@Number" AttributeSetName="@Number" EntityGUID="ca4326d0-7802-4798-a523-8b924295a7ad" Json="True" KeyNumber="3168">
-            <Value Key="Decimals" Value="0" Type="Number">
+            <Value Key="Decimals" Value="0.0" Type="Number">
               <Dimension DimensionID="146" ReadOnly="false" />
             </Value>
           </Entity>
@@ -1261,7 +1261,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="02.03.01" Type="String">
+      <Value Key="Version" Value="02.03.02" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
     </Entity>
@@ -1350,7 +1350,7 @@
       <Value Key="Description" Value="&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Image" Value="file:4453" Type="Hyperlink">
+      <Value Key="Image" Value="file:6319" Type="Hyperlink">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="Language" Value="de-de" Type="String">
@@ -1363,7 +1363,7 @@
       </Value>
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d9fbf8a7-c656-426e-b820-e74943699af1" AttributeSetName="Episode" EntityGUID="6ccb3c19-4e97-4a4d-a45f-cd7ee99a7f3c">
-      <Value Key="Audio" Value="file:4190" Type="Hyperlink">
+      <Value Key="Audio" Value="file:6320" Type="Hyperlink">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="Author" Value="2827581c-b4ed-48ad-9930-f3703c6c8d3b" Type="Entity" />
@@ -1385,7 +1385,7 @@
       </Value>
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d9fbf8a7-c656-426e-b820-e74943699af1" AttributeSetName="Episode" EntityGUID="94ded8ee-74fd-4031-b90a-8de1fe6d5b3e">
-      <Value Key="Audio" Value="file:4191" Type="Hyperlink">
+      <Value Key="Audio" Value="file:6321" Type="Hyperlink">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="Author" Value="2827581c-b4ed-48ad-9930-f3703c6c8d3b" Type="Entity" />
@@ -1407,7 +1407,7 @@
       </Value>
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d9fbf8a7-c656-426e-b820-e74943699af1" AttributeSetName="Episode" EntityGUID="3febf037-bc62-4378-91bf-931dc55d18ac">
-      <Value Key="Audio" Value="file:4190" Type="Hyperlink">
+      <Value Key="Audio" Value="file:6320" Type="Hyperlink">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="Author" Value="2827581c-b4ed-48ad-9930-f3703c6c8d3b" Type="Entity" />
@@ -2695,6 +2695,8 @@
       <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="068c9631-1abb-4dc9-8d30-ac8bf61352ec" Json="True">
+      <Value Key="Content" Value="null" Type="Entity" />
+      <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
     </Entity>
     <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="529ba3a2-d7d4-4f40-a81b-ff819de03a9e" AttributeSetName="IsDefaultDecorator" EntityGUID="82a67c53-e4b8-4697-bd14-968ab19ba099" Json="True" KeyGuid="bedafc8c-c1ec-445a-994d-fcce2b09e074" />
@@ -2702,7 +2704,7 @@
       <Value Key="Advanced" Value="{&#xD;&#xA;  &quot;recipe&quot;:{&#xD;&#xA;    &quot;setWidth&quot;: true, &#xD;&#xA;    &quot;variants&quot;: &quot;2*, 1.5*, 1*, 0.75*, 0.5*&quot;&#xD;&#xA;  }&#xD;&#xA;}" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="AspectRatio" Value="1" Type="Number">
+      <Value Key="AspectRatio" Value="1.0" Type="Number">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="Format" Value="" Type="String">
@@ -2711,7 +2713,7 @@
       <Value Key="ItemIdentifier" Value="Podcast" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Quality" Value="75" Type="Number">
+      <Value Key="Quality" Value="75.0" Type="Number">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="ResizeMode" Value="crop" Type="String">
@@ -2723,7 +2725,7 @@
       <Value Key="SettingsIdentifier" Value="Images.Podcast" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Width" Value="480" Type="Number">
+      <Value Key="Width" Value="480.0" Type="Number">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
     </Entity>
@@ -2772,67 +2774,23 @@
       </Value>
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="801a61f4-02c6-461b-b78f-08fd994a8015" Json="True">
-      <Value Key="Content" Value="a6122fee-fb78-4507-bfac-6c239971fad3" Type="Entity" />
+      <Value Key="Content" Value="null" Type="Entity" />
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c9af98e2-ca7d-478e-972e-bf221bd0af8c" AttributeSetName="Channel" EntityGUID="a6122fee-fb78-4507-bfac-6c239971fad3">
-      <Value Key="Category" Value="6ad8e4d0-7e31-4604-8605-b9495e7c2b07" Type="Entity" />
-      <Value Key="Description" Value="&lt;p&gt;Lorem ipsum&lt;/p&gt;&#xA;&lt;p&gt;&amp;nbsp;&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Image" Value="file:6175" Type="Hyperlink">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Language" Value="de-de" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="License" Value="a958f5e2-3941-4070-849d-c0d3772427ab" Type="Entity" />
-      <Value Key="Owner" Value="2827581c-b4ed-48ad-9930-f3703c6c8d3b" Type="Entity" />
-      <Value Key="Title" Value="Test" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d9fbf8a7-c656-426e-b820-e74943699af1" AttributeSetName="Episode" EntityGUID="0a9b6ae5-e29f-43a6-ba2a-56e16addfe33">
-      <Value Key="Audio" Value="file:6173" Type="Hyperlink">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Author" Value="2827581c-b4ed-48ad-9930-f3703c6c8d3b" Type="Entity" />
-      <Value Key="Channels" Value="a6122fee-fb78-4507-bfac-6c239971fad3" Type="Entity" />
-      <Value Key="Date" Value="2022-06-30T00:00:00" Type="DateTime">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Description" Value="&lt;p&gt;LOL&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Duration" Value="6" Type="Number">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Explicit" Value="False" Type="Boolean">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="TestEpisode" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-    </Entity>
   </Entities>
   <PortalFiles>
-    <File Id="4453" RelativePath="adam\PodCast\dwAA-R31CUO68STevXUDqQ\Image\podcast logo.png" />
-    <File Id="4190" RelativePath="adam\PodCast\GTzLbJdOTUqkX81-6Zp_PA\Audio\lyricchords.mp3" />
-    <File Id="4191" RelativePath="adam\PodCast\7tjelP10MUC5Co3h_m1bPg\Audio\lyricslap.mp3" />
-    <File Id="6175" RelativePath="adam\PodCast2\7i8Spnj7B0W_rGwjmXH60w\Image\visual-reverse-image-search-v2_intro.jpg" />
-    <File Id="6173" RelativePath="adam\ImageHotspots3\qYVI1hkvqU-KAO70vE-8Bw\Image\visual-reverse-image-search-v2_intro.jpg" />
-    <File Id="6029" RelativePath="adam\PodCast2\340HITtockSiX9FO_tUu1Q\Image\tall img.png" />
+    <File Id="6319" RelativePath="adam\PodCast2\dwAA-R31CUO68STevXUDqQ\Image\podcast logo.png" />
+    <File Id="6320" RelativePath="adam\PodCast2\GTzLbJdOTUqkX81-6Zp_PA\Audio\lyricchords.mp3" />
+    <File Id="6321" RelativePath="adam\PodCast2\7tjelP10MUC5Co3h_m1bPg\Audio\lyricslap.mp3" />
   </PortalFiles>
   <PortalFolders>
-    <Folder Id="7011" RelativePath="adam/PodCast/dwAA-R31CUO68STevXUDqQ/Image/" />
-    <Folder Id="7013" RelativePath="adam/PodCast/GTzLbJdOTUqkX81-6Zp_PA/Audio/" />
-    <Folder Id="7015" RelativePath="adam/PodCast/7tjelP10MUC5Co3h_m1bPg/Audio/" />
-    <Folder Id="13793" RelativePath="adam/PodCast2/7i8Spnj7B0W_rGwjmXH60w/Image/" />
-    <Folder Id="13789" RelativePath="adam/ImageHotspots3/qYVI1hkvqU-KAO70vE-8Bw/Image/" />
-    <Folder Id="13427" RelativePath="adam/PodCast2/340HITtockSiX9FO_tUu1Q/Image/" />
+    <Folder Id="13894" RelativePath="adam/PodCast2/dwAA-R31CUO68STevXUDqQ/Image/" />
+    <Folder Id="13896" RelativePath="adam/PodCast2/GTzLbJdOTUqkX81-6Zp_PA/Audio/" />
+    <Folder Id="13898" RelativePath="adam/PodCast2/7tjelP10MUC5Co3h_m1bPg/Audio/" />
     <Folder Id="13414" RelativePath="adam/PodCast2/" />
-    <Folder Id="13426" RelativePath="adam/PodCast2/340HITtockSiX9FO_tUu1Q/" />
-    <Folder Id="13792" RelativePath="adam/PodCast2/7i8Spnj7B0W_rGwjmXH60w/" />
+    <Folder Id="13897" RelativePath="adam/PodCast2/7tjelP10MUC5Co3h_m1bPg/" />
+    <Folder Id="13893" RelativePath="adam/PodCast2/dwAA-R31CUO68STevXUDqQ/" />
+    <Folder Id="13895" RelativePath="adam/PodCast2/GTzLbJdOTUqkX81-6Zp_PA/" />
   </PortalFolders>
 </SexyContent>
