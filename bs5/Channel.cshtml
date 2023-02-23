@@ -6,7 +6,7 @@
   var episodes = AsList(Content.Parents("Episode") as object);
 
   var imgSettings = AsDynamic(Settings.Images.Podcast, "Content");
-  
+
   // Default Toolbar Edit and Change Layouting 
   var channelToolbar = Kit.Toolbar.Default().Settings(hover:"left", autoAddMore:"start");
 
@@ -43,7 +43,7 @@
       <div class="card border-0 mb-4">
         @* Channel Information *@
         <div class="card-body p-0">
-          @if(channel.IsDemoItem){
+          @if (channel.IsDemoItem) {
             <div class="alert alert-warning">
               @Html.Raw(Resources.WarningIsShowingDemo)
             </div>
@@ -72,7 +72,7 @@
         @(channelIsDemoItem || episodes.Count() > 0 ? "" : episodeToolbar.AsTag())
 
         <ul class="list-group">
-          @foreach(var episode in episodes.OrderByDescending(e => e.Date)) {
+          @foreach (var episode in episodes.OrderByDescending(e => e.Date)) {
             @Html.Partial("./Channel.PartEpisode.cshtml", new { Episode = episode })
           }
         </ul>
