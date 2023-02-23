@@ -1,10 +1,7 @@
 @inherits Custom.Hybrid.Razor14
-@{
-    // 2. Include Bootstrap4 if the framework isn't known
-    if (Kit.Css.IsUnknown) {
-      Kit.Page.Activate("Bootstrap4");
-    }
-}
-<link rel="stylesheet" href="@App.Path/bs5/dist/styles.min.css" @Kit.Page.AssetAttributes()>
 
-@* 1 zu 1  *@
+@*  Include styles of the App *@
+<link rel="stylesheet" href="@CmsContext.View.Path/dist/styles.min.css" @Kit.Page.AssetAttributes()>
+
+@* Include bootstrap 5 if the framework isn't known - then this file is still called, and we add Bootstrap to the page *@
+@Kit.Page.Activate(condition: Kit.Css.IsUnknown, features: "Bootstrap5")

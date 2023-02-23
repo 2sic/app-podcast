@@ -1,20 +1,5 @@
 @inherits Custom.Hybrid.Razor14
-@using ToSic.Razor.Blade;
-@{
-    var episode = DynamicModel.Episode;
-    var episodeToolbar = Kit.Toolbar.Default().Layout("-").Delete();
-    var toolbar =  Content.IsDemoItem ? "" : episodeToolbar.For(episode);
-}
-@* Episode information *@
-<li class="app-podcast2 list-group-item border-right-0 border-left-0 p-0 pb-3 pt-3" @toolbar>
-    <p class="text-muted pc-episode-date font-weight-bold mb-2">@episode.Date.ToString("dd MMM yyyy")</p>
-    <h5 class="m-0">@episode.Title</h5>
-    <div class="text-muted mb-4">@Html.Raw(episode.Description)</div>
-    <audio
-        preload="metadata"
-        controls
-        src="@episode.Audio">
-            Your browser does not support the
-            <code>audio</code> element.
-    </audio>
-</li>
+@* --- This is the Bootstrap4 Edition of the Files --- *@
+@* This file is almost identical to Bootstrap5, so just load the BS5 edition *@
+@* Note: Diffrent are BS Class border-end-0 border-start-0, fw-bold  *@
+@Html.Partial("../bs5/Channel.PartEpisode.cshtml")

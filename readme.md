@@ -8,7 +8,7 @@ A standard podcast app to use with 2sxc - it's tested to work with normal PodCas
 
 | Aspect              | Status | Comments or Version |
 | ------------------- | :----: | ------------------- |
-| 2sxc                | ✅    | requires 2sxc v13.10
+| 2sxc                | ✅    | requires 2sxc v15.04
 | Dnn                 | ✅    | For v7, v8 and v9
 | Oqtane 2            | ✅    | Requires v2.02
 | No jQuery           | ✅    | 
@@ -32,21 +32,25 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
 
 ## History
 
-* v02.00 2021-10
+* v.02.00 2021-10
     * Updated to best-practices of 2sxc 12.05
     * RSS feed now in a web controller
     * Hybrid, so it works with Oqtane
     * Tested to look ok on Bootstrap5
-* v02.01.02 2022-02
+* v.02.01.02 2022-02
     * Enabled data-optimizations
-* v02.02.00 2022-04
+* v.02.02.00 2022-04
     * Change Services to come from "ToSic.Sxc.Services"
     * Use IScrub to replace Tag.Strip with IScrub.All
     * Changed images to use IImageService
     * Activated image configuration
     * Replaced data-enableoptimizations with pageSvc.AssetAttributes()
-* v02.03.00 2022-06 
+* v.02.03.00 2022-06 
     * Replaced all base classes with their 2sxc 14 equivalents
     * Replaced all GetService<> with the new ServiceKit14
     * Updated webpack 
     * Changed all the toolbar configurations to use the IToolbarService
+* v.02.04.00 2023-02
+    * Replaced turnOn Tag with `Kit.Page.TurnOn`
+    * Removed _ from Filenames
+    * Code in one file the bs5, less duplicated code

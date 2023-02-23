@@ -6,7 +6,8 @@
   var episodes = AsList(Content.Parents("Episode") as object);
 
   var imgSettings = AsDynamic(Settings.Images.Podcast, "Content");
-
+  
+  // Default Toolbar Edit and Change Layouting 
   var channelToolbar = Kit.Toolbar.Default().Settings(hover:"left", autoAddMore:"start");
 
   var episodeToolbar = Kit.Toolbar.Empty()
@@ -16,6 +17,10 @@
       + "&prefill:Author=" + channel.Owner.EntityGuid.ToString());
 
   var channelIsDemoItem = channel.IsDemoItem;
+
+  // Class for BS5 or BS4 
+  var isBs5 = Kit.Css.Is("bs5");
+  var badgePill = isBs5 ? "rounded-pill" : "badge-pill";
 }
 
 <div class="app-podcast2 mb-4" @channelToolbar.For(channel)>
@@ -50,7 +55,7 @@
             <div class="card-text text-muted">
               @(Text.Has(channel.Category.SubCategory) ? channel.Category.SubCategory : channel.Category.MainCategory)
             </div>
-            <a class="badge rounded-pill d-flex justify-content-center bg-secondary"
+            <a class="badge @badgePill d-flex justify-content-center bg-secondary"
               href='@Link.To(api: "api/PodCast/Rss", parameters: "pageid=" + CmsContext.Page.Id + "&moduleId=" + CmsContext.Module.Id + "&channelid=" + channel.EntityId)'
               target="_blank">
               <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rss" style="width: 10px;" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -80,6 +85,7 @@
 
 @* Zeile 13 BS5: show: "always" BS4:  *@
 @* Zeile 16 BS5: , imgAlt: channel.Title BS4:  *@
+
 @* Zeile 53 BS5: rounded-pill BS4: badge-pill *@
 
 
