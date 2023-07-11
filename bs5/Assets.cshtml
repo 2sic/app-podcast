@@ -1,7 +1,7 @@
-@inherits Custom.Hybrid.Razor14
+@inherits Custom.Hybrid.RazorPro
 
 @*  Include styles of the App *@
-<link rel="stylesheet" href="@CmsContext.View.Path/dist/styles.min.css" @Kit.Page.AssetAttributes()>
+<link rel="stylesheet" href="@MyView.Path/dist/styles.min.css" @Kit.Page.AssetAttributes()>
 
 @* Include bootstrap 5 if the framework isn't known - then this file is still called, and we add Bootstrap to the page *@
 @Kit.Page.Activate(condition: Kit.Css.IsUnknown, features: "Bootstrap5")

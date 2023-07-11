@@ -1,27 +1,28 @@
-@inherits Custom.Hybrid.Razor14
+@inherits Custom.Hybrid.RazorPro
 @using ToSic.Razor.Blade;
+
 @{
-    var episode = DynamicModel.Episode;
+    var channelPartContent = MyItem;
+    var episode = MyModel.Item("episode");
     // Default Toolbar with Delete and without layout 
-    var episodeToolbar = Kit.Toolbar.Default().Layout("-").Delete();
-    var toolbar = Content.IsDemoItem ? "" : episodeToolbar.For(episode);
+    var episodeToolbar = Kit.Toolbar.Default().DetectDemo(channelPartContent).Layout("-").Delete();
+    var toolbar = episodeToolbar.For(episode);
 
-  // Class for BS5 or BS4 
-  var isBs5 = Kit.Css.Is("bs5");
-  var border = isBs5 ? "border-end-0 border-start-0 " : "border-right-0 border-left-0 ";
-  var bold = isBs5 ? "fw-bold " : "font-weight-bold mb-2 ";
-
-
+    // Class for BS5 or BS4 
+    var isBs5 = Kit.Css.Is("bs5");
+    var border = isBs5 ? "border-end-0 border-start-0 " : "border-right-0 border-left-0 ";
+    var bold = isBs5 ? "fw-bold " : "font-weight-bold mb-2 ";
 }
+
 @* Episode information *@
 <li class="app-podcast2 list-group-item @border p-0 pb-3 pt-3" @toolbar>
-    <p class="text-muted pc-episode-date @bold">@episode.Date.ToString("dd MMM yyyy")</p>
-    <h5 class="m-0">@episode.Title</h5>
-    <div class="text-muted">@Html.Raw(episode.Description)</div>
+    <p class="text-muted pc-episode-date @bold">@episode.DateTime("Date").ToString("dd MMM yyyy")</p>
+    <h5 class="m-0">@channelPartContent.String("Title")</h5>
+    @channelPartContent.Html("Description").Class("text-muted")
     <audio
         preload="metadata"
         controls
-        src="@episode.Audio">
+        src="@episode.Url("Audio")">
             Your browser does not support the
             <code>audio</code> element.
     </audio>

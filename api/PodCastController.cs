@@ -11,11 +11,12 @@ using System.Linq;
 using System.Xml;
 using System.IO;
 using System;
+using ToSic.Sxc.Data;
 using ToSic.Razor.Blade;
 
 
 [AllowAnonymous]			// define that all commands can be accessed without a login
-public class PodCastController : Custom.Hybrid.Api14
+public class PodCastController : Custom.Hybrid.ApiPro
 {
   // Atom XML Namespace for RSS
   public const string AtomNsCode = "atom";
@@ -35,149 +36,128 @@ public class PodCastController : Custom.Hybrid.Api14
       +  "xmlns:" + ItunesNsCode + "='" + ItunesNamespace + "' "
       +  "xmlns:" + CreativeCommonsNsCode + "='" + CreativeCommonsNamespace + "' "
       +"></rss>";
-  public const string ErrDetailsPage = "Error: 'DetailsPage' app setting is missing. Please configure to get RSS to work.";
   
   [HttpGet]
-  public dynamic Rss()
+  public object Rss()
   {
-    // get all posts as delived from the standard query
-    var episodes = AsList(Content.Parents("Episode") as object).OrderByDescending(e => e.Date);
-
+    // get all posts as delivered from the standard query
+    var config = MyItem;
+    var episodes =  MyItem.Parents("Episode").OrderByDescending(e => e.DateTime("Date"));
     // results in "2019" or "2017-2019"
-    var copyrightYear = episodes.Last().Date.Year == episodes.First().Date.Year
-      ? episodes.First().Date.Year
-      : episodes.Last().Date.Year + "-" + episodes.First().Date.Year;
+    var firstYear = episodes.First().DateTime("Date").Year;
+    var lastYear = episodes.Last().DateTime("Date").Year;
+    var copyrightYear = lastYear == firstYear ? firstYear.ToString() : lastYear + "-" + firstYear;
 
-    var copyrightNotice = "Copyright © " + copyrightYear + " " + Content.Owner.FullName 
-      + (Content.License.Link != "copyright/" ?  " (" + Content.License.Link + ")" : "");
+    // var license = config.Child("License");
+    var licUrl = config.Child("License").Url("Link");
+    var copyrightNotice = "Copyright © "
+      + copyrightYear + " "
+      + config.Child("Owner").String("FullName") 
+      // Note: the term "copyright/" is currently hardwired into one of the licenses - adjust to your needs
+      + (licUrl != "copyright/" ?  " (" + licUrl + ")" : "");
 
-    // 1. Prepare
-    // 1.1 Figure out what page will show post details based on settings
-    // If the settings are configured, it's something like "page:27"
-    var detailsPageId = Text.Has(Settings.DetailsPage)
-      ? int.Parse((Settings.Get("DetailsPage", convertLinks: false)).Split(':')[1])
-      : int.Parse(CmsContext.Page.Parameters["PageId"]); // when 'DetailsPage' app setting is missing.
-
-    // 1.2 This will be null or a message. To be used instead of links
-    var linkErrMessage = (detailsPageId == 0) ? ErrDetailsPage : null;
-
-    // 2. Build main XML document
-    // 2.1 Create the XmlDocument and get root node
+    // 1. Build main XML document
+    // 1.1 Create the XmlDocument and get root node
     var rssDoc = new XmlDocument();
     rssDoc.PreserveWhitespace = true;
     rssDoc.LoadXml(EmptyRssDocument);
     var root = rssDoc.DocumentElement;
 
-    // 2.1 Add a warning to the XML in case we don't know what page to use for links
-    // we use a custom xml namespace "warning" to not break the RSS standard
-    if(detailsPageId == 0) {
-      var warningTag = AddNamespaceTag(root, "warning", "warning", "http://warning");
-      warningTag.InnerText = "The links for the details cannot work yet, because the App isn't fully configured. You must set a details page.";
-    }
-
-    // 3. Create Channel
-    // 3.1 Create <channel> node and set important values
+    // 2. Create Channel
+    // 2.1 Create <channel> node and set important values
     var channel = AddTag(root, "channel");
     AddTag(channel, "generator", "2sxc PodCast App");
-    AddTag(channel, "title", Content.Title);
-    AddTag(channel, "link", Link.To(pageId: detailsPageId, type: "full") ?? linkErrMessage);
-    AddTag(channel, "description", Kit.Scrub.All(Content.Description));
-    AddTag(channel, "language", Kit.Scrub.All(Content.Language));
+    AddTag(channel, "title", config.Title);
+    AddTag(channel, "link", Link.To(pageId: MyPage.Id, type: "full"));
+    AddTag(channel, "description", config.String("Description", scrubHtml: true));
+    AddTag(channel, "language", config.String("Language", scrubHtml: true));
     AddTag(channel, "copyright", copyrightNotice);
-    AddTag(channel, "managingEditor", Content.Owner.Email + " (" + Content.Owner.FullName + ")");
+    AddTag(channel, "managingEditor", config.Child("Owner").String("Email") + " (" + config.Child("Owner").String("FullName") + ")");
     var image = AddTag(channel, "image");
-    AddTag(image, "title", Content.Title);
-    AddTag(image, "url", Link.Image(Content.Image, type: "full"));
+    AddTag(image, "title", config.Title);
+    AddTag(image, "url", Link.Image(config.Url("Image"), type: "full"));
     AddTag(image, "link", Link.To(type: "full"));
 
-    // 3.2 Create <creativeCommons:license> tag and add Creative Commons license if isn't copyright
-    if(Content.License.Link != "copyright/") 
-      AddNamespaceTag(channel, CreativeCommonsNsCode, "license", CreativeCommonsNamespace, Content.License.Link);
+    // 2.2 Create <creativeCommons:license> tag and add Creative Commons license if isn't copyright
+    if(licUrl != "copyright/") 
+      AddNamespaceTag(channel, CreativeCommonsNsCode, "license", CreativeCommonsNamespace, licUrl);
     
-    // 3.3 Add required Itunes values to channel
+    // 2.3 Add required Itunes values to channel
     AddChannelItunes(channel);
 
-    // 3.4 Add Atom tag to channel
+    // 2.4 Add Atom tag to channel
     AddChannelAtom(channel);
     
-    // 3.5 Add all the episodes from the query to this channel
+    // 2.5 Add all the episodes from the query to this channel
     // get protocol and host to complete the urls of the episodes and the one of the image
     var fullLink = Link.To(type: "full");
     var websiteRoot = fullLink.Substring(0, fullLink.IndexOf("/", fullLink.IndexOf("//") + 2));
-    foreach(var episode in episodes) AddEpisode(websiteRoot, channel, episode);
+    foreach(var episode in episodes)
+      AddEpisode(websiteRoot, channel, episode);
 
     return File(download: false, fileDownloadName: "rss.xml", contents: rssDoc);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   #region functions that add xml sections 
 
   // Adds required <itunes:xy> tags to channel
   private void AddChannelItunes(XmlElement channel) {
     // Get all posts as delived from the standard query
-    var episodes = AsList(Content.Parents("Episode") as object).OrderByDescending(e => e.Date);
-    var imageUrl = Link.Image(Content.Image, type: "full");
+    var config = MyItem;
+    var episodes = config.Parents("Episode").OrderByDescending(e => e.DateTime("Date"));
+    var imageUrl = Link.Image(config.Url("Image"), type: "full");
 
-    AddNamespaceTag(channel, ItunesNsCode, "summary", ItunesNamespace, Kit.Scrub.All(Content.Description));
-    AddNamespaceTag(channel, ItunesNsCode, "author", ItunesNamespace, Content.Owner.FullName);
-    AddNamespaceTag(channel, ItunesNsCode, "explicit", ItunesNamespace, episodes.Any(e => e.Explicit == true) ? "yes" : "no");
+    AddNamespaceTag(channel, ItunesNsCode, "summary", ItunesNamespace, config.String("Description", scrubHtml: true));
+    var owner = config.Child("Owner");
+    AddNamespaceTag(channel, ItunesNsCode, "author", ItunesNamespace, owner.String("FullName"));
+    AddNamespaceTag(channel, ItunesNsCode, "explicit", ItunesNamespace, episodes.Any(e => e.Bool("Explicit")) ? "yes" : "no");
     var itunesImage = AddNamespaceTag(channel, ItunesNsCode, "image", ItunesNamespace);
     // Image size of 3000 x 3000 is required by itunes
     AddAttribute(itunesImage, "href", Link.Image(url: imageUrl, width: 3000, height: 3000));
 
     var itunesOwner = AddNamespaceTag(channel, ItunesNsCode, "owner", ItunesNamespace);
-    AddNamespaceTag(itunesOwner, ItunesNsCode, "name", ItunesNamespace, Content.Owner.FullName);
-    AddNamespaceTag(itunesOwner, ItunesNsCode, "email", ItunesNamespace, Content.Owner.Email);
+    AddNamespaceTag(itunesOwner, ItunesNsCode, "name", ItunesNamespace, owner.String("FullName"));
+    AddNamespaceTag(itunesOwner, ItunesNsCode, "email", ItunesNamespace, owner.String("Email"));
 
     var itunesCategory = AddNamespaceTag(channel, ItunesNsCode, "category", ItunesNamespace);
-    AddAttribute(itunesCategory, "text", Content.Category.MainCategory);
+    var category = config.Child("Category");
+    AddAttribute(itunesCategory, "text", category.String("MainCategory"));
 
     // Add subcategory if needed
-    if(Text.Has(Content.Category.SubCategory)) {
+    if (Text.Has(category.String("SubCategory"))) {
       var itunesSubCategory = AddNamespaceTag(itunesCategory, ItunesNsCode, "category", ItunesNamespace);
-      AddAttribute(itunesSubCategory, "text", Content.Category.SubCategory);
+      AddAttribute(itunesSubCategory, "text", category.String("SubCategory"));
     }
   }
 
   // Adds <atom> tag to channel
   private void AddChannelAtom(XmlElement channel) {
     var atomLink = AddNamespaceTag(channel, AtomNsCode, "link", AtomNamespace);
-    AddAttribute(atomLink, "href", Link.To(api: "api/PodCast/Rss", parameters: CmsContext.Page.Parameters, type: "full"));
+    AddAttribute(atomLink, "href", Link.To(api: "api/PodCast/Rss", parameters: MyPage.Parameters, type: "full"));
     AddAttribute(atomLink, "rel", "self");
     AddAttribute(atomLink, "type", "application/rss+xml");
   }
 
   // Adds Episode to channel
-  private void AddEpisode(string websiteRoot, XmlElement channel, dynamic episode) {
-    var publicationDate = (episode.Date ?? DateTime.Now).ToString("R");
-    var authorItems = AsList(episode.Author as object); 
-    var authorFullName = authorItems.Any() ? authorItems.First().FullName : "";
-    var authorEmail = authorItems.Any() ? authorItems.First().Email : "";
+  private void AddEpisode(string websiteRoot, XmlElement channel, ITypedItem episode) {
+    var publicationDate = episode.DateTime("Date", fallback: DateTime.Now).ToString("R");
+    var author = episode.Child("Author");
+    var authorFullName = author == null ? "" : author.String("FullName");
+    var authorEmail = author == null ? "" : author.String("Email");
     
     var itemNode = AddTag(channel, "item");
     AddTag(itemNode, "title", episode.Title);
-    AddTag(itemNode, "description", Kit.Scrub.All(episode.Description));
+    AddTag(itemNode, "description", episode.String("Description", scrubHtml: true));
 
-    var itemGuid = AddTag(itemNode, "guid", episode.EntityGuid.ToString());
+    var itemGuid = AddTag(itemNode, "guid", episode.Guid.ToString());
     AddAttribute(itemGuid, "isPermaLink", "false");
-    AddTag(itemNode, "category", Text.Has(Content.Category.SubCategory) ? Content.Category.SubCategory : Content.Category.MainCategory);
+    var category = MyItem.Child("Category");
+    AddTag(itemNode, "category", Text.First(category.String("SubCategory"), category.String("MainCategory")));
     AddTag(itemNode, "author", authorEmail + " (" + authorFullName + ")");
     AddTag(itemNode, "pubDate", publicationDate);
 
     var enclosure = AddTag(itemNode, "enclosure");
-    AddAttribute(enclosure, "url", websiteRoot + episode.Audio);
+    AddAttribute(enclosure, "url", websiteRoot + episode.Url("Audio"));
     AddAttribute(enclosure, "type", "audio/mpeg");
     AddAttribute(enclosure, "length", "1024");
     AddTag(itemNode, "link", Link.To());
@@ -187,13 +167,14 @@ public class PodCastController : Custom.Hybrid.Api14
   }
 
   // Adds required <itunes:xy> tags to itemNode
-  private void AddItemItunes(XmlElement itemNode, dynamic episode, string authorFullName) {
-    var duration = TimeSpan.FromMinutes(Kit.Convert.ToFloat(episode.Duration ?? 0)).ToString("hh\\:mm") + ":00";
-    AddNamespaceTag(itemNode, ItunesNsCode, "subtitle", ItunesNamespace, Text.Crop(Kit.Scrub.All(episode.Description), 255));
-    AddNamespaceTag(itemNode, ItunesNsCode, "summary", ItunesNamespace, Kit.Scrub.All(episode.Description));
+  private void AddItemItunes(XmlElement itemNode, ITypedItem episode, string authorFullName) {
+    var duration = TimeSpan.FromMinutes(episode.Float("Duration")).ToString("hh\\:mm") + ":00";
+    var description = episode.String("Description", scrubHtml: true);
+    AddNamespaceTag(itemNode, ItunesNsCode, "subtitle", ItunesNamespace, Text.Crop(description, 255));
+    AddNamespaceTag(itemNode, ItunesNsCode, "summary", ItunesNamespace, description);
     AddNamespaceTag(itemNode, ItunesNsCode, "author", ItunesNamespace, authorFullName);
     AddNamespaceTag(itemNode, ItunesNsCode, "duration", ItunesNamespace, duration);
-    AddNamespaceTag(itemNode, ItunesNsCode, "explicit", ItunesNamespace, episode.Explicit ? "yes" : "no");
+    AddNamespaceTag(itemNode, ItunesNsCode, "explicit", ItunesNamespace, episode.Bool("Explicit") ? "yes" : "no");
   }
 
   #endregion
