@@ -1,4 +1,4 @@
-@inherits Custom.Hybrid.RazorPro
+@inherits Custom.Hybrid.RazorTyped
 @using ToSic.Razor.Blade;
 @{
   var channel = MyItem;  // give it a nicer name so the code is easier to read
@@ -9,13 +9,13 @@
   // Default Toolbar Edit and Change Layouting 
   var channelToolbar = Kit.Toolbar.Default().Settings(hover:"left", autoAddMore:"start");
   
-    var episodeToolbar = Kit.Toolbar.Empty()
-    .Settings(hover: "left", show: "always")
-    .New("Episode", tweak: b => b
-        .Prefill("Date=" + DateTime.Now.ToString("yyyy-MM-dd"))
-        .Prefill("Channels=" + channel.Guid.ToString())
-        .Prefill("Author=" + channel.Child("Owner").Guid.ToString())
-    );
+  var episodeToolbar = Kit.Toolbar.Empty()
+  .Settings(hover: "left", show: "always")
+  .New("Episode", tweak: b => b
+      .Prefill("Date=" + DateTime.Now.ToString("yyyy-MM-dd"))
+      .Prefill("Channels=" + channel.Guid.ToString())
+      .Prefill("Author=" + channel.Child("Owner").Guid.ToString())
+  );
 
   // Class for BS5 or BS4 
   var isBs5 = Kit.Css.Is("bs5");

@@ -16,7 +16,7 @@ using ToSic.Razor.Blade;
 
 
 [AllowAnonymous]			// define that all commands can be accessed without a login
-public class PodCastController : Custom.Hybrid.ApiPro
+public class PodCastController : Custom.Hybrid.ApiTyped
 {
   // Atom XML Namespace for RSS
   public const string AtomNsCode = "atom";
