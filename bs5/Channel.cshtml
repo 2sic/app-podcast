@@ -4,7 +4,7 @@
   var channel = MyItem;  // give it a nicer name so the code is easier to read
 
   // Get all the Episode items which point to this channel
-  var episodes = AsItems(channel.Parents("Episode"));
+  var episodes = AsItems(channel.Parents(type: "Episode"));
   
   // Default Toolbar Edit and Change Layouting 
   var channelToolbar = Kit.Toolbar.Default().Settings(hover:"left", autoAddMore:"start");
@@ -28,7 +28,7 @@
     @* Left column with image, episode counter and channel description *@
     <div class="col-12 col-md-4">
       <div class="card border-0">
-        @Kit.Image.Picture(channel.Field("Image"), settings: "Podcast", width: "1000", imgClass:"w-100 rounded-sm", imgAltFallback: channel.String("Title"))
+        @channel.Picture("Image", settings: "Podcast", width: "1000", imgClass:"w-100 rounded-sm", imgAltFallback: channel.String("Title"))
         <div class="card-body p-0">
           <div class="card-text mt-2">
             <p class="text-muted">@episodes.Count() @App.Resources.String("Episodes")</p>
