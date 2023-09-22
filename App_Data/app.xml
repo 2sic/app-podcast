@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="16.00.00" ExportDate="2023-05-03T15:27:39.5455133+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="16.07.00" ExportDate="2023-09-22T12:16:06.9947125+02:00">
   <Header>
     <App Guid="8258619d-a5d7-4f9a-9ef5-af9caac8dbaa" />
     <Language Default="en-us" />
@@ -1249,19 +1249,19 @@
       <Value Key="OriginalId" Value="" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredDnnVersion" Value="07.04.02" Type="String">
+      <Value Key="RequiredDnnVersion" Value="09.06.01" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredOqtaneVersion" Value="03.01.00" Type="String">
+      <Value Key="RequiredOqtaneVersion" Value="03.04.00" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredVersion" Value="16.00.00" Type="String">
+      <Value Key="RequiredVersion" Value="16.04.00" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="02.04.00 " Type="String">
+      <Value Key="Version" Value="02.05.00 " Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
     </Entity>
@@ -2695,7 +2695,7 @@
       <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="068c9631-1abb-4dc9-8d30-ac8bf61352ec" Json="True">
-      <Value Key="Content" Value="ce956db5-7b55-43b2-93f3-06478e35691a" Type="Entity" />
+      <Value Key="Content" Value="null" Type="Entity" />
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
     </Entity>
@@ -2778,51 +2778,17 @@
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c9af98e2-ca7d-478e-972e-bf221bd0af8c" AttributeSetName="Channel" EntityGUID="ce956db5-7b55-43b2-93f3-06478e35691a">
-      <Value Key="Category" Value="8dd26f54-a1fa-4a11-b788-fa6dc06841a4" Type="Entity" />
-      <Value Key="Description" Value="&lt;p&gt;sdfdsf&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Image" Value="file:6330" Type="Hyperlink">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Language" Value="de-de" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="License" Value="18ab6a11-50e6-4eb9-98de-bd59a244fad3" Type="Entity" />
-      <Value Key="Owner" Value="2827581c-b4ed-48ad-9930-f3703c6c8d3b" Type="Entity" />
-      <Value Key="Title" Value="Test 2222" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="d9fbf8a7-c656-426e-b820-e74943699af1" AttributeSetName="Episode" EntityGUID="0cac228d-9940-4da9-bb00-52d7e67f4049">
-      <Value Key="Audio" Value="file:6331" Type="Hyperlink">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Author" Value="2827581c-b4ed-48ad-9930-f3703c6c8d3b" Type="Entity" />
-      <Value Key="Channels" Value="ce956db5-7b55-43b2-93f3-06478e35691a" Type="Entity" />
-      <Value Key="Date" Value="2023-03-13T00:00:00" Type="DateTime">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Description" Value="&lt;p&gt;sdfsdfsdfsf&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Duration" Value="1" Type="Number">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Explicit" Value="False" Type="Boolean">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Title 0" Type="String">
-        <Dimension DimensionID="146" ReadOnly="false" />
-      </Value>
-    </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="8b19d9a0-1d7c-427f-a6fd-71d269794dbb" Json="True">
       <Value Key="Content" Value="f9000077-f51d-4309-baf1-24debd7503a9" Type="Entity" />
       <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="7908029f-72e5-4c4e-b978-157aa6c12fb9" Json="True">
-      <Value Key="Content" Value="ce956db5-7b55-43b2-93f3-06478e35691a" Type="Entity" />
+      <Value Key="Content" Value="null" Type="Entity" />
+      <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="523f5e91-8aac-48da-95e7-df6530dbc7da" Json="True">
+      <Value Key="Content" Value="null" Type="Entity" />
+      <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="bedafc8c-c1ec-445a-994d-fcce2b09e074" Type="Entity" />
     </Entity>
   </Entities>
@@ -2830,29 +2796,38 @@
     <File Id="6319" RelativePath="adam\PodCast2\dwAA-R31CUO68STevXUDqQ\Image\podcast logo.png" />
     <File Id="6320" RelativePath="adam\PodCast2\GTzLbJdOTUqkX81-6Zp_PA\Audio\lyricchords.mp3" />
     <File Id="6321" RelativePath="adam\PodCast2\7tjelP10MUC5Co3h_m1bPg\Audio\lyricslap.mp3" />
-    <File Id="6330" RelativePath="adam\PodCast2\tW2VzlV7skOT8wZHjjVpGg\Image\117797_c7dbdfed13121ff2fcc46e783cc154db.jpg" />
-    <File Id="6331" RelativePath="adam\PodCast2\jSKsDECZqU27AFLX5n9ASQ\Audio\file_example_MP3_700KB.mp3" />
+    <File Id="6372" RelativePath="adam\PodCast2\06nhRXFDhUKmZsxS6rn3kA\Image\planetary-ring-ringed-planet-planet-stars-wallpaper-preview.jpg" />
     <File Id="6029" RelativePath="adam\PodCast2\340HITtockSiX9FO_tUu1Q\Image\tall img.png" />
+    <File Id="6381" RelativePath="adam\PodCast2\BZF92TW0m0CGrrNofrsXfQ\Image\demo-3.jpg" />
     <File Id="6318" RelativePath="adam\PodCast2\dcBJ9FMje0i_frcMr9N3vw\Audio\CP08CD_AudioSample.mp3" />
+    <File Id="6382" RelativePath="adam\PodCast2\gV4TyjZPPUmfsGaJIwzEFw\Audio\Tchaikovsky_Rococo_Var_orch.mp3" />
+    <File Id="6331" RelativePath="adam\PodCast2\jSKsDECZqU27AFLX5n9ASQ\Audio\file_example_MP3_700KB.mp3" />
+    <File Id="6330" RelativePath="adam\PodCast2\tW2VzlV7skOT8wZHjjVpGg\Image\117797_c7dbdfed13121ff2fcc46e783cc154db.jpg" />
   </PortalFiles>
   <PortalFolders>
     <Folder Id="13894" RelativePath="adam/PodCast2/dwAA-R31CUO68STevXUDqQ/Image/" />
     <Folder Id="13896" RelativePath="adam/PodCast2/GTzLbJdOTUqkX81-6Zp_PA/Audio/" />
     <Folder Id="13898" RelativePath="adam/PodCast2/7tjelP10MUC5Co3h_m1bPg/Audio/" />
-    <Folder Id="13908" RelativePath="adam/PodCast2/tW2VzlV7skOT8wZHjjVpGg/Image/" />
-    <Folder Id="13910" RelativePath="adam/PodCast2/jSKsDECZqU27AFLX5n9ASQ/Audio/" />
+    <Folder Id="13984" RelativePath="adam/PodCast2/06nhRXFDhUKmZsxS6rn3kA/Image/" />
     <Folder Id="13427" RelativePath="adam/PodCast2/340HITtockSiX9FO_tUu1Q/Image/" />
+    <Folder Id="13999" RelativePath="adam/PodCast2/BZF92TW0m0CGrrNofrsXfQ/Image/" />
     <Folder Id="13892" RelativePath="adam/PodCast2/dcBJ9FMje0i_frcMr9N3vw/Audio/" />
+    <Folder Id="14001" RelativePath="adam/PodCast2/gV4TyjZPPUmfsGaJIwzEFw/Audio/" />
+    <Folder Id="13910" RelativePath="adam/PodCast2/jSKsDECZqU27AFLX5n9ASQ/Audio/" />
+    <Folder Id="13908" RelativePath="adam/PodCast2/tW2VzlV7skOT8wZHjjVpGg/Image/" />
     <Folder Id="13414" RelativePath="adam/PodCast2/" />
+    <Folder Id="13983" RelativePath="adam/PodCast2/06nhRXFDhUKmZsxS6rn3kA/" />
     <Folder Id="13426" RelativePath="adam/PodCast2/340HITtockSiX9FO_tUu1Q/" />
     <Folder Id="13792" RelativePath="adam/PodCast2/7i8Spnj7B0W_rGwjmXH60w/" />
     <Folder Id="13793" RelativePath="adam/PodCast2/7i8Spnj7B0W_rGwjmXH60w/Image/" />
     <Folder Id="13897" RelativePath="adam/PodCast2/7tjelP10MUC5Co3h_m1bPg/" />
     <Folder Id="13889" RelativePath="adam/PodCast2/8ytKAHxKXkSzXHA8mink7A/" />
     <Folder Id="13890" RelativePath="adam/PodCast2/8ytKAHxKXkSzXHA8mink7A/Image/" />
+    <Folder Id="13998" RelativePath="adam/PodCast2/BZF92TW0m0CGrrNofrsXfQ/" />
     <Folder Id="13891" RelativePath="adam/PodCast2/dcBJ9FMje0i_frcMr9N3vw/" />
     <Folder Id="13893" RelativePath="adam/PodCast2/dwAA-R31CUO68STevXUDqQ/" />
     <Folder Id="13895" RelativePath="adam/PodCast2/GTzLbJdOTUqkX81-6Zp_PA/" />
+    <Folder Id="14000" RelativePath="adam/PodCast2/gV4TyjZPPUmfsGaJIwzEFw/" />
     <Folder Id="13909" RelativePath="adam/PodCast2/jSKsDECZqU27AFLX5n9ASQ/" />
     <Folder Id="13907" RelativePath="adam/PodCast2/tW2VzlV7skOT8wZHjjVpGg/" />
   </PortalFolders>
