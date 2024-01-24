@@ -42,7 +42,7 @@ public class PodCastController : Custom.Hybrid.ApiTyped
   {
     // get all posts as delivered from the standard query
     var config = MyItem;
-    var episodes =  MyItem.Parents("Episode").OrderByDescending(e => e.DateTime("Date"));
+    var episodes =  MyItem.Parents(type: "Episode").OrderByDescending(e => e.DateTime("Date"));
     // results in "2019" or "2017-2019"
     var firstYear = episodes.First().DateTime("Date").Year;
     var lastYear = episodes.Last().DateTime("Date").Year;
@@ -104,7 +104,7 @@ public class PodCastController : Custom.Hybrid.ApiTyped
   private void AddChannelItunes(XmlElement channel) {
     // Get all posts as delived from the standard query
     var config = MyItem;
-    var episodes = config.Parents("Episode").OrderByDescending(e => e.DateTime("Date"));
+    var episodes = config.Parents(type: "Episode").OrderByDescending(e => e.DateTime("Date"));
     var imageUrl = Link.Image(config.Url("Image"), type: "full");
 
     AddNamespaceTag(channel, ItunesNsCode, "summary", ItunesNamespace, config.String("Description", scrubHtml: true));

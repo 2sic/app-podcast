@@ -57,3 +57,5 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
 * v02.05.00 2023-07
   * 2sxc 16.02 coding conventions
   * everything typed
+* v02.05.01 2024-01
+  * fix bug which prevented RSS feed from working
