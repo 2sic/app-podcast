@@ -59,3 +59,5 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
   * everything typed
 * v02.05.01 2024-01
   * fix bug which prevented RSS feed from working
+* v02.05.02 2024-02
+  * fix episode title (previously the channel title, which was wrong)
