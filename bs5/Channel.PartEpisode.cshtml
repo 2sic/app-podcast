@@ -1,8 +1,10 @@
-@inherits Custom.Hybrid.RazorTyped
-@using ToSic.Razor.Blade;
+@inherits AppCode.Razor.AppRazor
+@using ToSic.Razor.Blade
+@using AppCode.Data
 
 @{
-    var episode = MyModel.Item("episode");
+    var episode = As<Episode>(Model);
+
     // Default Toolbar with Delete and without layout 
     var episodeToolbar = Kit.Toolbar.Default().DetectDemo(episode).Layout("-").Delete();
     var toolbar = episodeToolbar.For(episode);
@@ -15,13 +17,13 @@
 
 @* Episode information *@
 <li class="app-podcast2 list-group-item @border p-0 pb-3 pt-3" @toolbar>
-    <p class="text-muted pc-episode-date @bold">@episode.DateTime("Date").ToString("dd MMM yyyy")</p>
-    <h5 class="m-0">@episode.String("Title")</h5>
+    <p class="text-muted pc-episode-date @bold">@episode.Date.ToString("dd MMM yyyy")</p>
+    <h5 class="m-0">@episode.Title</h5>
     @episode.Html("Description").Class("text-muted")
     <audio
         preload="metadata"
         controls
-        src="@episode.Url("Audio")">
+        src="@episode.Audio">
             Your browser does not support the
             <code>audio</code> element.
     </audio>

@@ -8,7 +8,7 @@ A standard podcast app to use with 2sxc - it's tested to work with normal PodCas
 
 | Aspect              | Status | Comments or Version |
 | ------------------- | :----: | ------------------- |
-| 2sxc                | ✅    | requires 2sxc v16.04
+| 2sxc                | ✅    | requires 2sxc v17.06.02
 | Dnn                 | ✅    | For v9.6.1+
 | Oqtane 2            | ✅    | Requires v04.00+
 | No jQuery           | ✅    |
@@ -61,3 +61,5 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
   * fix bug which prevented RSS feed from working
 * v02.05.02 2024-02
   * fix episode title (previously the channel title, which was wrong)
+* v02.05.17 2024-04
+  * strong Type
