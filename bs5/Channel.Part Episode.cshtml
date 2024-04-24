@@ -1,0 +1,29 @@
+@inherits AppCode.Razor.AppRazor<Episode>
+@using ToSic.Razor.Blade
+@using AppCode.Data
+
+@{
+    // Get the Episode passed in
+    var episode = Model;
+
+    // Default Toolbar with Delete and without layout 
+    var episodeToolbar = Kit.Toolbar.Default().DetectDemo(episode).Layout("-").Delete();
+
+    // Class for BS5 or BS4 
+    var isBs5 = Kit.Css.Is("bs5");
+    var border = isBs5 ? "border-end-0 border-start-0 " : "border-right-0 border-left-0 ";
+    var bold = isBs5 ? "fw-bold " : "font-weight-bold mb-2 ";
+}
+
+@* Episode information *@
+<li class="app-podcast2 list-group-item @border p-0 pb-3 pt-3" @episodeToolbar.For(episode)>
+    <p class="text-muted pc-episode-date @bold">@episode.Date.ToString("dd MMM yyyy")</p>
+    <h5 class="m-0">@episode.Title</h5>
+    @episode.Html("Description").Class("text-muted")
+
+    @* Show Audio player *@
+    <audio preload="metadata" controls src="@episode.Audio">
+      Your browser does not support the
+      <code>audio</code> element.
+    </audio>
+</li>
