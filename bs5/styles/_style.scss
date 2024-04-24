@@ -15,7 +15,6 @@ $tertiary: #fff !default;
     color: $tertiary;
   }
 
-
   .card {
     & .pc-channel-title {
       font-size: 1.5rem;
@@ -46,5 +45,12 @@ $tertiary: #fff !default;
     & .pc-episode-date {
       font-size: 0.7rem;
     }
+  }
+
+  .list-group-item {
+    background-color: #fff;
+  }
+  .card {
+    background-color: #fff;
   }
 }

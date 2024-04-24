@@ -3,11 +3,11 @@
 @using AppCode.Data
 
 @{
-    var episode = As<Episode>(Model);
+    // Get one Episode item
+    var epi = As<Episode>(Model);
 
     // Default Toolbar with Delete and without layout 
-    var episodeToolbar = Kit.Toolbar.Default().DetectDemo(episode).Layout("-").Delete();
-    var toolbar = episodeToolbar.For(episode);
+    var epiToolbar = Kit.Toolbar.Default().DetectDemo(epi).Layout("-").Delete();
 
     // Class for BS5 or BS4 
     var isBs5 = Kit.Css.Is("bs5");
@@ -16,14 +16,14 @@
 }
 
 @* Episode information *@
-<li class="app-podcast2 list-group-item @border p-0 pb-3 pt-3" @toolbar>
-    <p class="text-muted pc-episode-date @bold">@episode.Date.ToString("dd MMM yyyy")</p>
-    <h5 class="m-0">@episode.Title</h5>
-    @episode.Html("Description").Class("text-muted")
+<li class="app-podcast2 list-group-item @border p-0 pb-3 pt-3" @epiToolbar.For(epi)>
+    <p class="text-muted pc-episode-date @bold">@epi.Date.ToString("dd MMM yyyy")</p>
+    <h5 class="m-0">@epi.Title</h5>
+    @epi.Html("Description").Class("text-muted")
     <audio
         preload="metadata"
         controls
-        src="@episode.Audio">
+        src="@epi.Audio">
             Your browser does not support the
             <code>audio</code> element.
     </audio>
