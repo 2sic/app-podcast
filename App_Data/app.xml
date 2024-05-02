@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="17.01.01" ExportDate="2024-01-24T14:30:02.4292461+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="17.07.00" ExportDate="2024-05-02T10:53:21.6152651+02:00">
   <Header>
     <App Guid="8258619d-a5d7-4f9a-9ef5-af9caac8dbaa" />
     <Language Default="en-us" />
@@ -1255,16 +1255,16 @@
       <Value Key="RequiredDnnVersion" Value="09.06.01" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredOqtaneVersion" Value="04.00.00" Type="String">
+      <Value Key="RequiredOqtaneVersion" Value="05.00.00" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredVersion" Value="16.04.00" Type="String">
+      <Value Key="RequiredVersion" Value="17.07.00" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="02.05.01" Type="String">
+      <Value Key="Version" Value="02.17.00" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
     </Entity>
@@ -2821,11 +2821,19 @@
     <Folder Id="13414" RelativePath="adam/PodCast2/" />
     <Folder Id="13983" RelativePath="adam/PodCast2/06nhRXFDhUKmZsxS6rn3kA/" />
     <Folder Id="13426" RelativePath="adam/PodCast2/340HITtockSiX9FO_tUu1Q/" />
+    <Folder Id="14351" RelativePath="adam/PodCast2/5DAqDnpiWUSR9ZPcC8k76w/" />
+    <Folder Id="14352" RelativePath="adam/PodCast2/5DAqDnpiWUSR9ZPcC8k76w/Image/" />
     <Folder Id="13792" RelativePath="adam/PodCast2/7i8Spnj7B0W_rGwjmXH60w/" />
     <Folder Id="13793" RelativePath="adam/PodCast2/7i8Spnj7B0W_rGwjmXH60w/Image/" />
+    <Folder Id="14353" RelativePath="adam/PodCast2/7lecYVij7EWkJKF5e5mvrg/" />
+    <Folder Id="14354" RelativePath="adam/PodCast2/7lecYVij7EWkJKF5e5mvrg/Audio/" />
     <Folder Id="13897" RelativePath="adam/PodCast2/7tjelP10MUC5Co3h_m1bPg/" />
+    <Folder Id="14355" RelativePath="adam/PodCast2/8PdXPEBFMkmcv5kYZAKY_Q/" />
+    <Folder Id="14356" RelativePath="adam/PodCast2/8PdXPEBFMkmcv5kYZAKY_Q/Image/" />
     <Folder Id="13889" RelativePath="adam/PodCast2/8ytKAHxKXkSzXHA8mink7A/" />
     <Folder Id="13890" RelativePath="adam/PodCast2/8ytKAHxKXkSzXHA8mink7A/Image/" />
+    <Folder Id="14357" RelativePath="adam/PodCast2/BPIRHKJ-qkSfPEkWvtUWdA/" />
+    <Folder Id="14358" RelativePath="adam/PodCast2/BPIRHKJ-qkSfPEkWvtUWdA/Audio/" />
     <Folder Id="13998" RelativePath="adam/PodCast2/BZF92TW0m0CGrrNofrsXfQ/" />
     <Folder Id="13891" RelativePath="adam/PodCast2/dcBJ9FMje0i_frcMr9N3vw/" />
     <Folder Id="13893" RelativePath="adam/PodCast2/dwAA-R31CUO68STevXUDqQ/" />
