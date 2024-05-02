@@ -6,11 +6,11 @@
 
 A standard podcast app to use with 2sxc - it's tested to work with normal PodCast clients as well as iTunes and Google Play.
 
-| Aspect              | Status | Comments or Version |
-| ------------------- | :----: | ------------------- |
-| 2sxc                | ✅    | requires 2sxc v16.04
+| Aspect              | Status | Comments or Version
+| ------------------- | :----: | -------------------
+| 2sxc                | ✅    | requires 2sxc v17.07.00
 | Dnn                 | ✅    | For v9.6.1+
-| Oqtane 2            | ✅    | Requires v04.00+
+| Oqtane              | ✅    | Requires v04.00+
 | No jQuery           | ✅    |
 | Live Demo           | ➖    |
 | Install Checklist   | ✅    | See [Installation](https://azing.org/2sxc/r/Y2n1XQwq) on [azing.org](https://azing.org/2sxc)
@@ -61,3 +61,7 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
   * fix bug which prevented RSS feed from working
 * v02.05.02 2024-02
   * fix episode title (previously the channel title, which was wrong)
+* v02.17.00 2024-04
+  * Strong Typed
+  * Auto Generated Class
+  * Typed MyItem

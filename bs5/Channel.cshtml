@@ -1,59 +1,61 @@
-@inherits Custom.Hybrid.RazorTyped
-@using ToSic.Razor.Blade;
+@inherits AppCode.Razor.AppRazor
+@using ToSic.Razor.Blade
+@using AppCode.Data
+
 @{
-  var channel = MyItem;  // give it a nicer name so the code is easier to read
+  var channel = As<Channel>(MyItem);
 
   // Get all the Episode items which point to this channel
-  var episodes = AsItems(channel.Parents(type: "Episode"));
+  var episodes = channel.Parents<Episode>(type: "Episode");
   
   // Default Toolbar Edit and Change Layouting 
   var channelToolbar = Kit.Toolbar.Default().Settings(hover:"left", autoAddMore:"start");
   
-  var episodeToolbar = Kit.Toolbar.Empty()
-  .Settings(hover: "left", show: "always")
-  .New("Episode", tweak: b => b
+  var episodesoolbar = Kit.Toolbar.Empty()
+    .Settings(hover: "left", show: "always")
+    .New("Episode", tweak: b => b
       .Prefill("Date=" + DateTime.Now.ToString("yyyy-MM-dd"))
       .Prefill("Channels=" + channel.Guid.ToString())
-      .Prefill("Author=" + channel.Child("Owner").Guid.ToString())
-  );
+      .Prefill("Author=" + channel.Owner.Guid.ToString())
+    );
 
-  // Class for BS5 or BS4 
-  var isBs5 = Kit.Css.Is("bs5");
-  var badgePill = isBs5 ? "rounded-pill" : "badge-pill";
+  // Css classes for BS5 or BS4 (Bootstrap 5 uses rounded-pill instead of badge-pill)
+  var badgePill = Kit.Css.Is("bs5") ? "rounded-pill" : "badge-pill";
 }
 
-<div class="app-podcast2 mb-4" @channelToolbar.For(channel)>
-  
+<div class="app-podcast2 mb-4" @channelToolbar.For(channel)>  
   <div class="row">
-    @* Left column with image, episode counter and channel description *@
+
+    @* Left column with image, episodes counter and channel description *@
     <div class="col-12 col-md-4">
       <div class="card border-0">
-        @channel.Picture("Image", settings: "Podcast", width: "1000", imgClass:"w-100 rounded-sm", imgAltFallback: channel.String("Title"))
+        @channel.Picture("Image", settings: "Podcast", width: "1000", imgClass:"w-100 rounded-sm", imgAltFallback: channel.Title)
         <div class="card-body p-0">
           <div class="card-text mt-2">
-            <p class="text-muted">@episodes.Count() @App.Resources.String("Episodes")</p>
+            <p class="text-muted">@episodes.Count() @App.Resources.Episodes</p>
             <hr>
               @channel.Html("Description").Class("pc-channel-description-desktop d-none d-md-block")
           </div>
         </div>
       </div>
     </div>
-    @* Right column with the rest of the channel information and the episode listing *@
+
+    @* Right column with the rest of the channel information and the episodes listing *@
     <div class="col-12 col-md-8">
       <div class="card border-0 mb-4">
         @* Channel Information *@
         <div class="card-body p-0">
           @if (channel.IsDemoItem) {
             <div class="alert alert-warning">
-              @Html.Raw(App.Resources.String("WarningIsShowingDemo"))
+              @Html.Raw(App.Resources.WarningIsShowingDemo)
             </div>
           }
-          <h3 class="card-title pc-channel-title">@channel.String("Title")</h3>
-          <h5 class="card-subtitle mb-3 pc-owner-name">@channel.String("Owner.FullName")</h5>
+          <h3 class="card-title pc-channel-title">@channel.Title</h3>
+          <h5 class="card-subtitle mb-3 pc-owner-name">@channel.Owner.FullName</h5>
           @channel.Html("Description").Class("pc-channel-description-mobile d-block d-md-none")
           <div class="pc-channel-category-rss d-flex justify-content-between">
             <div class="card-text text-muted">
-              @(Text.Has(channel.String("Category.SubCategory")) ? channel.String("Category.SubCategory") : channel.String("Category.MainCategory"))
+              @(Text.Has(channel.Category.SubCategory) ? channel.Category.SubCategory : channel.Category.MainCategory)
             </div>
             <a class="badge @badgePill d-flex justify-content-center bg-secondary"
               href='@Link.To(api: "api/PodCast/Rss", parameters: "pageid=" + MyPage.Id + "&moduleId=" + MyContext.Module.Id + "&channelid=" + channel.Id)'
@@ -66,15 +68,17 @@
         </div>
       </div>
 
-      @* Listing of episodes *@
-      <div class="position-relative"> @* position: relative muss aktuell drauf sein, sonst ist auch bei hover die Toolbar an der falschen stelle *@
-        @(channel.IsDemoItem || episodes.Count() > 0 ? null : episodeToolbar.AsTag())
+      @* Listing of episodes (position: relative is needed so the optional toolbar is shown correctly) *@
+      <div class="position-relative">
+        @* Only show an add-toolbar if there is no edition yet (afterwards you can add on each edition) *@
+        @(episodesoolbar.DetectDemo(channel).Condition(!episodes.Any()).AsTag())
         <ul class="list-group">
-          @foreach (var episode in episodes.OrderByDescending(e => e.DateTime("Date"))) {
-            @Html.Partial("./Channel.PartEpisode.cshtml", new { episode })
+          @foreach (var episode in episodes.OrderByDescending(e => e.Date)) {
+            @Html.Partial("./Channel.Part Episode.cshtml", episode)
           }
         </ul>
       </div>
+
     </div>
   </div>
 </div>
