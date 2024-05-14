@@ -1,20 +1,4 @@
-$tertiary: #fff !default;
-
 .app-podcast2 {
-  @mixin sizeAndBorderRadius($size, $border-radius) {
-    height: $size;
-    width: $size;
-    border-radius: $border-radius;
-  }
-
-  .pc-bg-tertiary {
-    background-color: $tertiary;
-  }
-
-  .pc-text-tertiary {
-    color: $tertiary;
-  }
-
   .card {
     & .pc-channel-title {
       font-size: 1.5rem;
@@ -36,7 +20,7 @@ $tertiary: #fff !default;
 
       & > a {
         max-width: 30px;
-        color: $tertiary;
+        color: #fff;
       }
     }
   }
