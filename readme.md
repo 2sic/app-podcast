@@ -65,3 +65,5 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
   * Strong Typed
   * Auto Generated Class
   * Typed MyItem
+* v02.17.01 2024-07
+  * Update app.sln and app.csproj
