@@ -19,8 +19,8 @@
       .Prefill("Author=" + channel.Owner.Guid.ToString())
     );
 
-  // Css classes for BS5 or BS4 (Bootstrap 5 uses rounded-pill instead of badge-pill)
-  var badgePill = Kit.Css.Is("bs5") ? "rounded-pill" : "badge-pill";
+  // Bootstrap 5 badge class
+  var badgePill = "rounded-pill";
 }
 
 <div class="app-podcast2 mb-4" @channelToolbar.For(channel)>  

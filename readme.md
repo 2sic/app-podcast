@@ -18,8 +18,8 @@ A standard podcast app to use with 2sxc - it's tested to work with normal PodCas
 | App Catalog         | ✅    | See [app catalog](https://2sxc.org/en/apps/app/podcast-v2-hybrid-for-dnn-and-oqtane)
 | Screenshots         | ✅    | See [app catalog](https://2sxc.org/en/apps/app/podcast-v2-hybrid-for-dnn-and-oqtane)
 | Best Practices      | ✅    | Uses v13.10 conventions
-| Bootstrap 3         | ✔️    |
-| Bootstrap 4         | ✅    |
+| Bootstrap 3         | ❌    | Last supported in v02.22.00
+| Bootstrap 4         | ❌    | Last supported in v02.22.00
 | Bootstrap 5         | ✅    |
 
 
@@ -31,6 +31,10 @@ The podcast app does not have any app settings and only a few resources(labels) 
 If you want to customize the CSS, you will usually follow the ["Create Custom Styles in a Standard 2sxc App" checklist](https://azing.org/2sxc/r/gg_aB9FD)
 
 ## History
+
+* v02.22.01 2026-10
+  * Removed Bootstrap 3 and Bootstrap 4 support; the app is now Bootstrap 5 only
+  * For Bootstrap 3 or Bootstrap 4, use v02.22.00
 
 * v.02.00 2021-10
   * Updated to best-practices of 2sxc 12.05
