@@ -70,4 +70,6 @@ If you want to customize the CSS, you will usually follow the ["Create Custom St
 * v02.21.00 2026-03
   * Added intellisense Extensions for Visual Studio Code
 * v02.21.01 2026-06
-  * Switched from webpack to Vite for faster builds 
+  * Switched from webpack to Vite for faster builds
+* v02.22.00 2026-10
+  * Corrected partial paths for Linux compatibility
