@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="21.08.00" ExportDate="2026-06-16T09:13:20.8305317+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="22.01.00" ExportDate="2026-11-19T15:03:49.9932517+01:00">
   <Header>
     <App Guid="8258619d-a5d7-4f9a-9ef5-af9caac8dbaa" />
     <Language Default="en-us" />
@@ -1252,10 +1252,10 @@
       <Value Key="OriginalId" Value="" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredDnnVersion" Value="09.06.01" Type="String">
+      <Value Key="RequiredDnnVersion" Value="9.11.2" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredOqtaneVersion" Value="05.00.00" Type="String">
+      <Value Key="RequiredOqtaneVersion" Value="10.0.0" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
       <Value Key="RequiredVersion" Value="21.05.00" Type="String">
@@ -1264,7 +1264,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="02.22.01" Type="String">
+      <Value Key="Version" Value="02.21.02" Type="String">
         <Dimension DimensionID="146" ReadOnly="false" />
       </Value>
     </Entity>
@@ -2799,16 +2799,16 @@
     </Entity>
   </Entities>
   <PortalFiles>
-    <File Id="6319" RelativePath="adam\PodCast2\dwAA-R31CUO68STevXUDqQ\Image\podcast logo.png" />
-    <File Id="6320" RelativePath="adam\PodCast2\GTzLbJdOTUqkX81-6Zp_PA\Audio\lyricchords.mp3" />
-    <File Id="6321" RelativePath="adam\PodCast2\7tjelP10MUC5Co3h_m1bPg\Audio\lyricslap.mp3" />
-    <File Id="6372" RelativePath="adam\PodCast2\06nhRXFDhUKmZsxS6rn3kA\Image\planetary-ring-ringed-planet-planet-stars-wallpaper-preview.jpg" />
-    <File Id="6029" RelativePath="adam\PodCast2\340HITtockSiX9FO_tUu1Q\Image\tall img.png" />
-    <File Id="6381" RelativePath="adam\PodCast2\BZF92TW0m0CGrrNofrsXfQ\Image\demo-3.jpg" />
-    <File Id="6318" RelativePath="adam\PodCast2\dcBJ9FMje0i_frcMr9N3vw\Audio\CP08CD_AudioSample.mp3" />
-    <File Id="6382" RelativePath="adam\PodCast2\gV4TyjZPPUmfsGaJIwzEFw\Audio\Tchaikovsky_Rococo_Var_orch.mp3" />
-    <File Id="6331" RelativePath="adam\PodCast2\jSKsDECZqU27AFLX5n9ASQ\Audio\file_example_MP3_700KB.mp3" />
-    <File Id="6330" RelativePath="adam\PodCast2\tW2VzlV7skOT8wZHjjVpGg\Image\117797_c7dbdfed13121ff2fcc46e783cc154db.jpg" />
+    <File Id="6319" RelativePath="adam/PodCast2/dwAA-R31CUO68STevXUDqQ/Image/podcast logo.png" />
+    <File Id="6320" RelativePath="adam/PodCast2/GTzLbJdOTUqkX81-6Zp_PA/Audio/lyricchords.mp3" />
+    <File Id="6321" RelativePath="adam/PodCast2/7tjelP10MUC5Co3h_m1bPg/Audio/lyricslap.mp3" />
+    <File Id="6372" RelativePath="adam/PodCast2/06nhRXFDhUKmZsxS6rn3kA/Image/planetary-ring-ringed-planet-planet-stars-wallpaper-preview.jpg" />
+    <File Id="6029" RelativePath="adam/PodCast2/340HITtockSiX9FO_tUu1Q/Image/tall img.png" />
+    <File Id="6381" RelativePath="adam/PodCast2/BZF92TW0m0CGrrNofrsXfQ/Image/demo-3.jpg" />
+    <File Id="6318" RelativePath="adam/PodCast2/dcBJ9FMje0i_frcMr9N3vw/Audio/CP08CD_AudioSample.mp3" />
+    <File Id="6382" RelativePath="adam/PodCast2/gV4TyjZPPUmfsGaJIwzEFw/Audio/Tchaikovsky_Rococo_Var_orch.mp3" />
+    <File Id="6331" RelativePath="adam/PodCast2/jSKsDECZqU27AFLX5n9ASQ/Audio/file_example_MP3_700KB.mp3" />
+    <File Id="6330" RelativePath="adam/PodCast2/tW2VzlV7skOT8wZHjjVpGg/Image/117797_c7dbdfed13121ff2fcc46e783cc154db.jpg" />
   </PortalFiles>
   <PortalFolders>
     <Folder Id="13894" RelativePath="adam/PodCast2/dwAA-R31CUO68STevXUDqQ/Image/" />

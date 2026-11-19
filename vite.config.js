@@ -87,6 +87,14 @@ export default defineConfig({
         if (postcssResult.map) {
           this.emitFile({ type: 'asset', fileName: 'styles.min.css.map', source: postcssResult.map.toString() });
         }
+
+        // The app currently has no JavaScript. Don't publish an empty JS chunk or source map.
+        for (const [fileName, output] of Object.entries(bundle)) {
+          if (output.type === 'chunk' && fileName.endsWith('.js') && output.code.trim() === '') {
+            delete bundle[fileName];
+            delete bundle[`${fileName}.map`];
+          }
+        }
       },
     }
   ],
